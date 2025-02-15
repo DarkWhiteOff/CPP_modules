@@ -1,6 +1,6 @@
-NAME = ex00
+NAME = ex01
 
-SRC = megaphone.cpp
+SRC = ok.cpp
 
 OBJS := $(SRC:%.c=%.o)
 
