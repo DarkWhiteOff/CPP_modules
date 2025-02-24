@@ -1,6 +1,6 @@
-NAME = ex01
+NAME = ex00
 
-SRC = Contact.cpp PhoneBook.cpp main.cpp
+SRC = megaphone.cpp
 
 OBJS := $(SRC:%.c=%.o)
 
