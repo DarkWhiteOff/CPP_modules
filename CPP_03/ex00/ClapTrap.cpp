@@ -1,37 +1,57 @@
-#include "Fixed.hpp"
+#include "ClapTrap.hpp"
 
-static int const m_bitNb = 0;
-
-Fixed::Fixed(void) : m_nbnbVirguleFixe(0)
+ClapTrap::ClapTrap(void) : m_Name(), m_hitPoints(10), m_energyPoints(10), m_attackDamage(0)
 {
     std::cout << "Default consttrucor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& copy) : m_nbnbVirguleFixe(copy.m_nbnbVirguleFixe)
+ClapTrap::ClapTrap(const ClapTrap& copy) : m_Name(copy.m_Name), m_hitPoints(copy.m_hitPoints), m_energyPoints(copy.m_energyPoints), m_attackDamage(copy.m_attackDamage)
 {
     std::cout << "Copy constructor called" << std::endl;
 }
 
-Fixed& Fixed::operator=(const Fixed& copy)
+ClapTrap::ClapTrap(std::string Name) : m_Name(Name), m_hitPoints(10), m_energyPoints(10), m_attackDamage(0)
+{
+    std::cout << "Surcharged constructor called" << std::endl;
+}
+
+ClapTrap& ClapTrap::operator=(const ClapTrap& copy)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    m_nbnbVirguleFixe = copy.m_nbnbVirguleFixe;
+    m_Name = copy.m_Name;
+    m_hitPoints = copy.m_hitPoints;
+    m_energyPoints = copy.m_energyPoints;
+    m_attackDamage = copy.m_attackDamage;
     return (*this);
 }
 
-Fixed::~Fixed(void)
+ClapTrap::~ClapTrap(void)
 {
     std::cout << "Destructor called" << std::endl;
 }
 
-int     Fixed::getRawBits(void) const
+void    ClapTrap::attack(const std::string& target)
 {
-    std::cout << "getRawBits member function called" << std::endl;
-    return (m_nbnbVirguleFixe);
+    if (m_hitPoints <= 0 || m_energyPoints <= 0)
+    {
+        std::cout << "ClapTrap " << m_Name << " attacks " << target << ", causing " << m_attackDamage << " points of damage!" << std::endl;
+        target.takeDamage(m_attackDamage); // pas sur pour target.
+        m_energyPoints--;
+    }
 }
 
-void    Fixed::setRawBits(int const raw)
+void    ClapTrap::takeDamage(unsigned int amount)
 {
-    std::cout << "setRawBits member function called" << std::endl;
-    m_nbnbVirguleFixe = raw;
+    std::cout << "Claptrap " << m_Name << " took " << amount << " points of damage!" << std::endl;
+    m_hitPoints -= amount;
+}
+
+void    ClapTrap::beRepaired(unsigned int amount)
+{
+    if (m_hitPoints <= 0 || m_energyPoints <= 0)
+    {
+        std::cout << "Claptrap " << m_Name << " repaired itself using 1 energy point!" << std::endl;
+        m_hitPoints += amount;
+        m_energyPoints--;
+    }
 }

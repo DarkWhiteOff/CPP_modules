@@ -1,6 +1,6 @@
-NAME = ./a.out
+NAME = ex00
 
-SRC = Fixed.cpp main.cpp
+SRC = ClapTrap.cpp main.cpp
 
 OBJS := $(SRC:%.c=%.o)
 
