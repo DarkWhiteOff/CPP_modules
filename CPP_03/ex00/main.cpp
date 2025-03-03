@@ -8,6 +8,9 @@ int main(void)
     ClapTrap Ye("Ye");
     
     Kanye.attack("Ye");
-    Kanye.beRepaired(0);
+    Ye.takeDamage(0);
+    Ye.beRepaired(0);
+    Ye.attack("Kanye");
+    Kanye.takeDamage(0);
     return (0);
 }
