@@ -1,33 +1,43 @@
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap(void) : m_Name(), m_hitPoints(100), m_energyPoints(50), m_attackDamage(20)
+ScavTrap::ScavTrap(void) : ClapTrap()
 {
-    std::cout << "Default consttrucor called" << std::endl;
+    m_hitPoints = 100;
+    m_energyPoints = 50;
+    m_attackDamage = 20;
+    std::cout << "(ScavTrap) Default consttrucor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& copy) : m_Name(copy.m_Name), m_hitPoints(copy.m_hitPoints), m_energyPoints(copy.m_energyPoints), m_attackDamage(copy.m_attackDamage)
+ScavTrap::ScavTrap(const ScavTrap& copy) : ClapTrap(copy.m_Name)
 {
-    std::cout << "Copy constructor called" << std::endl;
-}
-
-ScavTrap::ScavTrap(std::string Name) : m_Name(Name), m_hitPoints(100), m_energyPoints(50), m_attackDamage(20)
-{
-    std::cout << "Surcharged constructor called" << std::endl;
-}
-
-ScavTrap& ScavTrap::operator=(const ScavTrap& copy)
-{
-    std::cout << "Copy assignment operator called" << std::endl;
-    m_Name = copy.m_Name;
     m_hitPoints = copy.m_hitPoints;
     m_energyPoints = copy.m_energyPoints;
     m_attackDamage = copy.m_attackDamage;
+    std::cout << "(ScavTrap) Copy constructor called" << std::endl;
+}
+
+ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
+{
+    m_hitPoints = 100;
+    m_energyPoints = 50;
+    m_attackDamage = 20;
+    std::cout << "(ScavTrap) Surcharged constructor called" << std::endl;
+}
+
+ScavTrap& ScavTrap::operator=(const ScavTrap& src)
+{
+    std::cout << "(ScavTrap) Copy assignment operator called" << std::endl;
+    ClapTrap(src.m_Name);
+    m_hitPoints = src.m_hitPoints;
+    m_energyPoints = src.m_energyPoints;
+    m_attackDamage = src.m_attackDamage;
     return (*this);
 }
 
 ScavTrap::~ScavTrap(void)
 {
-    std::cout << "Destructor called" << std::endl;
+    // ~ClapTrap(); ??
+    std::cout << "(ScavTrap) Destructor called" << std::endl;
 }
 
 void    ScavTrap::attack(const std::string& target)

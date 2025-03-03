@@ -16,7 +16,7 @@ public :
     void    takeDamage(unsigned int amount);
     void    beRepaired(unsigned int amount);
 
-private :
+protected :
     std::string m_Name;
     int         m_hitPoints;
     int         m_energyPoints;

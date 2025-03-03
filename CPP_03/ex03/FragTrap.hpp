@@ -11,18 +11,9 @@ public :
     FragTrap(void);
     FragTrap(const FragTrap& copy);
     FragTrap(std::string Name);
-    FragTrap& operator=(const FragTrap& copy);
+    FragTrap& operator=(const FragTrap& src);
     ~FragTrap(void);
-    void    attack(const std::string& target);
-    void    takeDamage(unsigned int amount);
-    void    beRepaired(unsigned int amount);
     void    highFivesGuys(void);
-   
-private :
-    std::string m_Name;
-    int         m_hitPoints;
-    int         m_energyPoints;
-    int         m_attackDamage;
 };
 
 #endif

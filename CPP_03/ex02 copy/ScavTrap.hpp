@@ -11,16 +11,10 @@ public :
     ScavTrap(void);
     ScavTrap(const ScavTrap& copy);
     ScavTrap(std::string Name);
-    ScavTrap& operator=(const ScavTrap& copy);
+    ScavTrap& operator=(const ScavTrap& src);
     ~ScavTrap(void);
     void    attack(const std::string& target);
     void    guardGate(void);
-   
-private :
-    std::string m_Name;
-    int         m_hitPoints;
-    int         m_energyPoints;
-    int         m_attackDamage;
 };
 
 #endif
