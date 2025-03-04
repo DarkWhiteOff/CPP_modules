@@ -1,6 +1,6 @@
 #include "Fixed.hpp"
 
-static int const m_bitNb = 0;
+static int const m_bitNb = 8;
 
 Fixed::Fixed(void) : m_nbnbVirguleFixe(0)
 {
@@ -12,10 +12,10 @@ Fixed::Fixed(const Fixed& copy) : m_nbnbVirguleFixe(copy.m_nbnbVirguleFixe)
     std::cout << "Copy constructor called" << std::endl;
 }
 
-Fixed& Fixed::operator=(const Fixed& copy)
+Fixed& Fixed::operator=(const Fixed& src)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    m_nbnbVirguleFixe = copy.m_nbnbVirguleFixe;
+    m_nbnbVirguleFixe = src.m_nbnbVirguleFixe;
     return (*this);
 }
 
