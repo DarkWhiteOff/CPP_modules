@@ -7,18 +7,20 @@ int main()
     int i(0);
 
     std::cout << "> ";
-    std::cin >> input;
+    std::getline(std::cin, input);
     while (input != "EXIT")
     {
         if (input == "ADD")
         {
             goat.addContact(i);
             i++;
+            if (i == 8)
+                i = 0;
         }
         if (input == "SEARCH")
             goat.search();
-        std::cout << std::endl << "> ";
-        std::cin >> input;
+        std::cout << "> ";
+        std::getline(std::cin, input);
     }
     return (0);
 }
