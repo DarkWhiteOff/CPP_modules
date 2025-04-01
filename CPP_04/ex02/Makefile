@@ -1,4 +1,4 @@
-NAME = ex03
+NAME = ex02
 
 SRC = Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp Brain.cpp main.cpp
 
