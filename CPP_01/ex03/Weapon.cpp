@@ -15,7 +15,7 @@ Weapon::~Weapon(void)
     return ;
 }
 
-std::string Weapon::getType(void) const
+const std::string &Weapon::getType(void)
 {
     return (m_type);
 }

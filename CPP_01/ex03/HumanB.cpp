@@ -15,12 +15,17 @@ HumanB::~HumanB(void)
     return ;
 }
 
-void    HumanB::setWeapon(Weapon weapon)
+void    HumanB::setWeapon(Weapon &weapon)
 {
-    m_weapon = weapon;
+    m_weapon = &weapon;
 }
 
 void    HumanB::attack(void)
 {
-    std::cout << m_name << " attacks with their " << m_weapon.getType() << std::endl;
+    if (m_weapon->getType().empty())
+	{
+		std::cout << m_name << " attacks without weapon" << std::endl;
+		return;
+	}
+    std::cout << m_name << " attacks with their " << m_weapon->getType() << std::endl;
 }
