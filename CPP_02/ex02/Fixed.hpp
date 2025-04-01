@@ -14,6 +14,8 @@ public :
 
     Fixed& operator=(const Fixed& src);
 
+    ~Fixed(void);
+
     Fixed& operator+=(const Fixed& src);
     Fixed& operator-=(const Fixed& src);
     Fixed& operator*=(const Fixed& src);
@@ -24,7 +26,17 @@ public :
     Fixed	operator--(int);
     Fixed&	operator--(void);
 
-    ~Fixed(void);
+    bool operator>(const Fixed& X);
+    bool operator<(const Fixed& X);
+    bool operator>=(const Fixed& X);
+    bool operator<=(const Fixed& X);
+    bool operator==(const Fixed& X);
+    bool operator!=(const Fixed& X);
+
+    Fixed operator+(const Fixed& X);
+    Fixed operator-(const Fixed& X);
+    Fixed operator*(const Fixed& X);
+    Fixed operator/(const Fixed& X);
 
     int     getRawBits(void) const;
     void    setRawBits(int const raw);
@@ -39,18 +51,6 @@ private :
     int                 m_nbVirguleFixe;
     static int const    m_bitNb = 8;
 };
-
-bool operator>(const Fixed& A, const Fixed& B);
-bool operator<(const Fixed& A, const Fixed& B);
-bool operator>=(const Fixed& A, const Fixed& B);
-bool operator<=(const Fixed& A, const Fixed& B);
-bool operator==(const Fixed& A, const Fixed& B);
-bool operator!=(const Fixed& A, const Fixed& B);
-
-Fixed operator+(const Fixed& A, const Fixed& B);
-Fixed operator-(const Fixed& A, const Fixed& B);
-Fixed operator*(const Fixed& A, const Fixed& B);
-Fixed operator/(const Fixed& A, const Fixed& B);
 
 std::ostream& operator<<( std::ostream& os, const Fixed& number );
 

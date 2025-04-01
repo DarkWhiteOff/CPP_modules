@@ -7,15 +7,19 @@ Fixed::Fixed(void) : m_nbnbVirguleFixe(0)
     std::cout << "Default consttrucor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& copy) : m_nbnbVirguleFixe(copy.m_nbnbVirguleFixe)
+Fixed::Fixed(const Fixed& copy)// : m_nbnbVirguleFixe(copy.m_nbnbVirguleFixe)
 {
     std::cout << "Copy constructor called" << std::endl;
+    *this = copy;
 }
 
 Fixed& Fixed::operator=(const Fixed& src)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    m_nbnbVirguleFixe = src.m_nbnbVirguleFixe;
+    if (this != &src)
+    {
+        m_nbnbVirguleFixe = src.getRawBits();
+    }
     return (*this);
 }
 

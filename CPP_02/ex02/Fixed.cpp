@@ -1,6 +1,7 @@
 #include "Fixed.hpp"
 #include <cmath>
 
+
 Fixed::Fixed(void) : m_nbVirguleFixe(0)
 {
     std::cout << "Default constructor called" << std::endl;
@@ -24,7 +25,8 @@ Fixed::Fixed(float const nbVirguleFixe) : m_nbVirguleFixe(roundf(nbVirguleFixe *
 Fixed& Fixed::operator=(const Fixed& src)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    m_nbVirguleFixe = src.m_nbVirguleFixe;
+    if (this != &src)
+        m_nbVirguleFixe = src.m_nbVirguleFixe;
     return (*this);
 }
 
@@ -97,8 +99,10 @@ void    Fixed::setRawBits(int const raw)
 
 float   Fixed::toFloat(void) const
 {
-    return ((float)m_nbVirguleFixe / (1 << m_bitNb));
+    //return ((float)m_nbVirguleFixe / (1 << m_bitNb));
+    return static_cast<float>(this->getRawBits()) / (1 << m_bitNb);
 }
+
 int     Fixed::toInt(void) const
 {
     return (m_nbVirguleFixe >> m_bitNb);
@@ -137,63 +141,55 @@ const Fixed& Fixed::max(const Fixed& A, const Fixed& B)
 }
 
 // COMAPRISON OPERATORS
-bool operator>(const Fixed& A, const Fixed& B)
+bool Fixed::operator>(const Fixed& X)
 {
-    return (A.getRawBits() > B.getRawBits());
+    return (getRawBits() > X.getRawBits());
 }
 
-bool operator<(const Fixed& A, const Fixed& B)
+bool Fixed::operator<(const Fixed& X)
 {
-    return (A.getRawBits() < B.getRawBits());
+    return (getRawBits() < X.getRawBits());
 }
 
-bool operator>=(const Fixed& A, const Fixed& B)
+bool Fixed::operator>=(const Fixed& X)
 {
-    return (A.getRawBits() >= B.getRawBits());
+    return (getRawBits() >= X.getRawBits());
 }
 
-bool operator<=(const Fixed& A, const Fixed& B)
+bool Fixed::operator<=(const Fixed& X)
 {
-    return (A.getRawBits() <= B.getRawBits());
+    return (getRawBits() <= X.getRawBits());
 }
 
-bool operator==(const Fixed& A, const Fixed& B)
+bool Fixed::operator==(const Fixed& X)
 {
-    return (A.getRawBits() == B.getRawBits());
+    return (getRawBits() == X.getRawBits());
 }
 
-bool operator!=(const Fixed& A, const Fixed& B)
+bool Fixed::operator!=(const Fixed& X)
 {
-    return (A.getRawBits() != B.getRawBits());
+    return (getRawBits() != X.getRawBits());
 }
 
 // ARITHMETIC OPERATORS
-Fixed operator+(const Fixed& A, const Fixed& B)
+Fixed Fixed::operator+(const Fixed& X)
 {
-    Fixed copyA(A);
-    copyA += B;
-    return (copyA);
+    return Fixed(toFloat() + X.toFloat());
 }
 
-Fixed operator-(const Fixed& A, const Fixed& B)
+Fixed Fixed::operator-(const Fixed& X)
 {
-    Fixed copyA(A);
-    copyA -= B;
-    return (copyA);
+    return Fixed(toFloat() - X.toFloat());
 }
 
-Fixed operator*(const Fixed& A, const Fixed& B)
+Fixed Fixed::operator*(const Fixed& X)
 {
-    Fixed copyA(A);
-    copyA *= B;
-    return (copyA);
+    return Fixed(toFloat() * X.toFloat());
 }
 
-Fixed operator/(const Fixed& A, const Fixed& B)
+Fixed Fixed::operator/(const Fixed& X)
 {
-    Fixed copyA(A);
-    copyA /= B;
-    return (copyA);
+    return Fixed(toFloat() / X.toFloat());
 }
 
 std::ostream& operator<<( std::ostream& os, const Fixed& number )
