@@ -15,7 +15,7 @@ public :
     void    setRawBits(int const raw);
 
 private :
-    int                 m_nbnbVirguleFixe;
+    int                 m_nbVirguleFixe;
     static int const    m_bitNb;
 };
 

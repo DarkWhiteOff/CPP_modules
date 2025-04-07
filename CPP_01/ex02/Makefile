@@ -1,8 +1,8 @@
-NAME = ex02
+NAME = brain
 
 SRC = main.cpp
 
-OBJS := $(SRC:%.c=%.o)
+OBJS := $(SRC:%.cpp=%.o)
 
 CC = g++
 FLAGS = -Wall -Wextra -Werror -I ./includes

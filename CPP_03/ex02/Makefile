@@ -2,7 +2,7 @@ NAME = ex02
 
 SRC = ClapTrap.cpp ScavTrap.cpp FragTrap.cpp main.cpp
 
-OBJS := $(SRC:%.c=%.o)
+OBJS := $(SRC:%.cpp=%.o)
 
 CC = g++
 FLAGS = -Wall -Wextra -Werror -I ./includes

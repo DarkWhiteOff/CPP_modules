@@ -1,8 +1,8 @@
-NAME = ex00
+NAME = claptrap
 
 SRC = ClapTrap.cpp main.cpp
 
-OBJS := $(SRC:%.c=%.o)
+OBJS := $(SRC:%.cpp=%.o)
 
 CC = g++
 FLAGS = -Wall -Wextra -Werror -I ./includes

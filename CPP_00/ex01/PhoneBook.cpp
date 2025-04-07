@@ -35,6 +35,8 @@ void	PhoneBook::addContact(int contact_nb)
 	std::getline(std::cin, tmp_first_n);
 	while (tmp_first_n.empty())
 	{
+		if (std::cin.eof())
+            return ;
 		std::cout << "First name : ";
 		std::getline(std::cin, tmp_first_n);
 	}
@@ -44,6 +46,8 @@ void	PhoneBook::addContact(int contact_nb)
 	std::getline(std::cin, tmp_last_n);
 	while (tmp_last_n.empty())
 	{
+		if (std::cin.eof())
+            return ;
 		std::cout << "Last name : ";
 		std::getline(std::cin, tmp_last_n);
 	}
@@ -53,6 +57,8 @@ void	PhoneBook::addContact(int contact_nb)
 	std::getline(std::cin, tmp_nickname);
 	while (tmp_nickname.empty())
 	{
+		if (std::cin.eof())
+            return ;
 		std::cout << "Nickname : ";
 		std::getline(std::cin, tmp_nickname);
 	}
@@ -62,6 +68,8 @@ void	PhoneBook::addContact(int contact_nb)
 	std::getline(std::cin, tmp_phone_nb);
 	while (tmp_phone_nb.empty() || onlyNumbers(tmp_phone_nb) == 1)
 	{
+		if (std::cin.eof())
+            return ;
 		std::cout << "Phone number : ";
 		std::getline(std::cin, tmp_phone_nb);
 	}
@@ -71,12 +79,12 @@ void	PhoneBook::addContact(int contact_nb)
 	std::getline(std::cin, tmp_secret);
 	while (tmp_secret.empty())
 	{
+		if (std::cin.eof())
+            return ;
 		std::cout << "Darkest secret : ";
 		std::getline(std::cin, tmp_secret);
 	}
 	m_contacts[contact_nb].setSecret(tmp_secret);
-
-	std::cout << std::endl;
 }
 
 int PhoneBook::goodIndex(std::string index)
@@ -108,10 +116,14 @@ void	PhoneBook::search()
 		std::cout << "|" << std::endl;
 		i++;
 	}
+	if (i == 0)
+		return ;
 	std::cout << "Which contact would you like to see ?" << std::endl << "--> ";
 	std::getline(std::cin, index);
 	while (goodIndex(index) == 0)
 	{
+		if (std::cin.eof())
+            return ;
 		std::cout << "--> ";
 		std::getline(std::cin, index);
 	}

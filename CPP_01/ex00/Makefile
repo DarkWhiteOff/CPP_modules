@@ -1,8 +1,8 @@
-NAME = ex00
+NAME = brainzz
 
 SRC = Zombie.cpp newZombie.cpp randomChump.cpp main.cpp
 
-OBJS := $(SRC:%.c=%.o)
+OBJS := $(SRC:%.cpp=%.o)
 
 CC = g++
 FLAGS = -Wall -Wextra -Werror -I ./includes

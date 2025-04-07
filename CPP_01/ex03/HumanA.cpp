@@ -2,11 +2,13 @@
 
 HumanA::HumanA(std::string name, Weapon &weapon) : m_name(name), m_weapon(weapon)
 {
+    std::cout << "Human A born" << std::endl;
     return ;
 }
 
 HumanA::~HumanA(void)
 {
+    std::cout << "Human A died" << std::endl;
     return ;
 }
 

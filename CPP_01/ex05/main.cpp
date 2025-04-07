@@ -2,11 +2,13 @@
 #include <string>
 #include "Harl.hpp"
 
-int main(int argc, char *argv[])
+int main(void)
 {
     Harl goat;
     
-    (void)argc;
-    goat.complain(argv[1]);
+    goat.complain("DEBUG");
+	goat.complain("ERROR");
+	goat.complain("INFO");
+	goat.complain("WARNING");
     return (0);
 }

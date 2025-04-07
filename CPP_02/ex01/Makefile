@@ -1,8 +1,8 @@
-NAME = ./a.out
+NAME = fixed1
 
 SRC = Fixed.cpp main.cpp
 
-OBJS := $(SRC:%.c=%.o)
+OBJS := $(SRC:%.cpp=%.o)
 
 CC = g++
 FLAGS = -Wall -Wextra -Werror -I ./includes

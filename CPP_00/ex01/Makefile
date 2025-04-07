@@ -1,8 +1,8 @@
-NAME = ex01
+NAME = phonebook
 
 SRC = Contact.cpp PhoneBook.cpp main.cpp
 
-OBJS := $(SRC:%.c=%.o)
+OBJS := $(SRC:%.cpp=%.o)
 
 CC = g++
 FLAGS = -Wall -Wextra -Werror -I ./includes

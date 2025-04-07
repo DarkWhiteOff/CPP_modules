@@ -7,6 +7,9 @@ int main(int argc, char *argv[])
     (void)argc;
     Harl goat;
 
-    goat.complain(argv[1]);
+    if (argc == 2)
+        goat.complain(argv[1]);
+    else
+        std::cout << "Wrong arguments." << std::endl;
     return (0);
 }

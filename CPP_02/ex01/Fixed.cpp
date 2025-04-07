@@ -25,7 +25,10 @@ Fixed::Fixed(float const nbVirguleFixe) : m_nbVirguleFixe(roundf(nbVirguleFixe *
 Fixed& Fixed::operator=(const Fixed& src)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    m_nbVirguleFixe = src.m_nbVirguleFixe;
+    if (this != &src)
+    {
+        m_nbVirguleFixe = src.m_nbVirguleFixe;
+    }
     return (*this);
 }
 

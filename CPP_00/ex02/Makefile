@@ -1,8 +1,8 @@
-NAME = ex02
+NAME = account
 
 SRC = Account.cpp tests.cpp
 
-OBJS := $(SRC:%.c=%.o)
+OBJS := $(SRC:%.cpp=%.o)
 
 CC = g++
 FLAGS = -Wall -Wextra -Werror -I ./includes

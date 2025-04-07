@@ -1,8 +1,8 @@
-NAME = ex03
+NAME = unviolence
 
 SRC = HumanA.cpp HumanB.cpp Weapon.cpp main.cpp
 
-OBJS := $(SRC:%.c=%.o)
+OBJS := $(SRC:%.cpp=%.o)
 
 CC = g++
 FLAGS = -Wall -Wextra -Werror -I ./includes

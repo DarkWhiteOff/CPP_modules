@@ -1,8 +1,8 @@
-NAME = ex00
+NAME = megaphone
 
 SRC = megaphone.cpp
 
-OBJS := $(SRC:%.c=%.o)
+OBJS := $(SRC:%.cpp=%.o)
 
 CC = g++
 FLAGS = -Wall -Wextra -Werror -I ./includes

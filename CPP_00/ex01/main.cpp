@@ -19,6 +19,8 @@ int main()
         }
         if (input == "SEARCH")
             goat.search();
+        if (std::cin.eof())
+            return (0);
         std::cout << "> ";
         std::getline(std::cin, input);
     }

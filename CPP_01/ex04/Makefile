@@ -1,8 +1,8 @@
-NAME = ex04
+NAME = sed
 
 SRC = main.cpp
 
-OBJS := $(SRC:%.c=%.o)
+OBJS := $(SRC:%.cpp=%.o)
 
 CC = g++
 FLAGS = -Wall -Wextra -Werror -I ./includes
@@ -20,6 +20,7 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
+	rm -rf file.replace
 
 re: fclean all
 
