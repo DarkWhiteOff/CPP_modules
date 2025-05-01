@@ -4,7 +4,7 @@ SRC = ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp main.cpp
 
 OBJS := $(SRC:%.cpp=%.o)
 
-CC = g++
+CC = c++
 FLAGS = -Wall -Wextra -Werror -I ./includes
 
 .c.o:

@@ -4,8 +4,8 @@ SRC = megaphone.cpp
 
 OBJS := $(SRC:%.cpp=%.o)
 
-CC = g++
-FLAGS = -Wall -Wextra -Werror -I ./includes
+CC = c++
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
 .c.o:
 	$(CC) $(FLAGS) -c $< -o $@
@@ -13,7 +13,7 @@ FLAGS = -Wall -Wextra -Werror -I ./includes
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) -std=c++98 $(OBJS) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -rf $(OBJS)
