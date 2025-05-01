@@ -2,7 +2,7 @@ NAME = ex00
 
 SRC = Animal.cpp Dog.cpp Cat.cpp WrongAnimal.cpp WrongCat.cpp main.cpp
 
-OBJS := $(SRC:%.cpp=%.o)
+OBJS = $(SRC:%.cpp=%.o)
 
 CC = c++
 FLAGS = -Wall -Wextra -Werror -I ./includes

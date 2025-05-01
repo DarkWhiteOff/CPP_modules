@@ -2,13 +2,13 @@ NAME = phonebook
 
 SRC = Contact.cpp PhoneBook.cpp main.cpp
 
-OBJS := $(SRC:%.cpp=%.o)
+OBJS = $(SRC:%.cpp=%.o)
 
 CC = c++
 FLAGS = -Wall -Wextra -Werror -I ./includes
 
 .c.o:
-	$(CC) $(FLAGS) -c $< -o $@
+	$(FLAGS) -c $< -o $@
 
 all: $(NAME)
 

@@ -1,5 +1,3 @@
-#include <iostream>
-#include <string>
 #include "Harl.hpp"
 
 int main(void)
@@ -7,8 +5,8 @@ int main(void)
     Harl goat;
     
     goat.complain("DEBUG");
+    goat.complain("INFO");
+    goat.complain("WARNING");
 	goat.complain("ERROR");
-	goat.complain("INFO");
-	goat.complain("WARNING");
     return (0);
 }
