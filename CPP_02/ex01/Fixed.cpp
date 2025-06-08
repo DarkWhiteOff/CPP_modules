@@ -1,5 +1,4 @@
 #include "Fixed.hpp"
-#include <cmath>
 
 Fixed::Fixed(void) : m_nbVirguleFixe(0)
 {

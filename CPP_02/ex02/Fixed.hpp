@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <cmath>
 
 class   Fixed
 {
@@ -11,9 +12,7 @@ public :
     Fixed(const Fixed& copy);
     Fixed(int const nbVirguleFixe);
     Fixed(float const nbVirguleFixe);
-
     Fixed& operator=(const Fixed& src);
-
     ~Fixed(void);
 
     Fixed& operator+=(const Fixed& src);
