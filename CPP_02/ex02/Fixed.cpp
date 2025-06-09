@@ -5,9 +5,10 @@ Fixed::Fixed(void) : m_nbVirguleFixe(0)
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& copy) : m_nbVirguleFixe(copy.m_nbVirguleFixe)
+Fixed::Fixed(const Fixed& copy)
 {
     std::cout << "Copy constructor called" << std::endl;
+    *this = copy;
 }
 
 Fixed::Fixed(int const nbVirguleFixe) : m_nbVirguleFixe(nbVirguleFixe << m_bitNb)
@@ -97,8 +98,7 @@ void    Fixed::setRawBits(int const raw)
 
 float   Fixed::toFloat(void) const
 {
-    //return ((float)m_nbVirguleFixe / (1 << m_bitNb));
-    return static_cast<float>(this->getRawBits()) / (1 << m_bitNb);
+    return ((float)m_nbVirguleFixe / (1 << m_bitNb));
 }
 
 int     Fixed::toInt(void) const
@@ -138,7 +138,7 @@ const Fixed& Fixed::max(const Fixed& A, const Fixed& B)
         return (B);
 }
 
-// COMAPRISON OPERATORS
+// COMPARISON OPERATORS
 bool Fixed::operator>(const Fixed& X)
 {
     return (getRawBits() > X.getRawBits());
@@ -190,8 +190,8 @@ Fixed Fixed::operator/(const Fixed& X)
     return Fixed(toFloat() / X.toFloat());
 }
 
-std::ostream& operator<<( std::ostream& os, const Fixed& number )
+std::ostream& operator<<(std::ostream& os, const Fixed& number)
 {
 	os << number.toFloat();
-	return ( os );
+	return (os);
 }

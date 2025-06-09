@@ -51,6 +51,6 @@ private :
     static int const    m_bitNb = 8;
 };
 
-std::ostream& operator<<( std::ostream& os, const Fixed& number );
+std::ostream& operator<<(std::ostream& os, const Fixed& number);
 
 #endif
