@@ -8,11 +8,8 @@ ScavTrap::ScavTrap(void) : ClapTrap()
     std::cout << "(ScavTrap) Default consttrucor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap& copy) : ClapTrap(copy.m_Name)
+ScavTrap::ScavTrap(const ScavTrap& copy) : ClapTrap(copy);
 {
-    m_hitPoints = copy.m_hitPoints;
-    m_energyPoints = copy.m_energyPoints;
-    m_attackDamage = copy.m_attackDamage;
     std::cout << "(ScavTrap) Copy constructor called" << std::endl;
 }
 
@@ -27,16 +24,18 @@ ScavTrap::ScavTrap(std::string Name) : ClapTrap(Name)
 ScavTrap& ScavTrap::operator=(const ScavTrap& src)
 {
     std::cout << "(ScavTrap) Copy assignment operator called" << std::endl;
-    ClapTrap(src.m_Name);
-    m_hitPoints = src.m_hitPoints;
-    m_energyPoints = src.m_energyPoints;
-    m_attackDamage = src.m_attackDamage;
+    if (this != &src)
+    {
+        m_Name = src.m_Name;
+        m_hitPoints = src.m_hitPoints;
+        m_energyPoints = src.m_energyPoints;
+        m_attackDamage = src.m_attackDamage;
+    }
     return (*this);
 }
 
 ScavTrap::~ScavTrap(void)
 {
-    // ~ClapTrap(); ??
     std::cout << "(ScavTrap) Destructor called" << std::endl;
 }
 

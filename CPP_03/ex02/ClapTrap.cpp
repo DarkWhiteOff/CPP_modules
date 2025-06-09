@@ -1,13 +1,14 @@
-#include "ClapTrap.hpp"
+-#include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap(void) : m_Name(), m_hitPoints(10), m_energyPoints(10), m_attackDamage(0)
 {
     std::cout << "Default consttrucor called" << std::endl;
 }
 
-ClapTrap::ClapTrap(const ClapTrap& copy) : m_Name(copy.m_Name), m_hitPoints(copy.m_hitPoints), m_energyPoints(copy.m_energyPoints), m_attackDamage(copy.m_attackDamage)
+ClapTrap::ClapTrap(const ClapTrap& copy)
 {
     std::cout << "Copy constructor called" << std::endl;
+    *this = copy;
 }
 
 ClapTrap::ClapTrap(std::string Name) : m_Name(Name), m_hitPoints(10), m_energyPoints(10), m_attackDamage(0)
@@ -18,10 +19,13 @@ ClapTrap::ClapTrap(std::string Name) : m_Name(Name), m_hitPoints(10), m_energyPo
 ClapTrap& ClapTrap::operator=(const ClapTrap& copy)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    m_Name = copy.m_Name;
-    m_hitPoints = copy.m_hitPoints;
-    m_energyPoints = copy.m_energyPoints;
-    m_attackDamage = copy.m_attackDamage;
+    if (this != &copy)
+    {
+        m_Name = copy.m_Name;
+        m_hitPoints = copy.m_hitPoints;
+        m_energyPoints = copy.m_energyPoints;
+        m_attackDamage = copy.m_attackDamage;
+    }
     return (*this);
 }
 
