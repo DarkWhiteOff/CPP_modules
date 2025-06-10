@@ -18,6 +18,9 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
         A2 *= -1;
     if (A3 < 0)
         A3 *= -1;
+    #include <stdio.h>
+    printf("Area : %f\n", a.area_calc(a, b, c));
+    printf("A1 : %f, A2 : %f, A3 : %f\n", A1, A2, A3);
     if (A1 + A2 + A3 == a.area_calc(a, b, c))
         return (true);
     else
