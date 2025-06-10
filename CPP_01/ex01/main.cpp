@@ -8,7 +8,7 @@ int main(void)
     int i(0);
     while (i < 5)
     {
-        horde1->announce();
+        horde1[i].announce();
         i++;
     }
     delete[]horde1;

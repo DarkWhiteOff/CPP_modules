@@ -9,14 +9,14 @@ void ft_putstr(char *str, char *arg)
 
     i = 0;
     while (str[i])
-        write(1, &str[i++], 1);
+        write(2, &str[i++], 1);
     if (arg)
     {
         i = 0;
         while (arg[i])
-            write(1, &arg[i++], 1);
+            write(2, &arg[i++], 1);
     }
-    write(1, "\n", 1);
+    write(2, "\n", 1);
 }
 
 void ft_exec(char *argv[], int i, int tmp_fd, char *env[])
