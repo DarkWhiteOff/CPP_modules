@@ -17,4 +17,6 @@ private :
     std::string m_name;
 };
 
+Zombie* zombieHorde(int N, std::string name);
+
 #endif

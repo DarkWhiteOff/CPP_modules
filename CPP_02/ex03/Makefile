@@ -1,6 +1,6 @@
-NAME = sed
+NAME = fixed1
 
-SRC = main.cpp Replace.cpp
+SRC = Fixed.cpp Point.cpp bsp.cpp main.cpp
 
 OBJS = $(SRC:%.cpp=%.o)
 
@@ -20,7 +20,6 @@ clean:
 
 fclean: clean
 	rm -rf $(NAME)
-	rm -rf file.replace
 
 re: fclean all
 

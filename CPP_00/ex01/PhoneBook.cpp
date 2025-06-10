@@ -1,12 +1,10 @@
 #include "PhoneBook.hpp"
 
-// CONSTRUCTOR
 PhoneBook::PhoneBook() : m_contacts()
 {
 	return ;
 }
 
-//DESTRUCTOR
 PhoneBook::~PhoneBook()
 {
 	return ;

@@ -1,11 +1,10 @@
 #include "Contact.hpp"
 
-// CONSTRUCTOR
 Contact::Contact() : m_first_n(), m_last_n(), m_nickname(), m_phone_nb(), m_secret()
 {
     return ;
 }
-//DESTRUCTOR
+
 Contact::~Contact()
 {
     return ;
@@ -102,6 +101,7 @@ void    Contact::printSecret()
     std::cout << m_secret;
 }
 
+// UTILS
 bool    Contact::exists()
 {
     if (m_first_n.size() > 0)
