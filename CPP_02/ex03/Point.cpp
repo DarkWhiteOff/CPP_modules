@@ -2,23 +2,23 @@
 
 Point::Point(void) : m_x(Fixed()), m_y(Fixed())
 {
-    std::cout << "Default constructor called" << std::endl;
+    //std::cout << "Default constructor called" << std::endl;
 }
 
 Point::Point(float const x, float const y) : m_x(Fixed(x)), m_y(Fixed(y))
 {
-    std::cout << "Surcharged constructor called" << std::endl;
+    //std::cout << "Surcharged constructor called" << std::endl;
 }
 
 Point::Point(const Point& copy)
 {
-    std::cout << "Copy constructor called" << std::endl;
+    //std::cout << "Copy constructor called" << std::endl;
     *this = copy;
 }
 
 Point& Point::operator=(const Point& src)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
+    //std::cout << "Copy assignment operator called" << std::endl;
     if (this != &src)
     {
         // m_x = src.getX();
@@ -29,7 +29,7 @@ Point& Point::operator=(const Point& src)
 
 Point::~Point(void)
 {
-    std::cout << "Destructor called" << std::endl;
+    //std::cout << "Destructor called" << std::endl;
 }
 
 Fixed Point::getX(void) const
