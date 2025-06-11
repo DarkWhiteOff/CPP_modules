@@ -10,17 +10,17 @@ class   Point
 {
 public :
     Point(void);
-    Point(float const x, float const y);
+    Point(const float x, const float y);
     Point(const Point& copy);
     Point& operator=(const Point& src);
     ~Point(void);
+    static float area_calc(Point const a, Point const b, Point const c);
     Fixed getX(void) const;
-    Fixed getY(void) const;
-    float area_calc(Point const a, Point const b, Point const c) const;
+	Fixed getY(void) const;
 
 private :
-    Fixed const m_x;
-    Fixed const m_y;
+    const Fixed m_x;
+    const Fixed m_y;
 };
 
 bool bsp(Point const a, Point const b, Point const c, Point const point);

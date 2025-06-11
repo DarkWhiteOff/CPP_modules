@@ -1,13 +1,13 @@
 #include "Point.hpp"
 
-Point::Point(void) : m_x(Fixed()), m_y(Fixed())
+Point::Point(void) : m_x(0), m_y(0)
 {
-    //std::cout << "Default constructor called" << std::endl;
+    std::cout << "Default constructor called P" << std::endl;
 }
 
-Point::Point(float const x, float const y) : m_x(Fixed(x)), m_y(Fixed(y))
+Point::Point(const float x, const float y) : m_x(x), m_y(y)
 {
-    //std::cout << "Surcharged constructor called" << std::endl;
+    std::cout << "Surcharged constructor called P" << std::endl;
 }
 
 Point::Point(const Point& copy)
@@ -21,8 +21,8 @@ Point& Point::operator=(const Point& src)
     //std::cout << "Copy assignment operator called" << std::endl;
     if (this != &src)
     {
-        // m_x = src.getX();
-        // m_y = src.getY();
+        // m_x = src.m_x;
+        // m_y = src.m_y;
     }
     return (*this);
 }
@@ -32,21 +32,29 @@ Point::~Point(void)
     //std::cout << "Destructor called" << std::endl;
 }
 
-Fixed Point::getX(void) const
+float Point::area_calc(Point const a, Point const b, Point const c)
 {
-    return (m_x);
-}
-
-Fixed Point::getY(void) const
-{
-    return (m_y);
-}
-
-float Point::area_calc(Point const a, Point const b, Point const c) const
-{
-    float res = (b.getX().toFloat() - a.getX().toFloat())*(c.getY().toFloat() - a.getY().toFloat())
-        - (c.getX().toFloat() - a.getX().toFloat())*(b.getY().toFloat() - a.getY().toFloat());
+    std::cout << a.getX() << std::endl;
+    std::cout << a.getY() << std::endl;
+    std::cout << b.getX() << std::endl;
+    std::cout << b.getY() << std::endl;
+    std::cout << c.getX() << std::endl;
+    std::cout << c.getY() << std::endl;
+    exit(0);
+    std::cout << a.m_x.toFloat() << std::endl;
+    std::cout << a.m_y.toFloat() << std::endl;
+    float res = (b.m_x.toFloat() - a.m_x.toFloat())*(c.m_y.toFloat() - a.m_y.toFloat())
+        - (c.m_x.toFloat() - a.m_x.toFloat())*(b.m_y.toFloat() - a.m_y.toFloat()) / 2;
     if (res < 0)
         res *= -1;
     return (res);
+}
+
+Fixed Point::getX(void) const
+{
+	return m_x;
+}
+Fixed Point::getY(void) const
+{
+	return m_y;
 }

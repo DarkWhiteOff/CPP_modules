@@ -2,27 +2,30 @@
 
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
+    //exit(0);
+    float Atotal;
     float A1;
     float A2;
     float A3;
 
-    A1 = (b.getX().toFloat() - a.getX().toFloat())*(point.getY().toFloat() - a.getY().toFloat())
-        - (point.getX().toFloat() - a.getX().toFloat())*(b.getY().toFloat() - a.getY().toFloat()); // a b point
-    A2 = (b.getX().toFloat() - point.getX().toFloat())*(c.getY().toFloat() - point.getY().toFloat())
-        - (c.getX().toFloat() - point.getX().toFloat())*(b.getY().toFloat() - point.getY().toFloat()); // b c point
-    A3 = (point.getX().toFloat() - a.getX().toFloat())*(c.getY().toFloat() - a.getY().toFloat())
-        - (c.getX().toFloat() - a.getX().toFloat())*(point.getY().toFloat() - a.getY().toFloat()); // c a point
-    if (A1 < 0)
-        A1 *= -1;
-    if (A2 < 0)
-        A2 *= -1;
-    if (A3 < 0)
-        A3 *= -1;
-    #include <stdio.h>
-    printf("Area : %f\n", a.area_calc(a, b, c));
-    printf("A1 : %f, A2 : %f, A3 : %f\n", A1, A2, A3);
-    if (A1 + A2 + A3 == a.area_calc(a, b, c))
-        return (true);
-    else
-        return (false);
+    std::cout << a.getX() << std::endl;
+    std::cout << a.getY() << std::endl;
+    std::cout << b.getX() << std::endl;
+    std::cout << b.getY() << std::endl;
+    std::cout << c.getX() << std::endl;
+    std::cout << c.getY() << std::endl;
+    std::cout << point.getX() << std::endl;
+    std::cout << point.getY() << std::endl;
+    Atotal = Point::area_calc(a, b, c);
+    A1 = Point::area_calc(a, b, point);
+    A2 = Point::area_calc(b, c, point);
+    A3 = Point::area_calc(c, a, point);
+    std::cout << A1 << std::endl;
+    std::cout << A2 << std::endl;
+    std::cout << A3 << std::endl;
+    // if (A1 + A2 + A3 == Point::area_calc(a, b, c))
+    //     return (true);
+    // else
+    //     return (false);
+    return (true);
 }
