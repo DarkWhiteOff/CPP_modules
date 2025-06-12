@@ -21,8 +21,8 @@ Point& Point::operator=(const Point& src)
     //std::cout << "Copy assignment operator called" << std::endl;
     if (this != &src)
     {
-        // m_x = src.m_x;
-        // m_y = src.m_y;
+        (Fixed)m_x = src.m_x;
+        (Fixed)m_y = src.m_y;
     }
     return (*this);
 }
@@ -34,9 +34,9 @@ Point::~Point(void)
 
 const float Point::getX(void) const
 {
-	return m_x.toFloat();
+	return (m_x.toFloat());
 }
 const float Point::getY(void) const
 {
-	return m_y.toFloat();
+	return (m_y.toFloat());
 }
