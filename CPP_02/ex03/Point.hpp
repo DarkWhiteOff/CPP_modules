@@ -22,6 +22,7 @@ private :
     const Fixed m_y;
 };
 
+float area_calc(const float ax, const float ay, const float bx, const float by, const float cx, const float cy);
 bool bsp(Point const a, Point const b, Point const c, Point const point);
 
 #endif
