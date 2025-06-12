@@ -1,13 +1,9 @@
-#include <unistd.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <string.h>
+#include "training1.h"
 
 void ft_putstr(char *str, char *arg)
 {
-    int i;
+    int i = 0;
 
-    i = 0;
     while (str[i])
         write(2, &str[i++], 1);
     if (arg)
@@ -18,9 +14,23 @@ void ft_putstr(char *str, char *arg)
     }
     write(2, "\n", 1);
 }
+void cd(char *argv[], int i, int pipe)
+{
+    int status;
+
+    status = (i != 2) || chdir(argv[1]) == -1;
+    if (i != 2)
+        ft_putstr("error: cd: bad arguments", NULL);
+    else if (status)
+        ft_putstr("error: cd: cannot access ", argv[1]);
+    if (pipe)
+        exit(status);
+}
 
 void ft_exec(char *argv[], int i, int tmp_fd, char *env[])
 {
+    if (strcmp(argv[0], "cd") == 0)
+        cd(argv, i, 1);
     argv[i] = NULL;
     dup2(tmp_fd, STDIN_FILENO);
     close(tmp_fd);
@@ -44,14 +54,9 @@ int main(int argc, char *argv[], char *env[])
         i = 0;
         while (argv[i] && strcmp(argv[i], ";") && strcmp(argv[i], "|"))
             i++;
-        if (strcmp(argv[0], "cd") == 0)
-        {
-            if (i != 2)
-                ft_putstr("error: cd: bad arguments", NULL);
-            else if (chdir(argv[1]) == -1)
-                ft_putstr("error: cd: cannot change directory to ", argv[1]);
-        }
-        else if (i != 0 && (argv[i] == NULL || strcmp(argv[i], ";") == 0))
+        if (strcmp(argv[0], "cd") == 0 && argv[i] && strcmp(argv[i], "|"))
+            cd(argv, i, 0);
+        else if ((i != 0 && argv[i] == NULL) || (i != 0 && strcmp(argv[i], ";") == 0))
         {
             if (fork() == 0)
                 ft_exec(argv, i, tmp_fd, env);

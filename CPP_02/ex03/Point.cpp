@@ -32,29 +32,11 @@ Point::~Point(void)
     //std::cout << "Destructor called" << std::endl;
 }
 
-float Point::area_calc(Point const a, Point const b, Point const c)
+const float Point::getX(void) const
 {
-    std::cout << a.getX() << std::endl;
-    std::cout << a.getY() << std::endl;
-    std::cout << b.getX() << std::endl;
-    std::cout << b.getY() << std::endl;
-    std::cout << c.getX() << std::endl;
-    std::cout << c.getY() << std::endl;
-    exit(0);
-    std::cout << a.m_x.toFloat() << std::endl;
-    std::cout << a.m_y.toFloat() << std::endl;
-    float res = (b.m_x.toFloat() - a.m_x.toFloat())*(c.m_y.toFloat() - a.m_y.toFloat())
-        - (c.m_x.toFloat() - a.m_x.toFloat())*(b.m_y.toFloat() - a.m_y.toFloat()) / 2;
-    if (res < 0)
-        res *= -1;
-    return (res);
+	return m_x.toFloat();
 }
-
-Fixed Point::getX(void) const
+const float Point::getY(void) const
 {
-	return m_x;
-}
-Fixed Point::getY(void) const
-{
-	return m_y;
+	return m_y.toFloat();
 }

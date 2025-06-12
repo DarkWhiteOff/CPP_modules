@@ -14,9 +14,8 @@ public :
     Point(const Point& copy);
     Point& operator=(const Point& src);
     ~Point(void);
-    static float area_calc(Point const a, Point const b, Point const c);
-    Fixed getX(void) const;
-	Fixed getY(void) const;
+    const float getX(void) const;
+	const float getY(void) const;
 
 private :
     const Fixed m_x;
