@@ -86,88 +86,89 @@ int     Fixed::toInt(void) const
 }
 
 // COMPARISON OPERATORS
-bool Fixed::operator>(const Fixed &X)
+bool Fixed::operator>(const Fixed &X) const
 {
     return (toFloat() > X.toFloat());
 }
 
-bool Fixed::operator<(const Fixed &X)
+bool Fixed::operator<(const Fixed &X) const
 {
     return (toFloat() < X.toFloat());
 }
 
-bool Fixed::operator>=(const Fixed &X)
+bool Fixed::operator>=(const Fixed &X) const
 {
     return (toFloat() >= X.toFloat());
 }
 
-bool Fixed::operator<=(const Fixed &X)
+bool Fixed::operator<=(const Fixed &X) const
 {
     return (toFloat() <= X.toFloat());
 }
 
-bool Fixed::operator==(const Fixed &X)
+bool Fixed::operator==(const Fixed &X) const
 {
     return (toFloat() == X.toFloat());
 }
 
-bool Fixed::operator!=(const Fixed &X)
+bool Fixed::operator!=(const Fixed &X) const
 {
     return (toFloat() != X.toFloat());
 }
 
 // ARITHMETIC OPERATORS
-Fixed Fixed::operator+(const Fixed &X)
+Fixed Fixed::operator+(const Fixed &X) const
 {
     return (Fixed(toFloat() + X.toFloat()));
 }
 
-Fixed Fixed::operator-(const Fixed &X)
+Fixed Fixed::operator-(const Fixed &X) const
 {
     return (Fixed(toFloat() - X.toFloat()));
 }
 
-Fixed Fixed::operator*(const Fixed &X)
+Fixed Fixed::operator*(const Fixed &X) const
 {
     return (Fixed(toFloat() * X.toFloat()));
 }
 
-Fixed Fixed::operator/(const Fixed &X)
+Fixed Fixed::operator/(const Fixed &X) const
 {
     return (Fixed(toFloat() / X.toFloat()));
 }
 
-// INCR/DECR OPERATORS
-Fixed	Fixed::operator++(int)
-{
-    Fixed copy(*this);
-    m_nbVirguleFixe += 1;
-    return (copy);
-}
-
+// PRE INCREMENT/DECREMENT
 Fixed &Fixed::operator++(void)
 {
-    m_nbVirguleFixe += 1;
+    m_nbVirguleFixe += 1; // x += 1 equivalent to ++x 
     return (*this);
-}
-
-Fixed	Fixed::operator--(int)
-{
-    Fixed copy(*this);
-    m_nbVirguleFixe -= 1;
-    return (copy);
 }
 
 Fixed &Fixed::operator--(void)
 {
-    m_nbVirguleFixe -= 1;
+    m_nbVirguleFixe -= 1; // x -= 1 equivalent to --x 
     return (*this);
+}
+
+// POST INCREMENT/DECREMENT
+Fixed	Fixed::operator++(int)
+{
+    Fixed tmp = *this;
+    ++m_nbVirguleFixe;
+    return (tmp);
+}
+
+Fixed	Fixed::operator--(int)
+{
+    Fixed tmp = *this;
+    --m_nbVirguleFixe;
+    return (tmp);
 }
 
 // MIN MAX
 Fixed& Fixed::min(Fixed &A, Fixed &B)
 {
-    if (A.getRawBits() < B.getRawBits())
+    if (A.toFloat() < B.toFloat())
         return (A);
     else
         return (B);

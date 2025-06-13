@@ -19,22 +19,22 @@ public :
     float   toFloat(void) const;
     int     toInt(void) const;
 
-    bool operator>(const Fixed &X);
-    bool operator<(const Fixed &X);
-    bool operator>=(const Fixed &X);
-    bool operator<=(const Fixed &X);
-    bool operator==(const Fixed &X);
-    bool operator!=(const Fixed &X);
+    bool operator>(const Fixed &X) const;
+    bool operator<(const Fixed &X) const;
+    bool operator>=(const Fixed &X) const;
+    bool operator<=(const Fixed &X) const;
+    bool operator==(const Fixed &X) const;
+    bool operator!=(const Fixed &X) const;
 
-    Fixed operator+(const Fixed &X);
-    Fixed operator-(const Fixed &X);
-    Fixed operator*(const Fixed &X);
-    Fixed operator/(const Fixed &X);
+    Fixed operator+(const Fixed &X) const;
+    Fixed operator-(const Fixed &X) const;
+    Fixed operator*(const Fixed &X) const;
+    Fixed operator/(const Fixed &X) const;
 
-    Fixed operator++(int);
     Fixed &operator++(void);
-    Fixed operator--(int);
     Fixed &operator--(void);
+    Fixed operator++(int);
+    Fixed operator--(int);
 
     static Fixed &min(Fixed &A, Fixed &B);
     static const Fixed &min(const Fixed &A, const Fixed &B);
