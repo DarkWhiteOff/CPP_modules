@@ -2,12 +2,12 @@
 
 Fixed::Fixed(void) : m_nbVirguleFixe(0)
 {
-    //std::cout << "Default constructor called" << std::endl;
+    // std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int in)
 {
-    //std::cout << "Int constructor called" << std::endl;
+    // std::cout << "Int constructor called" << std::endl;
     int nbVirguleFixe = in;
     int i = 8;
     while (i > 0)
@@ -20,7 +20,7 @@ Fixed::Fixed(const int in)
 
 Fixed::Fixed(const float f)
 {
-    //std::cout << "Float constructor called" << std::endl;
+    // std::cout << "Float constructor called" << std::endl;
     float nbVirguleFixe = f;
     int i = 8;
     while (i > 0)

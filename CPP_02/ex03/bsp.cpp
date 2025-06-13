@@ -1,8 +1,9 @@
 #include "Point.hpp"
 
-float area_calc(const float ax, const float ay, const float bx, const float by, const float cx, const float cy)
+float area_calc(Point const a, Point const b, Point const c)
 {
-    float res = (bx - ax)*(cy - ay) - (cx - ax)*(by - ay);
+    float res = (b.getX().toFloat() - a.getX().toFloat())*(c.getY().toFloat() - a.getY().toFloat())
+        - (c.getX().toFloat() - a.getX().toFloat())*(b.getY().toFloat() - a.getY().toFloat());
     if (res < 0)
         res *= -1;
     res = res / 2;
@@ -11,15 +12,11 @@ float area_calc(const float ax, const float ay, const float bx, const float by, 
 
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
-    float Atotal;
-    float A1;
-    float A2;
-    float A3;
+    float Atotal = area_calc(a, b, c);
+    float A1 = area_calc(a, b, point);
+    float A2 = area_calc(b, c, point);
+    float A3 = area_calc(c, a, point);
 
-    Atotal = area_calc(a.getX(), a.getY(), b.getX(), b.getY(), c.getX(), c.getY());
-    A1 = area_calc(a.getX(), a.getY(), b.getX(), b.getY(), point.getX(), point.getY());
-    A2 = area_calc(b.getX(), b.getY(), c.getX(), c.getY(), point.getX(), point.getY());
-    A3 = area_calc(c.getX(), c.getY(), a.getX(), a.getY(), point.getX(), point.getY());
     if (A1 == 0 || A2 == 0 || A3 == 0)
         return (false);
     if (A1 + A2 + A3 == Atotal)
@@ -32,14 +29,14 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
 
 
 
-// std::cout << "ax : " << a.getX() << std::endl;
-// std::cout << "ay : " << a.getY() << std::endl;
-// std::cout << "bx : " << b.getX() << std::endl;
-// std::cout << "by : " << b.getY() << std::endl;
-// std::cout << "cx : " << c.getX() << std::endl;
-// std::cout << "cy : " << c.getY() << std::endl;
-// std::cout << "px : " << point.getX() << std::endl;
-// std::cout << "py : " << point.getY() << std::endl;
+// std::cout << "ax : " << a.getX().toFloat() << std::endl;
+// std::cout << "ay : " << a.getY().toFloat() << std::endl;
+// std::cout << "bx : " << b.getX().toFloat() << std::endl;
+// std::cout << "by : " << b.getY().toFloat() << std::endl;
+// std::cout << "cx : " << c.getX().toFloat() << std::endl;
+// std::cout << "cy : " << c.getY().toFloat() << std::endl;
+// std::cout << "px : " << point.getX().toFloat() << std::endl;
+// std::cout << "py : " << point.getY().toFloat() << std::endl;
 // std::cout << std::endl;
 // std::cout << "Atotal : " << Atotal << std::endl;
 // std::cout << "A1 : " << A1 << std::endl;
