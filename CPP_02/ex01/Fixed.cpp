@@ -5,23 +5,38 @@ Fixed::Fixed(void) : m_nbVirguleFixe(0)
     std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(int const nbVirguleFixe) : m_nbVirguleFixe(nbVirguleFixe << m_bitNb)
+Fixed::Fixed(const int in)
 {
     std::cout << "Int constructor called" << std::endl;
+    int nbVirguleFixe = in;
+    int i = 8;
+    while (i > 0)
+    {
+        nbVirguleFixe *= 2;
+        i--;
+    }
+    m_nbVirguleFixe = nbVirguleFixe;
 }
 
-Fixed::Fixed(float const nbVirguleFixe) : m_nbVirguleFixe(roundf(nbVirguleFixe * (1 << m_bitNb)))
+Fixed::Fixed(const float f)
 {
     std::cout << "Float constructor called" << std::endl;
+    float nbVirguleFixe = f;
+    int i = 8;
+    while (i > 0)
+    {
+        nbVirguleFixe *= 2;
+        i--;
+    }
+    m_nbVirguleFixe = roundf(nbVirguleFixe);
 }
 
-Fixed::Fixed(const Fixed& copy)
+Fixed::Fixed(const Fixed &copy) : m_nbVirguleFixe(copy.m_nbVirguleFixe)
 {
     std::cout << "Copy constructor called" << std::endl;
-    *this = copy;
 }
 
-Fixed& Fixed::operator=(const Fixed& src)
+Fixed &Fixed::operator=(const Fixed &src)
 {
     std::cout << "Copy assignment operator called" << std::endl;
     if (this != &src)
@@ -48,16 +63,30 @@ void    Fixed::setRawBits(int const raw)
 
 float   Fixed::toFloat(void) const
 {
-    return ((float)m_nbVirguleFixe / (1 << m_bitNb));
+    float nbVirguleFixe = m_nbVirguleFixe;
+    int i = 8;
+    while (i > 0)
+    {
+        nbVirguleFixe /= 2;
+        i--;
+    } 
+    return (nbVirguleFixe);
 }
 
 int     Fixed::toInt(void) const
 {
-    return (m_nbVirguleFixe >> m_bitNb);
+    int nbVirguleFixe = m_nbVirguleFixe;
+    int i = 8;
+    while (i > 0)
+    {
+        nbVirguleFixe /= 2;
+        i--;
+    } 
+    return (nbVirguleFixe);
 }
 
-std::ostream& operator<<(std::ostream& os, const Fixed& number)
+std::ostream &operator<<(std::ostream &o, const Fixed &fixed)
 {
-	os << number.toFloat();
-	return (os);
+	o << fixed.toFloat();
+	return (o);
 }

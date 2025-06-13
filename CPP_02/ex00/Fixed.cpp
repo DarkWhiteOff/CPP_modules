@@ -1,19 +1,16 @@
 #include "Fixed.hpp"
 
-static int const m_bitNb = 8;
-
 Fixed::Fixed(void) : m_nbVirguleFixe(0)
 {
     std::cout << "Default construcor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed& copy)
+Fixed::Fixed(const Fixed &copy) : m_nbVirguleFixe(copy.m_nbVirguleFixe)
 {
     std::cout << "Copy constructor called" << std::endl;
-    *this = copy;
 }
 
-Fixed& Fixed::operator=(const Fixed& src)
+Fixed &Fixed::operator=(const Fixed &src)
 {
     std::cout << "Copy assignment operator called" << std::endl;
     if (this != &src)

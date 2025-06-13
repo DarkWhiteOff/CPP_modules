@@ -5,20 +5,35 @@ Fixed::Fixed(void) : m_nbVirguleFixe(0)
     //std::cout << "Default constructor called" << std::endl;
 }
 
-Fixed::Fixed(int const nbVirguleFixe) : m_nbVirguleFixe(nbVirguleFixe << m_bitNb)
+Fixed::Fixed(const int in)
 {
     //std::cout << "Int constructor called" << std::endl;
+    int nbVirguleFixe = in;
+    int i = 8;
+    while (i > 0)
+    {
+        nbVirguleFixe *= 2;
+        i--;
+    }
+    m_nbVirguleFixe = nbVirguleFixe;
 }
 
-Fixed::Fixed(float const nbVirguleFixe) : m_nbVirguleFixe(roundf(nbVirguleFixe * (1 << m_bitNb)))
+Fixed::Fixed(const float f)
 {
     //std::cout << "Float constructor called" << std::endl;
+    float nbVirguleFixe = f;
+    int i = 8;
+    while (i > 0)
+    {
+        nbVirguleFixe *= 2;
+        i--;
+    }
+    m_nbVirguleFixe = roundf(nbVirguleFixe);
 }
 
-Fixed::Fixed(const Fixed& copy)
+Fixed::Fixed(const Fixed& copy) : m_nbVirguleFixe(copy.m_nbVirguleFixe)
 {
     //std::cout << "Copy constructor called" << std::endl;
-    *this = copy;
 }
 
 Fixed& Fixed::operator=(const Fixed& src)
@@ -48,64 +63,78 @@ void    Fixed::setRawBits(int const raw)
 
 float   Fixed::toFloat(void) const
 {
-    return ((float)m_nbVirguleFixe / (1 << m_bitNb));
+    float nbVirguleFixe = m_nbVirguleFixe;
+    int i = 8;
+    while (i > 0)
+    {
+        nbVirguleFixe /= 2;
+        i--;
+    } 
+    return (nbVirguleFixe);
 }
 
 int     Fixed::toInt(void) const
 {
-    return (m_nbVirguleFixe >> m_bitNb);
+    int nbVirguleFixe = m_nbVirguleFixe;
+    int i = 8;
+    while (i > 0)
+    {
+        nbVirguleFixe /= 2;
+        i--;
+    } 
+    return (nbVirguleFixe);
 }
 
 // COMPARISON OPERATORS
-bool Fixed::operator>(const Fixed& X)
+bool Fixed::operator>(const Fixed &X)
 {
-    return (getRawBits() > X.getRawBits());
+    return (toFloat() > X.toFloat());
 }
 
-bool Fixed::operator<(const Fixed& X)
+bool Fixed::operator<(const Fixed &X)
 {
-    return (getRawBits() < X.getRawBits());
+    return (toFloat() < X.toFloat());
 }
 
-bool Fixed::operator>=(const Fixed& X)
+bool Fixed::operator>=(const Fixed &X)
 {
-    return (getRawBits() >= X.getRawBits());
+    return (toFloat() >= X.toFloat());
 }
 
-bool Fixed::operator<=(const Fixed& X)
+bool Fixed::operator<=(const Fixed &X)
 {
-    return (getRawBits() <= X.getRawBits());
+    return (toFloat() <= X.toFloat());
 }
 
-bool Fixed::operator==(const Fixed& X)
+bool Fixed::operator==(const Fixed &X)
 {
-    return (getRawBits() == X.getRawBits());
+    return (toFloat() == X.toFloat());
 }
 
-bool Fixed::operator!=(const Fixed& X)
+bool Fixed::operator!=(const Fixed &X)
 {
-    return (getRawBits() != X.getRawBits());
+    return (toFloat() != X.toFloat());
 }
 
 // ARITHMETIC OPERATORS
-Fixed Fixed::operator+(const Fixed& X)
+Fixed Fixed::operator+(const Fixed &X)
 {
-    return Fixed(toFloat() + X.toFloat());
+    return (Fixed(toFloat() + X.toFloat()));
 }
 
-Fixed Fixed::operator-(const Fixed& X)
+Fixed Fixed::operator-(const Fixed &X)
 {
-    return Fixed(toFloat() - X.toFloat());
+    return (Fixed(toFloat() - X.toFloat()));
 }
 
-Fixed Fixed::operator*(const Fixed& X)
+Fixed Fixed::operator*(const Fixed &X)
 {
-    return Fixed(toFloat() * X.toFloat());
+    return (Fixed(toFloat() * X.toFloat()));
 }
 
-Fixed Fixed::operator/(const Fixed& X)
+Fixed Fixed::operator/(const Fixed &X)
 {
-    return Fixed(toFloat() / X.toFloat());
+    return (Fixed(toFloat() / X.toFloat()));
 }
 
 // INCR/DECR OPERATORS
@@ -116,7 +145,7 @@ Fixed	Fixed::operator++(int)
     return (copy);
 }
 
-Fixed&	Fixed::operator++(void)
+Fixed &Fixed::operator++(void)
 {
     m_nbVirguleFixe += 1;
     return (*this);
@@ -129,38 +158,14 @@ Fixed	Fixed::operator--(int)
     return (copy);
 }
 
-Fixed&	Fixed::operator--(void)
+Fixed &Fixed::operator--(void)
 {
     m_nbVirguleFixe -= 1;
     return (*this);
 }
 
-Fixed& Fixed::operator+=(const Fixed& src)
-{
-    m_nbVirguleFixe += src.m_nbVirguleFixe;
-    return (*this);
-}
-
-Fixed& Fixed::operator-=(const Fixed& src)
-{
-    m_nbVirguleFixe -= src.m_nbVirguleFixe;
-    return (*this);
-}
-
-Fixed& Fixed::operator*=(const Fixed& src)
-{
-    m_nbVirguleFixe *= src.m_nbVirguleFixe;
-    return (*this);
-}
-
-Fixed& Fixed::operator/=(const Fixed& src)
-{
-    m_nbVirguleFixe /= src.m_nbVirguleFixe;
-    return (*this);
-}
-
 // MIN MAX
-Fixed& Fixed::min(Fixed& A, Fixed& B)
+Fixed& Fixed::min(Fixed &A, Fixed &B)
 {
     if (A.getRawBits() < B.getRawBits())
         return (A);
@@ -168,32 +173,32 @@ Fixed& Fixed::min(Fixed& A, Fixed& B)
         return (B);
 }
 
-const Fixed& Fixed::min(const Fixed& A, const Fixed& B)
+const Fixed &Fixed::min(const Fixed &A, const Fixed &B)
 {
-    if (A.getRawBits() < B.getRawBits())
+    if (A.toFloat() < B.toFloat())
         return (A);
     else
         return (B);
 }
 
-Fixed& Fixed::max(Fixed& A, Fixed& B)
+Fixed &Fixed::max(Fixed &A, Fixed &B)
 {
-    if (A.getRawBits() > B.getRawBits())
+    if (A.toFloat() > B.toFloat())
         return (A);
     else
         return (B);
 }
 
-const Fixed& Fixed::max(const Fixed& A, const Fixed& B)
+const Fixed &Fixed::max(const Fixed &A, const Fixed &B)
 {
-    if (A.getRawBits() > B.getRawBits())
+    if (A.toFloat() > B.toFloat())
         return (A);
     else
         return (B);
 }
 
-std::ostream& operator<<(std::ostream& os, const Fixed& number)
+std::ostream &operator<<(std::ostream &o, const Fixed &fixed)
 {
-	os << number.toFloat();
-	return (os);
+	o << fixed.toFloat();
+	return (o);
 }
