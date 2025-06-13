@@ -7,7 +7,7 @@ OBJS = $(SRC:%.cpp=%.o)
 CC = c++
 FLAGS = -Wall -Wextra -Werror -I ./includes
 
-.c.o:
+%.o: %.cpp
 	$(FLAGS) -c $< -o $@
 
 all: $(NAME)

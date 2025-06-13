@@ -31,9 +31,10 @@ Fixed::Fixed(const float f)
     m_nbVirguleFixe = roundf(nbVirguleFixe);
 }
 
-Fixed::Fixed(const Fixed &copy) : m_nbVirguleFixe(copy.m_nbVirguleFixe)
+Fixed::Fixed(const Fixed &copy)// : m_nbVirguleFixe(copy.m_nbVirguleFixe)
 {
     std::cout << "Copy constructor called" << std::endl;
+    *this = copy;
 }
 
 Fixed &Fixed::operator=(const Fixed &src)

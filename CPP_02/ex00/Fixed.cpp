@@ -5,9 +5,10 @@ Fixed::Fixed(void) : m_nbVirguleFixe(0)
     std::cout << "Default construcor called" << std::endl;
 }
 
-Fixed::Fixed(const Fixed &copy) : m_nbVirguleFixe(copy.m_nbVirguleFixe)
+Fixed::Fixed(const Fixed &copy)// : m_nbVirguleFixe(copy.m_nbVirguleFixe)
 {
     std::cout << "Copy constructor called" << std::endl;
+    *this = copy;
 }
 
 Fixed &Fixed::operator=(const Fixed &src)

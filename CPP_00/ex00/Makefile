@@ -7,7 +7,7 @@ OBJS = $(SRC:%.cpp=%.o)
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-.c.o:
+%.o: %.cpp
 	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)
