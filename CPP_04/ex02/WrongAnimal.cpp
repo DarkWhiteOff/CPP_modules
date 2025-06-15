@@ -5,12 +5,12 @@ WrongAnimal::WrongAnimal(void) : m_type("WrongAnimal")
     std::cout << "WrongAnimal Default construcor called" << std::endl;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal& copy) : m_type(copy.m_type)
+WrongAnimal::WrongAnimal(const WrongAnimal &copy) : m_type(copy.m_type)
 {
     std::cout << "WrongAnimal Copy constructor called" << std::endl;
 }
 
-WrongAnimal& WrongAnimal::operator=(const WrongAnimal& src)
+WrongAnimal &WrongAnimal::operator=(const WrongAnimal &src)
 {
     std::cout << "WrongAnimal Copy assignment operator called" << std::endl;
     if (this != &src)

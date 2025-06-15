@@ -5,12 +5,12 @@ Animal::Animal(void) : m_type("Animal")
     std::cout << "Animal Default construcor called" << std::endl;
 }
 
-Animal::Animal(const Animal& copy) : m_type(copy.m_type)
+Animal::Animal(const Animal &copy) : m_type(copy.m_type)
 {
     std::cout << "Animal Copy constructor called" << std::endl;
 }
 
-Animal& Animal::operator=(const Animal& src)
+Animal &Animal::operator=(const Animal &src)
 {
     std::cout << "Animal Copy assignment operator called" << std::endl;
     if (this != &src)
@@ -32,5 +32,4 @@ std::string Animal::getType(void) const
 
 void    Animal::makeSound(void) const
 {
-    std::cout << "ANIMALLLLLLLLL" << std::endl;
 }

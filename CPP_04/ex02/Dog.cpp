@@ -1,27 +1,29 @@
 #include "Dog.hpp"
 
-Dog::Dog(void) : Animal(), m_brain(0)
+Dog::Dog(void) : Animal()
 {
+    std::cout << "Dog Default construcor called" << std::endl;
     m_type = "Dog";
     m_brain = new Brain();
-    std::cout << "Dog Default construcor called" << std::endl;
 }
 
-Dog::Dog(const Dog& copy) : Animal()
+Dog::Dog(const Dog &copy) : Animal(copy)
 {
-    m_type = copy.m_type;
-    m_brain = new Brain(*(copy.m_brain));
     std::cout << "Dog Copy constructor called" << std::endl;
+    m_type = copy.m_type;
+    m_brain = new Brain();
+    *m_brain = *copy.m_brain;
 }
 
-Dog& Dog::operator=(const Dog& src)
+Dog &Dog::operator=(const Dog &src)
 {
     std::cout << "Dog Copy assignment operator called" << std::endl;
     if (this != &src)
     {
         m_type = src.m_type;
         delete m_brain;
-        m_brain = new Brain(*(src.m_brain));
+        m_brain = new Brain();
+        *m_brain = *src.m_brain;
     }
     return (*this);
 }
@@ -35,4 +37,17 @@ Dog::~Dog(void)
 void    Dog::makeSound(void) const
 {
     std::cout << "WAF WAF" << std::endl;
+}
+
+// Getter
+void	Dog::getIdeas(void)const
+{
+	for (int i = 0; i < 3; i++)// change the 3 to 100 to show all ideas
+		std::cout << "\tIdea " << i << " of the Dog is: \"" << m_brain->getIdea(i) << "\" at the address " << m_brain->getIdeaAddress(i) << std::endl;
+}
+
+// Setter
+void	Dog::setIdea(size_t i, std::string idea)
+{
+		m_brain->setIdea(i, idea);
 }

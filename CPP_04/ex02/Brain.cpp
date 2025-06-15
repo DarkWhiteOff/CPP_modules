@@ -5,7 +5,7 @@ Brain::Brain(void)
     std::cout << "Brain Default construcor called" << std::endl;
 }
 
-Brain::Brain(const Brain& copy)
+Brain::Brain(const Brain &copy)
 {
     int i(0);
     while (i++ < 100)
@@ -13,14 +13,17 @@ Brain::Brain(const Brain& copy)
     std::cout << "Brain Copy constructor called" << std::endl;
 }
 
-Brain& Brain::operator=(const Brain& src)
+Brain &Brain::operator=(const Brain &src)
 {
     std::cout << "Brain Copy assignment operator called" << std::endl;
     if (this != &src)
     {
         int i(0);
-        while (i++ < 100)
+        while (i < 100)
+		{
             m_ideas[i] = src.m_ideas[i];
+			i++;
+		}
     }
     return (*this);
 }
@@ -28,4 +31,33 @@ Brain& Brain::operator=(const Brain& src)
 Brain::~Brain(void)
 {
     std::cout << "Brain Destructor called" << std::endl;
+}
+
+// Getter
+const std::string	Brain::getIdea(size_t i)const
+{
+	if (i < 100)
+		return(this->m_ideas[i]);
+	else
+		return ("\033[33mThere is only 100 ideas per brain.\033[0m");
+}
+
+const std::string *Brain::getIdeaAddress(size_t i)const
+{
+	if (i < 100)
+	{
+		const std::string	&stringREF = this->m_ideas[i];
+		return(&stringREF);
+	}
+	else
+		return (NULL);
+}
+
+// Setter
+void	Brain::setIdea(size_t i, std::string idea)
+{
+	if (i < 100)
+		m_ideas[i] = idea;
+	else
+		std::cout << "\033[33mThere is only 100 ideas per brain.\033[0m" << std::endl;
 }

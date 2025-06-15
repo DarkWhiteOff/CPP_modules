@@ -3,13 +3,18 @@
 
 int main(void)
 {
-    ClapTrap Kanye("Kanye");
-    ScavTrap Ye("Ye");
+    ClapTrap Walter("Walter");
+    ScavTrap Jesse("Jesse");
     
-    Kanye.attack("Ye");
-    Ye.takeDamage(0);
-    Ye.beRepaired(0);
-    Ye.attack("Kanye");
-    Kanye.takeDamage(20);
+    Walter.attack("Jesse"); // first attack
+    Jesse.takeDamage(0);
+    Jesse.beRepaired(0); // -1 Epts
+    Jesse.attack("Walter"); // -1 Epts
+    Walter.takeDamage(20);
+    Walter.attack("Jesse"); // 2 -> no hit points left
+    Jesse.guardGate();
+    for (int i = 48; i > 0; i--)
+        Jesse.beRepaired(1); // -48 Epts
+    Jesse.beRepaired(1); // no energy
     return (0);
 }

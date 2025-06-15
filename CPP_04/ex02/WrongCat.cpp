@@ -6,13 +6,13 @@ WrongCat::WrongCat(void) : WrongAnimal()
     std::cout << "WrongCat Default construcor called" << std::endl;
 }
 
-WrongCat::WrongCat(const WrongCat& copy) : WrongAnimal()
+WrongCat::WrongCat(const WrongCat &copy) : WrongAnimal(copy)
 {
     m_type = copy.m_type;
     std::cout << "WrongCat Copy constructor called" << std::endl;
 }
 
-WrongCat& WrongCat::operator=(const WrongCat& src)
+WrongCat &WrongCat::operator=(const WrongCat &src)
 {
     std::cout << "WrongCat Copy assignment operator called" << std::endl;
     if (this != &src)

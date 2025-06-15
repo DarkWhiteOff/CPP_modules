@@ -5,18 +5,22 @@
 
 int main(void)
 {
-    ClapTrap Kanye("Kanye");
-    ScavTrap Ye("Ye");
-    FragTrap Elon("Elon");
-    DiamondTrap Diddy("Diddy");
+    ClapTrap Walter("Walter");
+    ScavTrap Jesse("Jesse");
+    FragTrap Mike("Mike");
+    DiamondTrap Saul("Saul");
     
-    Kanye.attack("Ye");
-    Ye.takeDamage(0);
-    Ye.beRepaired(0);
-    Ye.attack("Kanye");
-    Kanye.takeDamage(20);
-    Kanye.beRepaired(15);
-    Elon.attack("Kanye");
-    Kanye.takeDamage(30);
+    Walter.attack("Jesse"); // first attack
+    Jesse.takeDamage(0);
+    Jesse.beRepaired(0); // -1 Epts
+    Jesse.attack("Walter"); // -1 Epts
+    Walter.takeDamage(20);
+    Walter.attack("Jesse"); // 2 -> no hit points left
+    Jesse.attack("Mike");
+    Mike.takeDamage(20);
+    Mike.attack("Jesse");
+    Jesse.takeDamage(30);
+
+    
     return (0);
 }

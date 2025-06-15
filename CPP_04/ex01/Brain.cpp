@@ -5,7 +5,7 @@ Brain::Brain(void)
     std::cout << "Brain Default construcor called" << std::endl;
 }
 
-Brain::Brain(const Brain& copy)
+Brain::Brain(const Brain &copy)
 {
     int i(0);
     while (i++ < 100)
@@ -13,7 +13,7 @@ Brain::Brain(const Brain& copy)
     std::cout << "Brain Copy constructor called" << std::endl;
 }
 
-Brain& Brain::operator=(const Brain& src)
+Brain& Brain::operator=(const Brain &src)
 {
     std::cout << "Brain Copy assignment operator called" << std::endl;
     if (this != &src)
@@ -30,9 +30,9 @@ Brain::~Brain(void)
     std::cout << "Brain Destructor called" << std::endl;
 }
 
-void Brain::addIdea(std::string idea)
-{
-    this->m_ideas[0] = idea;
+// void Brain::addIdea(std::string idea)
+// {
+//     this->m_ideas[0] = idea;
 
-    std::cout << this->m_ideas[0] << std::endl;
-}
+//     std::cout << this->m_ideas[0] << std::endl;
+// }

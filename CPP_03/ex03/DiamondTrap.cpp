@@ -5,10 +5,20 @@ DiamondTrap::DiamondTrap(void) : FragTrap(), ScavTrap()
     FragTrap::m_hitPoints = 100;
     ScavTrap::m_energyPoints = 50;
     FragTrap::m_attackDamage = 30;
-    std::cout << "(DiamondTrap) Default consttrucor called" << std::endl;
+    std::cout << "(DiamondTrap) Default construcor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& copy) : FragTrap(), ScavTrap()
+DiamondTrap::DiamondTrap(std::string Name) : FragTrap(Name), ScavTrap(Name)
+{
+    m_Name = Name;
+    ClapTrap::m_Name = Name + "_clap_name";
+    FragTrap::m_hitPoints = 100;
+    ScavTrap::m_energyPoints = 50;
+    FragTrap::m_attackDamage = 30;
+    std::cout << "(DiamondTrap) Surcharged constructor called" << std::endl;
+}
+
+DiamondTrap::DiamondTrap(const DiamondTrap &copy) : FragTrap(), ScavTrap()
 {
     clap_Name = copy.clap_Name;
     FragTrap::m_Name = copy.FragTrap::m_Name;
@@ -18,16 +28,7 @@ DiamondTrap::DiamondTrap(const DiamondTrap& copy) : FragTrap(), ScavTrap()
     std::cout << "(DiamondTrap) Copy constructor called" << std::endl;
 }
 
-DiamondTrap::DiamondTrap(std::string Name) : FragTrap(Name), ScavTrap(Name)
-{
-    clap_Name = Name += "_clap_name";
-    FragTrap::m_hitPoints = 100;
-    ScavTrap::m_energyPoints = 50;
-    FragTrap::m_attackDamage = 30;
-    std::cout << "(DiamondTrap) Surcharged constructor called" << std::endl;
-}
-
-DiamondTrap& DiamondTrap::operator=(const DiamondTrap& src)
+DiamondTrap& DiamondTrap::operator=(const DiamondTrap &src)
 {
     std::cout << "(DiamondTrap) Copy assignment operator called" << std::endl;
     clap_Name = src.clap_Name;
