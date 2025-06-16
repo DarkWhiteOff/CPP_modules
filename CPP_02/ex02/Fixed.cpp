@@ -31,12 +31,13 @@ Fixed::Fixed(const float f)
     m_nbVirguleFixe = roundf(nbVirguleFixe);
 }
 
-Fixed::Fixed(const Fixed &copy) : m_nbVirguleFixe(copy.m_nbVirguleFixe)
+Fixed::Fixed(const Fixed &copy)
 {
     //std::cout << "Copy constructor called" << std::endl;
+    *this = copy;
 }
 
-Fixed& Fixed::operator=(const Fixed &src)
+Fixed &Fixed::operator=(const Fixed &src)
 {
     //std::cout << "Copy assignment operator called" << std::endl;
     if (this != &src)
@@ -166,7 +167,7 @@ Fixed	Fixed::operator--(int)
 }
 
 // MIN MAX
-Fixed& Fixed::min(Fixed &A, Fixed &B)
+Fixed &Fixed::min(Fixed &A, Fixed &B)
 {
     if (A.toFloat() < B.toFloat())
         return (A);
