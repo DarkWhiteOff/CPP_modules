@@ -2,16 +2,16 @@
 
 Dog::Dog(void) : Animal()
 {
+    std::cout << "Dog Default construcor called" << std::endl;
     m_type = "Dog";
     m_brain = new Brain();
-    std::cout << "Dog Default construcor called" << std::endl;
 }
 
 Dog::Dog(const Dog &copy) : Animal(copy)
 {
+    std::cout << "Dog Copy constructor called" << std::endl;
     m_type = copy.m_type;
     m_brain = new Brain(*(copy.m_brain));
-    std::cout << "Dog Copy constructor called" << std::endl;
 }
 
 Dog &Dog::operator=(const Dog &src)

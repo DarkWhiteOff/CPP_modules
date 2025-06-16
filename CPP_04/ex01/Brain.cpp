@@ -29,10 +29,3 @@ Brain::~Brain(void)
 {
     std::cout << "Brain Destructor called" << std::endl;
 }
-
-// void Brain::addIdea(std::string idea)
-// {
-//     this->m_ideas[0] = idea;
-
-//     std::cout << this->m_ideas[0] << std::endl;
-// }

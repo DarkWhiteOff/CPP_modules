@@ -24,17 +24,4 @@ int main(void)
     while (i-- > 0)
         delete array[i];
     return (0);
-
-
-    // Dog *dog = new Dog();
-
-    // Dog *dogCopy(dog);
-
-    // dog->m_brain->addIdea("TEST");
-
-    // delete dog;
-
-    // dogCopy->m_brain->addIdea("DELETE BRAIN");
-
-    // return 0;
 }

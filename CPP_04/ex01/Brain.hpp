@@ -11,7 +11,6 @@ public :
     Brain(const Brain &copy);
     Brain &operator=(const Brain &src);
     virtual ~Brain(void);
-    // void addIdea(std::string idea);
 
 private :
     std::string m_ideas[100];

@@ -2,14 +2,14 @@
 
 WrongCat::WrongCat(void) : WrongAnimal()
 {
-    m_type = "WrongCat";
     std::cout << "WrongCat Default construcor called" << std::endl;
+    m_type = "WrongCat";
 }
 
 WrongCat::WrongCat(const WrongCat &copy) : WrongAnimal(copy)
 {
-    m_type = copy.m_type;
     std::cout << "WrongCat Copy constructor called" << std::endl;
+    m_type = copy.m_type;
 }
 
 WrongCat &WrongCat::operator=(const WrongCat &src)

@@ -5,6 +5,11 @@ Dog::Dog(void) : Animal()
     std::cout << "Dog Default construcor called" << std::endl;
     m_type = "Dog";
     m_brain = new Brain();
+    if (m_brain == NULL)
+	{
+		perror("Dpg Brain allocation failed");
+		exit(1);
+	}
 }
 
 Dog::Dog(const Dog &copy) : Animal(copy)
@@ -21,7 +26,6 @@ Dog &Dog::operator=(const Dog &src)
     if (this != &src)
     {
         m_type = src.m_type;
-        delete m_brain;
         m_brain = new Brain();
         *m_brain = *src.m_brain;
     }

@@ -21,7 +21,8 @@ Brain &Brain::operator=(const Brain &src)
         int i(0);
         while (i < 100)
 		{
-            m_ideas[i] = src.m_ideas[i];
+			if (src.m_ideas[i].length() > 0)
+            	m_ideas[i] = src.m_ideas[i];
 			i++;
 		}
     }
@@ -37,7 +38,7 @@ Brain::~Brain(void)
 const std::string	Brain::getIdea(size_t i)const
 {
 	if (i < 100)
-		return(this->m_ideas[i]);
+		return(m_ideas[i]);
 	else
 		return ("\033[33mThere is only 100 ideas per brain.\033[0m");
 }
@@ -46,7 +47,7 @@ const std::string *Brain::getIdeaAddress(size_t i)const
 {
 	if (i < 100)
 	{
-		const std::string	&stringREF = this->m_ideas[i];
+		const std::string	&stringREF = m_ideas[i];
 		return(&stringREF);
 	}
 	else
