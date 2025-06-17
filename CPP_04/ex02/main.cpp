@@ -23,21 +23,13 @@ int main()
 		{
 			meta[i] = new Cat();
 			if (meta[i] == NULL)
-			{
-				perror("Cat allocation failed");
-				std::cerr << "Exiting process now";
-				exit(1);
-			}
+		    	std::cout << "Cat Brain allocation failed" << std::endl;
 		}
 		else
 		{
 			meta[i] = new Dog();
 			if (meta[i] == NULL)
-			{
-				perror("Dog allocation failed");
-				std::cerr << "Exiting process now";
-				exit(1);
-			}
+				std::cout << "Dog Brain allocation failed" << std::endl;
 		}
 	}
 	std::cout << std::endl;
@@ -66,11 +58,7 @@ int main()
 	Dog *a = new Dog();
 	// Cat *a = new Cat();
 	if (a == NULL)
-	{
-		perror("Allocation failed");
-		std::cerr << "Exiting the process now." << std::endl;
-		exit(1);
-	}
+		std::cout << "Dog Brain allocation failed" << std::endl;
 
 	a->setIdea(0, "I have to sniff it");
 	a->setIdea(1, "I have to pee on it");
@@ -80,11 +68,7 @@ int main()
 	Dog *b = new Dog(*a);
 	// Cat *b = new Cat(*a);
 	if (b == NULL)
-	{
-		perror("Allocation failed");
-		std::cerr << "Exiting the process now." << std::endl;
-		exit(1);
-	}
+		std::cout << "Dog Brain allocation failed" << std::endl;
 	std::cout << std::endl;
 
 	std::cout << "\033[34mTesting a\033[0m" << std::endl;

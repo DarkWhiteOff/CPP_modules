@@ -6,10 +6,7 @@ Cat::Cat(void) : Animal()
     m_type = "Cat";
     m_brain = new Brain();
     if (m_brain == NULL)
-	{
-		perror("Cat Brain allocation failed");
-		exit(1);
-	}
+		std::cout << "Cat Brain allocation failed" << std::endl;
 }
 
 Cat::Cat(const Cat &copy) : Animal(copy)
@@ -17,6 +14,8 @@ Cat::Cat(const Cat &copy) : Animal(copy)
     std::cout << "Cat Copy constructor called" << std::endl;
     m_type = copy.m_type;
     m_brain = new Brain();
+    if (m_brain == NULL)
+		std::cout << "Cat Brain allocation failed" << std::endl;
     *m_brain = *copy.m_brain;
 }
 
@@ -27,6 +26,8 @@ Cat &Cat::operator=(const Cat &src)
     {
         m_type = src.m_type;
         m_brain = new Brain();
+        if (m_brain == NULL)
+		    std::cout << "Cat Brain allocation failed" << std::endl;
         *m_brain = *src.m_brain;
     }
     return (*this);

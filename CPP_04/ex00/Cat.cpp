@@ -2,14 +2,14 @@
 
 Cat::Cat(void) : Animal()
 {
-    m_type = "Cat";
     std::cout << "Cat Default construcor called" << std::endl;
+    m_type = "Cat";
 }
 
 Cat::Cat(const Cat &copy) : Animal(copy)
 {
-    m_type = copy.m_type;
     std::cout << "Cat Copy constructor called" << std::endl;
+    m_type = copy.m_type;
 }
 
 Cat &Cat::operator=(const Cat &src)

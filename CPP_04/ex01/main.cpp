@@ -11,17 +11,16 @@ int main(void)
 {
     Animal *array[10];
     array[10] = NULL;
-    int i(0);
-    while (i++ < 5)
-        array[i] = new Dog();
-    i--;
-    while (i++ < 10)
-        array[i] = new Cat();
+    int i = 0;
+    while (i <= 4)
+        array[i++] = new Dog();
+    while (i <= 9)
+        array[i++] = new Cat();
     i = 0;
-    while (i++ < 10)
-        array[i]->makeSound();
-    i = 11;
-    while (i-- > 0)
-        delete array[i];
+    while (i <= 9)
+        array[i++]->makeSound();
+    i = 9;
+    while (i >= 0)
+        delete array[i--];
     return (0);
 }

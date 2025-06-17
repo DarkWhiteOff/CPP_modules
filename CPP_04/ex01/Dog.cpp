@@ -5,13 +5,18 @@ Dog::Dog(void) : Animal()
     std::cout << "Dog Default construcor called" << std::endl;
     m_type = "Dog";
     m_brain = new Brain();
+    if (m_brain == NULL)
+		std::cout << "Dog Brain allocation failed" << std::endl;
 }
 
 Dog::Dog(const Dog &copy) : Animal(copy)
 {
     std::cout << "Dog Copy constructor called" << std::endl;
     m_type = copy.m_type;
-    m_brain = new Brain(*(copy.m_brain));
+    m_brain = new Brain();
+    if (m_brain == NULL)
+		std::cout << "Dog Brain allocation failed" << std::endl;
+    *m_brain = *copy.m_brain;
 }
 
 Dog &Dog::operator=(const Dog &src)
@@ -20,8 +25,10 @@ Dog &Dog::operator=(const Dog &src)
     if (this != &src)
     {
         m_type = src.m_type;
-        delete m_brain;
-        m_brain = new Brain(*(src.m_brain));
+        m_brain = new Brain();
+        if (m_brain == NULL)
+            std::cout << "Dog Brain allocation failed" << std::endl;
+        *m_brain = *src.m_brain;
     }
     return (*this);
 }

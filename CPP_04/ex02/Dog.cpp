@@ -6,10 +6,7 @@ Dog::Dog(void) : Animal()
     m_type = "Dog";
     m_brain = new Brain();
     if (m_brain == NULL)
-	{
-		perror("Dpg Brain allocation failed");
-		exit(1);
-	}
+		std::cout << "Dog Brain allocation failed" << std::endl;
 }
 
 Dog::Dog(const Dog &copy) : Animal(copy)
@@ -17,6 +14,8 @@ Dog::Dog(const Dog &copy) : Animal(copy)
     std::cout << "Dog Copy constructor called" << std::endl;
     m_type = copy.m_type;
     m_brain = new Brain();
+    if (m_brain == NULL)
+		std::cout << "Dog Brain allocation failed" << std::endl;
     *m_brain = *copy.m_brain;
 }
 
@@ -27,6 +26,8 @@ Dog &Dog::operator=(const Dog &src)
     {
         m_type = src.m_type;
         m_brain = new Brain();
+        if (m_brain == NULL)
+		std::cout << "Dog Brain allocation failed" << std::endl;
         *m_brain = *src.m_brain;
     }
     return (*this);

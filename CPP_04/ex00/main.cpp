@@ -21,13 +21,14 @@ int main(void)
     const WrongAnimal* meta2 = new WrongAnimal();
     const WrongAnimal* i2 = new WrongCat();
 
+    std::cout << meta2->getType() << " " << std::endl;
     std::cout << i2->getType() << " " << std::endl;
-    i2->makeSound(); //will output the Animal sound!
     meta2->makeSound();
-    delete meta;
+    i2->makeSound(); //will output the Animal sound!
     delete j;
     delete i;
-    delete meta2;
+    delete meta;
     delete i2;
+    delete meta2;
     return (0);
 }
