@@ -13,7 +13,7 @@ FLAGS = -Wall -Wextra -Werror -I ./includes
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) -std=c++98 $(OBJS) -o $(NAME)
+	$(CC) $(FLAGS) -std=c++98 -Wshadow -Wno-shadow $(OBJS) -o $(NAME)
 
 clean:
 	rm -rf $(OBJS)
