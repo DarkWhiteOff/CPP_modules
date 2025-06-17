@@ -4,7 +4,7 @@ FragTrap::FragTrap(void) : ClapTrap()
 {
     m_hitPoints = 100;
     m_energyPoints = 100;
-    m_attackDamage = 30;
+    FragTrap::m_attackDamage = 30;
     std::cout << "(Fragtrap) Default consttrucor called" << std::endl;
 }
 
@@ -13,7 +13,7 @@ FragTrap::FragTrap(std::string Name) : ClapTrap(Name)
     m_Name = Name;
     m_hitPoints = 100;
     m_energyPoints = 100;
-    m_attackDamage = 30;
+    FragTrap::m_attackDamage = 30;
     std::cout << "(Fragtrap) Surcharged constructor called" << std::endl;
 }
 

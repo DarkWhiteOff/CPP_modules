@@ -3,9 +3,9 @@
 DiamondTrap::DiamondTrap(void) : FragTrap(), ScavTrap()
 {
     std::cout << "(DiamondTrap) Default construcor called" << std::endl;
-    FragTrap::m_hitPoints = 100;
-    ScavTrap::m_energyPoints = 50;
-    FragTrap::m_attackDamage = 30;
+    m_hitPoints = FragTrap::m_init_hitPoints;
+    m_energyPoints = ScavTrap::m_init_energyPoints;
+    m_attackDamage = FragTrap::m_init_attackDamage;
 }
 
 DiamondTrap::DiamondTrap(std::string Name) : FragTrap(Name), ScavTrap(Name)
@@ -13,9 +13,9 @@ DiamondTrap::DiamondTrap(std::string Name) : FragTrap(Name), ScavTrap(Name)
     std::cout << "(DiamondTrap) Surcharged constructor called" << std::endl;
     m_Name = Name;
     ClapTrap::m_Name = Name + "_clap_name";
-    FragTrap::m_hitPoints = 100;
-    ScavTrap::m_energyPoints = 50;
-    FragTrap::m_attackDamage = 30;
+    m_hitPoints = FragTrap::m_init_hitPoints;
+    m_energyPoints = ScavTrap::m_init_energyPoints;
+    m_attackDamage = FragTrap::m_init_attackDamage;
 }
 
 DiamondTrap::DiamondTrap(const DiamondTrap &copy) : ClapTrap(copy), FragTrap(copy), ScavTrap(copy)
@@ -23,9 +23,9 @@ DiamondTrap::DiamondTrap(const DiamondTrap &copy) : ClapTrap(copy), FragTrap(cop
     std::cout << "(DiamondTrap) Copy constructor called" << std::endl;
     m_Name = copy.m_Name;
     ClapTrap::m_Name = copy.ClapTrap::m_Name;
-    FragTrap::m_hitPoints = copy.FragTrap::m_hitPoints;
-    ScavTrap::m_energyPoints = copy.ScavTrap::m_energyPoints;
-    FragTrap::m_attackDamage = copy.FragTrap::m_attackDamage;
+    FragTrap::m_hitPoints = copy.FragTrap::m_init_hitPoints;
+    ScavTrap::m_energyPoints = copy.ScavTrap::m_init_energyPoints;
+    FragTrap::m_attackDamage = copy.FragTrap::m_init_attackDamage;
 }
 
 DiamondTrap &DiamondTrap::operator=(const DiamondTrap &src)
@@ -35,9 +35,9 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &src)
     {
         m_Name = src.m_Name;
         ClapTrap::m_Name = src.ClapTrap::m_Name;
-        FragTrap::m_hitPoints = src.FragTrap::m_hitPoints;
-        ScavTrap::m_energyPoints = src.ScavTrap::m_energyPoints;
-        FragTrap::m_attackDamage = src.FragTrap::m_attackDamage;
+        FragTrap::m_hitPoints = src.FragTrap::m_init_hitPoints;
+        ScavTrap::m_energyPoints = src.ScavTrap::m_init_energyPoints;
+        FragTrap::m_attackDamage = src.FragTrap::m_init_attackDamage;
     }
     return (*this);
 }

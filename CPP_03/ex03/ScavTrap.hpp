@@ -15,6 +15,11 @@ public :
     ~ScavTrap(void);
     void    attack(const std::string &target);
     void    guardGate(void);
+
+protected :
+    static unsigned int const         m_init_hitPoints = 100;
+    static unsigned int const         m_init_energyPoints = 50;
+    static unsigned int const         m_init_attackDamage = 20;
 };
 
 #endif

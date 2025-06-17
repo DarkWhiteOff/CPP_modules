@@ -15,6 +15,11 @@ public :
     ~FragTrap(void);
     void    attack(const std::string &target);
     void    highFivesGuys(void);
+
+protected :
+    static unsigned int const         m_init_hitPoints = 100;
+    static unsigned int const         m_init_energyPoints = 100;
+    static unsigned int const         m_init_attackDamage = 30;
 };
 
 #endif
