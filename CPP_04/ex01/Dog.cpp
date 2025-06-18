@@ -44,15 +44,17 @@ void    Dog::makeSound(void) const
     std::cout << "WAF WAF" << std::endl;
 }
 
-// Getter
-void	Dog::getIdeas(void)const
-{
-	for (int i = 0; i < 3; i++)// change the 3 to 100 to show all ideas
-		std::cout << "\tIdea " << i << " of the Dog is: \"" << m_brain->getIdea(i) << "\" at the address " << m_brain->getIdeaAddress(i) << std::endl;
-}
-
-// Setter
 void	Dog::setIdea(size_t i, std::string idea)
 {
-		m_brain->setIdea(i, idea);
+	m_brain->setIdea(i, idea);
+}
+
+void	Dog::getIdeas(void)
+{
+    int i(0);
+    while (i < 3)
+    {
+        std::cout << "Idea " << i << " is : " << m_brain->getIdea(i) << std::endl;
+        i++;
+    }
 }
