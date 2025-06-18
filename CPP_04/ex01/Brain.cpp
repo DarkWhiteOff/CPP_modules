@@ -33,3 +33,32 @@ Brain::~Brain(void)
 {
     std::cout << "Brain Destructor called" << std::endl;
 }
+
+// Getter
+const std::string	Brain::getIdea(size_t i)const
+{
+	if (i < 100)
+		return(m_ideas[i]);
+	else
+		return ("\033[33mThere is only 100 ideas per brain.\033[0m");
+}
+
+const std::string *Brain::getIdeaAddress(size_t i)const
+{
+	if (i < 100)
+	{
+		const std::string	&stringREF = m_ideas[i];
+		return(&stringREF);
+	}
+	else
+		return (NULL);
+}
+
+// Setter
+void	Brain::setIdea(size_t i, std::string idea)
+{
+	if (i < 100)
+		m_ideas[i] = idea;
+	else
+		std::cout << "\033[33mThere is only 100 ideas per brain.\033[0m" << std::endl;
+}

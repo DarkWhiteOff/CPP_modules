@@ -14,6 +14,10 @@ public :
     Dog &operator=(const Dog &src);
     ~Dog(void);
     void makeSound(void) const;
+    // Getter
+		void getIdeas(void)const;
+	// Setter
+		void setIdea(size_t i, std::string idea);
 
 private :
     Brain *m_brain;
