@@ -1,6 +1,6 @@
 NAME = ex00
 
-SRC = Zombie.cpp newZombie.cpp randomChump.cpp main.cpp
+SRC = Bureaucrat.cpp main.cpp
 
 OBJS = $(SRC:%.cpp=%.o)
 

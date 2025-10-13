@@ -1,22 +1,26 @@
-#ifndef ZOMBIE_HPP
-# define ZOMBIE_HPP
+#ifndef BUREAUCRAT_HPP
+# define BUREAUCRAT_HPP
 
 #include <iostream>
 #include <string>
 
-class   Zombie
+class   Bureaucrat
 {
 public :
-    Zombie(void);
-    Zombie(std::string n);
-    ~Zombie(void);
-    void    announce(void);
+    Bureaucrat(void);
+    Bureaucrat(std::string n);
+    Bureaucrat(const Bureaucrat &copy);
+    Bureaucrat &operator=(const Bureaucrat &src);
+    ~Bureaucrat(void);
+    void    getName(void);
+    void    getGrade(void);
+
+    Bureaucrat operator++(int);
+    Bureaucrat operator--(int);
 
 private :
-    std::string m_name;
+    std::string const m_name;
+    int m_grade;
 };
-
-void randomChump(std::string name);
-Zombie* newZombie(std::string name);
 
 #endif
