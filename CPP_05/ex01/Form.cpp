@@ -1,12 +1,12 @@
-#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
-Bureaucrat::Bureaucrat(void)
+Form::Form(void)
 {
     std::cout << m_name << " created" << std::endl;
     return ;
 }
 
-Bureaucrat::Bureaucrat(std::string n, unsigned int g) : m_name(n), m_grade(g)
+Form::Form(std::string n, unsigned int g) : m_name(n), m_grade(g)
 {
     std::cout << m_name << " created" << std::endl;
     if (m_grade < 1)
@@ -16,13 +16,13 @@ Bureaucrat::Bureaucrat(std::string n, unsigned int g) : m_name(n), m_grade(g)
     return ;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &copy)
+Form::Form(const Bureaucrat &copy)
 {
     std::cout << "Copy constructor called" << std::endl;
     *this = copy;
 }
 
-Bureaucrat &Bureaucrat::operator=(const Bureaucrat &src)
+Form &Form::operator=(const Bureaucrat &src)
 {
     std::cout << "Copy assignment operator called" << std::endl;
     if (this != &src)
@@ -33,23 +33,23 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &src)
     return (*this);
 }
 
-Bureaucrat::~Bureaucrat(void)
+Form::~Form(void)
 {
     std::cout << m_name << " destroyed" << std::endl;
 }
 
-std::string    Bureaucrat::getName(void)
+std::string    Form::getName(void)
 {
     return (m_name);
 }
 
-unsigned int    Bureaucrat::getGrade(void)
+unsigned int    Form::getGrade(void)
 {
     return (m_grade);
 }
 
 // POST INCREMENT/DECREMENT
-void	Bureaucrat::incr()
+void	Form::incr()
 {
     --m_grade;
     if (m_grade < 1)
@@ -60,7 +60,7 @@ void	Bureaucrat::incr()
 
 }
 
-void	Bureaucrat::decr()
+void	Form::decr()
 {
     ++m_grade;
     if (m_grade > 150)
@@ -70,17 +70,17 @@ void	Bureaucrat::decr()
     }
 }
 
-const char *Bureaucrat::GradeTooHighException::what() const throw()
+const char *Form::GradeTooHighException::what() const throw()
 {
     return ("Grade too high!\n");
 }
 
-const char *Bureaucrat::GradeTooLowException::what() const throw()
+const char *Form::GradeTooLowException::what() const throw()
 {
     return ("Grade too low!\n");
 }
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat &obj) {
+std::ostream &operator<<(std::ostream &os, Form &obj) {
   os << obj.getName() << ", bureaucrat grade " << obj.getGrade() << "."
      << std::endl;
   return os;

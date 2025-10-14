@@ -1,17 +1,17 @@
-#ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#ifndef FORM_HPP
+# define FORM_HPP
 
 #include <iostream>
 #include <string>
 
-class   Bureaucrat
+class   Form
 {
 public :
-    Bureaucrat(void);
-    Bureaucrat(std::string n, unsigned int g);
-    Bureaucrat(const Bureaucrat &copy);
-    Bureaucrat &operator=(const Bureaucrat &src);
-    ~Bureaucrat(void);
+    Form(void);
+    Form(std::string n, unsigned int g);
+    Form(const Form &copy);
+    Form &operator=(const Form &src);
+    ~Form(void);
     std::string    getName(void);
     unsigned int    getGrade(void);
 
@@ -32,9 +32,10 @@ public :
 
 private :
     std::string const m_name;
-    unsigned int m_grade;
+    bool sign;
+    unsigned int const m_grade;
 };
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat &obj);
+std::ostream &operator<<(std::ostream &os, Form &obj);
 
 #endif
