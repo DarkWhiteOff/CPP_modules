@@ -1,6 +1,6 @@
-NAME = ex01
+NAME = ex03
 
-SRC = Bureaucrat.cpp Form.cpp main.cpp
+SRC = Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp main.cpp
 
 OBJS = $(SRC:%.cpp=%.o)
 

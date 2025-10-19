@@ -3,31 +3,34 @@
 
 #include <iostream>
 #include <string>
+#include "Form.hpp"
+
+class Form;
 
 class   Bureaucrat
 {
 public :
     Bureaucrat(void);
     Bureaucrat(std::string n, unsigned int g);
-    Bureaucrat(const Bureaucrat &copy);
-    Bureaucrat &operator=(const Bureaucrat &src);
     ~Bureaucrat(void);
-    std::string    getName(void);
-    unsigned int    getGrade(void);
 
-    void incr(void);
-    void decr(void);
+    std::string     getName(void);
+    unsigned int    getGrade(void);
+    void            incr(void);
+    void            decr(void);
+
+    void            signForm(Form &f);
 
     class GradeTooHighException : public std::exception
     {
         public :
-            const char *what() const throw();
+            virtual const char *what(void) const throw();
     };
 
     class GradeTooLowException : public std::exception
     {
         public :
-            const char *what() const throw();
+            virtual const char *what(void) const throw();
     };
 
 private :
@@ -35,6 +38,6 @@ private :
     unsigned int m_grade;
 };
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat &obj);
+std::ostream &operator<<(std::ostream &os, Bureaucrat &bc);
 
 #endif

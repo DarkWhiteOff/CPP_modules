@@ -23,7 +23,7 @@ std::string    Bureaucrat::getName(void)
     return (m_name);
 }
 
-unsigned int    Bureaucrat::getGrade(void)
+unsigned int    Bureaucrat::getGrade(void) const
 {
     return (m_grade);
 }
@@ -43,10 +43,16 @@ void	Bureaucrat::decr(void)
         throw GradeTooLowException();
 }
 
-void    Bureaucrat::signForm(Form &f)
+void    Bureaucrat::signForm(AForm &f)
 {
     f.beSigned(*this);
     std::cout << m_name << " signed " << f.getName();
+}
+
+void    Bureaucrat::executeForm(AForm const &form) const
+{
+    form.execute(*this);
+    std::cout << m_name << " executed " << form.getName();
 }
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()
