@@ -48,6 +48,12 @@ T &Array<T>::operator[](const int i)
 }
 
 template <typename T>
+Array<T>::~Array(void)
+{
+    return ;
+}
+
+template <typename T>
 int Array<T>::size(void)
 {
     return (m_l);

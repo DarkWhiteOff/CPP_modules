@@ -45,6 +45,8 @@
         "iosfwd": "cpp",
         "limits": "cpp",
         "numbers": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "map": "cpp",
+        "list": "cpp"
     }
 }
