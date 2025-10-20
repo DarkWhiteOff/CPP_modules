@@ -28,6 +28,4 @@ private :
     unsigned int m_l;
 };
 
-#include "Array.tpp"
-
 #endif
