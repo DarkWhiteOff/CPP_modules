@@ -13,19 +13,11 @@ class MutantStack
 {
 public :
     MutantStack(void);
-    MutantStack(unsigned int N);
     MutantStack(const MutantStack &copy);
     MutantStack &operator=(const MutantStack &src);
     ~MutantStack(void);
 
-    class SpanIsFullException : public std::exception
-    {
-        public :
-            virtual const char *what(void) const throw();
-    };
 
-private :
-    
 };
 
 #endif

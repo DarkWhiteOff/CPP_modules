@@ -10,12 +10,6 @@ MutantStack<T>::MutantStack(void)
 }
 
 template <typename T>
-MutantStack<T>::MutantStack(unsigned int N)
-{
-    return ;
-}
-
-template <typename T>
 MutantStack<T>::MutantStack(const MutantStack &copy)
 {
     *this = copy;
@@ -37,10 +31,6 @@ MutantStack<T>::~MutantStack(void)
     return ;
 }
 
-template <typename T>
-const char *MutantStack<T>::SpanIsFullException::what(void) const throw()
-{
-    return ("Span Is Full!\n");
-}
+
 
 #endif
