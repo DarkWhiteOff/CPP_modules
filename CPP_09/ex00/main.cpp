@@ -1,6 +1,15 @@
 #include "BitcoinExchange.hpp"
 
-int main( void )
+int main(int argc, char **argv)
 {
-    // tests à faire
+    (void) argc;
+    try
+    {
+        BitcoinExchange b;
+        b.make(argv[1]);
+    }
+    catch (std::exception &o)
+    {
+        std::cout << o.what() << std::endl;
+    }
 }
