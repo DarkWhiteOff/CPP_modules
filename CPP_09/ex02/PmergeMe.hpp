@@ -1,22 +1,22 @@
-#ifndef RPN_HPP
-#define RPN_HPP
+#ifndef PMERGEME_HPP
+#define PMERGEME_HPP
 
 #include <iostream>
 #include <string>
-#include <stack>
+#include <>
 #include <algorithm>
 #include <sstream>
 
-class RPN
+class PmergeMe
 {
 public :
-    RPN(void);
-    RPN(std::string str);
-    RPN(const RPN &copy);
-    RPN &operator=(const RPN &src);
-    ~RPN(void);
+    PmergeMe(void);
+    PmergeMe(std::string str);
+    PmergeMe(const PmergeMe &copy);
+    PmergeMe &operator=(const PmergeMe &src);
+    ~PmergeMe(void);
 
-    void calc();
+    // void calc();
 
     class ValueTooLargeException : public std::exception
     {
@@ -31,8 +31,7 @@ public :
     };
 
 private :
-    std::string m_str;
-    std::stack<int> m_stack;
+    
 };
 
 #endif

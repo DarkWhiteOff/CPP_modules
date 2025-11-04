@@ -1,11 +1,11 @@
-#include "RPN.hpp"
+#include "PmergeMe.hpp"
 
 int main(int argc, char **argv)
 {
     (void) argc;
     try
     {
-        RPN rpn(argv[1]);
+        PmergeMe PmM();
         rpn.calc();
     }
     catch (std::exception &o)

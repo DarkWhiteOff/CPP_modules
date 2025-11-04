@@ -2,7 +2,26 @@
 
 RPN::RPN(void)
 {
-    
+    return ;
+}
+
+RPN::RPN(std::string str)
+{
+    for(int i = 0; str[i]; i++)
+    {
+        if (!isdigit(str[i]) && str[i] != '+' && str[i] != '-'
+            && str[i] != '/' && str[i] != '*' && str[i] != ' ')
+            throw BadInputException();
+    }
+    for(int i = 0; str[i]; i++)
+    {
+        if (str[i] != ' ' && isdigit(str[i]))
+        {
+            if (isdigit(str[i + 1]))
+                throw ValueTooLargeException();
+        }
+    }
+    m_str = str;
 }
 
 RPN::RPN(const RPN &copy)
@@ -14,7 +33,7 @@ RPN &RPN::operator=(const RPN &src)
 {
     if (this != &src)
     {
-        
+        m_stack = src.m_stack;
     }
     return (*this);
 }
@@ -24,17 +43,39 @@ RPN::~RPN(void)
     return ;
 }
 
-const char *RPN::FileFailedException::what(void) const throw()
+void RPN::calc()
 {
-    return ("Error: could not open file.");
+    for(int i = 0; m_str[i]; i++)
+    {
+        if (isdigit(m_str[i]))
+            m_stack.push(std::stoi(std::string(1, m_str[i])));
+        if (m_str[i] == '+' || m_str[i] == '-'
+            || m_str[i] == '/' || m_str[i] == '*')
+            {
+                int res(0);
+                int a(m_stack.top());
+                m_stack.pop();
+                int b(m_stack.top());
+                m_stack.pop();
+                if (m_str[i] == '+')
+                    res = b + a;
+                if (m_str[i] == '-')
+                    res = b - a;
+                if (m_str[i] == '/')
+                    res = b / a;
+                if (m_str[i] == '*')
+                    res = b * a;
+                m_stack.push(res);
+            }
+    }
 }
 
-RPN::BadInputException::BadInputException(std::string date)
+const char *RPN::ValueTooLargeException::what(void) const throw()
 {
-    m_msg = "Error: bad input => " + date;
+    return ("Error: Value is too large.");
 }
 
 const char *RPN::BadInputException::what(void) const throw()
 {
-    return (m_msg.c_str());
+    return ("Error");
 }
