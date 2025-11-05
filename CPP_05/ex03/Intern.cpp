@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 #include "Intern.hpp"
 
 typedef struct	list

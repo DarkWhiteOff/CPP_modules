@@ -31,6 +31,4 @@ MutantStack<T>::~MutantStack(void)
     return ;
 }
 
-
-
 #endif

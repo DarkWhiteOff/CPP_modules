@@ -1,3 +1,8 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+#include <algorithm>
 #include "Span.hpp"
 
 Span::Span(void) : m_vect(0), m_N(0)

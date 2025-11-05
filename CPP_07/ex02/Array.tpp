@@ -1,6 +1,8 @@
 #ifndef ARRAY_TPP
 #define ARRAY_TPP
 
+#include <iostream>
+#include <string>
 #include "Array.hpp"
 
 template <typename T>

@@ -1,3 +1,9 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <map>
+#include <algorithm>
+#include <sstream>
 #include "BitcoinExchange.hpp"
 
 int main(int argc, char **argv)

@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 #include "RobotomyRequestForm.hpp"
 
 RobotomyRequestForm::RobotomyRequestForm(void) : AForm("Default Robotomy Request Form", 72, 45)

@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 #include "ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm("Default Shrubbery Creation Form", 145, 137)

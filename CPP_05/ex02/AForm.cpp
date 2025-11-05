@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 #include "AForm.hpp"
 
 AForm::AForm(void) : m_name("Default form"), m_signed(false), m_grade_sign(150), m_grade_exe(150)

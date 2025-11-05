@@ -1,3 +1,8 @@
+#include <iostream>
+#include <string>
+#include <stack>
+#include <algorithm>
+#include <sstream>
 #include "RPN.hpp"
 
 int main(int argc, char **argv)

@@ -1,3 +1,5 @@
+#include <iostream>
+#include <string>
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(void) : m_name("Default name"), m_grade(150)

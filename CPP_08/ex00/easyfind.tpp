@@ -1,6 +1,11 @@
 #ifndef EASYFIND_TPP
 #define EASYFIND_TPP
 
+#include <iostream>
+#include <string>
+#include <vector>
+#include <list>
+#include <algorithm>
 #include "easyfind.hpp"
 
 template <typename T>

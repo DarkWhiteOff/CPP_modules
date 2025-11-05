@@ -3,8 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <vector>
-#include <list>
+#include <stack>
 #include <algorithm>
 #include <stack>
 
@@ -17,7 +16,8 @@ public :
     MutantStack &operator=(const MutantStack &src);
     ~MutantStack(void);
 
-
+private :
+    
 };
 
 #endif
