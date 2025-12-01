@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <exception>
 #include "Bureaucrat.hpp"
 #include "Form.hpp"
 
@@ -32,16 +33,9 @@ int main()
   }
   
   // Sign error
-  try
-  {
     Bureaucrat  Z("Z", 76);
     Form        O("O", 75, 100);
     Z.signForm(O);
-  }
-  catch(std::exception &o)
-  {
-    std::cout << o.what() << std::endl;
-  }
 
   // No error
   try

@@ -2,14 +2,9 @@
 #include <string>
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm(void) : AForm("Default Presidential Pardon Form", 25, 5)
+PresidentialPardonForm::PresidentialPardonForm(std::string const target) : AForm("Presidential Pardon Form", target, 25, 5)
 {
-    setTarget("Default PPF target");
-}
-
-PresidentialPardonForm::PresidentialPardonForm(std::string target) : AForm("Presidential Pardon Form", 25, 5)
-{
-    setTarget(target);
+    return ;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm(void)

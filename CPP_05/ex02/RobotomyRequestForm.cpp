@@ -2,14 +2,9 @@
 #include <string>
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(void) : AForm("Default Robotomy Request Form", 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(std::string const target) : AForm("Robotomy Request Form", target, 72, 45)
 {
-    setTarget("Default RRF target");
-}
-
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("Robotomy Request Form", 72, 45)
-{
-    setTarget(target);
+    return ;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm(void)
@@ -24,7 +19,8 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
     if (executor.getGrade() > getGradeExec())
         throw GradeTooLowException();
     std::cout << "making weird drilling noises..." << std::endl;
-    if (rand() % 2 == 0)
+    srand(time(NULL));
+    if (std::rand() % 2 == 0)
         std::cout << getTarget() << " has been robotomized." << std::endl;
     else
         std::cout << getTarget() << " failed to robotomized." << std::endl;

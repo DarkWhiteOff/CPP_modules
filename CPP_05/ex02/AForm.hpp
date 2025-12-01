@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
@@ -11,18 +12,17 @@ class   AForm
 {
 public :
     AForm(void);
-    AForm(std::string n, unsigned int gs, unsigned int ge);
+    AForm(std::string const n, std::string const t, unsigned int gs, unsigned int ge);
     virtual ~AForm(void);
 
-    void            setTarget(std::string t);
-    std::string     getName(void) const;
-    std::string     getTarget(void) const;
-    bool            getSigned(void) const;
-    unsigned int    getGradeSign(void);
-    unsigned int    getGradeExec(void) const;
+    std::string const getTarget(void) const;
 
-    virtual void    beSigned(Bureaucrat &b);
+    std::string const getName(void) const;
+    bool getSigned(void) const;
+    unsigned int getGradeSign(void) const;
+    unsigned int getGradeExec(void) const;
 
+    void beSigned(Bureaucrat const &b);
     virtual void execute(Bureaucrat const &executor) const = 0;
 
     class GradeTooHighException : public std::exception
@@ -45,12 +45,12 @@ public :
 
 private :
     std::string const m_name;
-    std::string m_target;
+    std::string const m_target;
     bool m_signed;
     unsigned int const m_grade_sign;
     unsigned int const m_grade_exe;
 };
 
-std::ostream &operator<<(std::ostream &os, AForm &f);
+std::ostream &operator<<(std::ostream &output, AForm const &obj);
 
 #endif

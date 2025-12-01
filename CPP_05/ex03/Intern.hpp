@@ -16,7 +16,7 @@ public :
     Intern(void);
     ~Intern(void);
 
-    AForm    *makeForm(std::string formName, std::string formTarget);
+    AForm    *makeForm(std::string const formName, std::string const formTarget);
 
     class FormNameFailedException : public std::exception
     {

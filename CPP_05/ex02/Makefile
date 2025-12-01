@@ -17,6 +17,7 @@ $(NAME): $(OBJS)
 
 clean:
 	rm -rf $(OBJS)
+	rm -rf Home_shrubbery
 
 fclean: clean
 	rm -rf $(NAME)

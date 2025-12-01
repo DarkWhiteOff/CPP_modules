@@ -1,13 +1,14 @@
 #include <iostream>
 #include <string>
+#include <exception>
 #include "AForm.hpp"
 
-AForm::AForm(void) : m_name("Default form"), m_signed(false), m_grade_sign(150), m_grade_exe(150)
+AForm::AForm(void) : m_name("Default AForm"), m_target("Default target"), m_signed(false), m_grade_sign(150), m_grade_exe(150)
 {
     return ;
 }
 
-AForm::AForm(std::string n, unsigned int gs, unsigned int ge) : m_name(n), m_signed(false), m_grade_sign(gs), m_grade_exe(ge)
+AForm::AForm(std::string const n, std::string const t, unsigned int gs, unsigned int ge) : m_name(n), m_target(t), m_signed(false), m_grade_sign(gs), m_grade_exe(ge)
 {
     if (m_grade_sign < 1 || m_grade_exe < 1)
         throw GradeTooHighException();
@@ -20,37 +21,32 @@ AForm::~AForm(void)
     return ;
 }
 
-void    AForm::setTarget(std::string t)
-{
-    m_target = t;
-}
-
-std::string    AForm::getName(void) const
-{
-    return (m_name);
-}
-
-std::string    AForm::getTarget(void) const
+std::string const AForm::getTarget(void) const
 {
     return (m_target);
 }
 
-bool    AForm::getSigned(void) const
+std::string const AForm::getName(void) const
+{
+    return (m_name);
+}
+
+bool AForm::getSigned(void) const
 {
     return (m_signed);
 }
 
-unsigned int    AForm::getGradeSign(void)
+unsigned int AForm::getGradeSign(void) const
 {
     return (m_grade_sign);
 }
 
-unsigned int    AForm::getGradeExec(void) const
+unsigned int AForm::getGradeExec(void) const
 {
     return (m_grade_exe);
 }
 
-void    AForm::beSigned(Bureaucrat &b)
+void    AForm::beSigned(Bureaucrat const &b)
 {
     if (b.getGrade() <= m_grade_sign)
         m_signed = true;
@@ -65,22 +61,22 @@ void AForm::execute(Bureaucrat const &executor) const
 
 const char *AForm::GradeTooHighException::what() const throw()
 {
-    return ("AForm grade too high!\n");
+    return ("Form grade too high!");
 }
 
 const char *AForm::GradeTooLowException::what() const throw()
 {
-    return ("AForm grade too low! or Bureaucrat grade too low to sign AForm!\n");
+    return ("Form grade too low! (or Bureaucrat too low to sign/execute this form)");
 }
 
 const char *AForm::FormNotSignedException::what() const throw()
 {
-    return ("AForm is not signed!\n");
+    return ("AForm is not signed!");
 }
 
-std::ostream &operator<<(std::ostream &os, AForm &f)
+std::ostream &operator<<(std::ostream &output, AForm const &obj)
 {
-    std::string s = f.getSigned() ? "signed" : "not signed";
-    os << f.getName() << ", AForm (" << s << ") grade " << f.getGradeSign() << " (sign), and " << f.getGradeExec() << " (exec)." << std::endl;
-    return os;
+    std::string s = obj.getSigned() ? "signed" : "not signed";
+    output << obj.getName() << ", form (" << s << "), grade " << obj.getGradeSign() << " (sign), and " << obj.getGradeExec() << " (exec)." << std::endl;
+    return (output);
 }

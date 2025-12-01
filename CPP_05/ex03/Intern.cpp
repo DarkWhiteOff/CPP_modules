@@ -18,7 +18,7 @@ Intern::~Intern(void)
     return ;
 }
 
-AForm    *Intern::makeForm(std::string formName, std::string formTarget)
+AForm    *Intern::makeForm(std::string const formName, std::string const formTarget)
 {
     AForm	*F = NULL;
 	t_list	list[3] =

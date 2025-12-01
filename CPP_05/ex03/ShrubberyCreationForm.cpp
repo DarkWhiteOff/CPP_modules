@@ -2,14 +2,9 @@
 #include <string>
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm("Default Shrubbery Creation Form", 145, 137)
+ShrubberyCreationForm::ShrubberyCreationForm(std::string const target) : AForm("Shrubbery Creation Form", target, 145, 137)
 {
-    setTarget("Default SCF target");
-}
-
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("Shrubbery Creation Form", 145, 137)
-{
-    setTarget(target);
+    return ;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm(void)
@@ -25,6 +20,8 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
         throw GradeTooLowException();
     std::string filename = getTarget() + "_shrubbery";
     std::ofstream tfile(filename);
+    if (!tfile)
+        return ;
     tfile << TEXT << std::endl;
     tfile.close();
 }

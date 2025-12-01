@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
@@ -11,15 +12,15 @@ class   Form
 {
 public :
     Form(void);
-    Form(std::string n, unsigned int gs, unsigned int ge);
+    Form(std::string const n, unsigned int gs, unsigned int ge);
     ~Form(void);
 
-    std::string     getName(void);
-    bool            getSigned(void);
-    unsigned int    getGradeSign(void);
-    unsigned int    getGradeExec(void);
+    std::string const getName(void) const;
+    bool getSigned(void) const;
+    unsigned int getGradeSign(void) const;
+    unsigned int getGradeExec(void) const;
 
-    void            beSigned(Bureaucrat &b);
+    void beSigned(Bureaucrat const &b);
 
     class GradeTooHighException : public std::exception
     {
@@ -40,6 +41,6 @@ private :
     unsigned int const m_grade_exe;
 };
 
-std::ostream &operator<<(std::ostream &os, Form &f);
+std::ostream &operator<<(std::ostream &output, Form const &obj);
 
 #endif

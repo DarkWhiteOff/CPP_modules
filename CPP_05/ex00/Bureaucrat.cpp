@@ -2,12 +2,12 @@
 #include <string>
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat(void)
+Bureaucrat::Bureaucrat(void) : m_name("Default Bureaucrat"), m_grade(150)
 {
     return ;
 }
 
-Bureaucrat::Bureaucrat(std::string n, unsigned int g) : m_name(n), m_grade(g)
+Bureaucrat::Bureaucrat(std::string const n, unsigned int g) : m_name(n), m_grade(g)
 {
     if (m_grade < 1)
         throw GradeTooHighException();
@@ -20,12 +20,12 @@ Bureaucrat::~Bureaucrat(void)
     return ;
 }
 
-std::string    Bureaucrat::getName(void)
+std::string const Bureaucrat::getName(void) const
 {
     return (m_name);
 }
 
-unsigned int    Bureaucrat::getGrade(void)
+unsigned int Bureaucrat::getGrade(void) const
 {
     return (m_grade);
 }
@@ -47,16 +47,16 @@ void	Bureaucrat::decr()
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
-    return ("Grade too high!\n");
+    return ("Grade too high!");
 }
 
 const char *Bureaucrat::GradeTooLowException::what() const throw()
 {
-    return ("Grade too low!\n");
+    return ("Grade too low!");
 }
 
-std::ostream &operator<<(std::ostream &os, Bureaucrat &bc)
+std::ostream &operator<<(std::ostream &output, Bureaucrat const &obj)
 {
-  os << bc.getName() << ", bureaucrat grade " << bc.getGrade() << "." << std::endl;
-  return os;
+    output << obj.getName() << ", bureaucrat grade " << obj.getGrade() << "." << std::endl;
+    return (output);
 }
