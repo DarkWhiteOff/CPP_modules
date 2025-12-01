@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <exception>
 #include "Bureaucrat.hpp"
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"

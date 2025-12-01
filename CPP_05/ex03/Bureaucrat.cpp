@@ -21,6 +21,20 @@ Bureaucrat::~Bureaucrat(void)
     return ;
 }
 
+Bureaucrat::Bureaucrat(Bureaucrat const &copy) : m_name(copy.m_name), m_grade(copy.m_grade)
+{
+    return ;
+}
+
+Bureaucrat &Bureaucrat::operator=(Bureaucrat const &src)
+{
+    if (this != &src)
+    {
+        m_grade = src.m_grade;
+    }
+    return (*this);
+}
+
 std::string const Bureaucrat::getName(void) const
 {
     return (m_name);

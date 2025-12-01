@@ -15,6 +15,9 @@ public :
     Form(std::string const n, unsigned int gs, unsigned int ge);
     ~Form(void);
 
+    Form(Form const &copy);
+    Form &operator=(Form const &src);
+
     std::string const getName(void) const;
     bool getSigned(void) const;
     unsigned int getGradeSign(void) const;
@@ -29,6 +32,12 @@ public :
     };
 
     class GradeTooLowException : public std::exception
+    {
+        public :
+            const char *what() const throw();
+    };
+
+    class AlreadySignedException : public std::exception
     {
         public :
             const char *what() const throw();

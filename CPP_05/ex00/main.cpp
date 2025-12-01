@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <exception>
 #include "Bureaucrat.hpp"
 
 int main() {
@@ -53,4 +54,5 @@ int main() {
   {
     std::cout << o.what() << std::endl;
   }
+  return (0);
 }

@@ -21,6 +21,20 @@ AForm::~AForm(void)
     return ;
 }
 
+AForm::AForm(AForm const &copy) : m_name(copy.m_name), m_target(copy.m_target), m_signed(copy.m_signed), m_grade_sign(copy.m_grade_sign), m_grade_exe(copy.m_grade_exe)
+{
+    return ;
+}
+
+AForm &AForm::operator=(AForm const &src)
+{
+    if (this != &src)
+    {
+        m_signed = src.m_signed;
+    }
+    return (*this);
+}
+
 std::string const AForm::getTarget(void) const
 {
     return (m_target);
@@ -48,6 +62,8 @@ unsigned int AForm::getGradeExec(void) const
 
 void    AForm::beSigned(Bureaucrat const &b)
 {
+    if (m_signed)
+        throw AlreadySignedException();
     if (b.getGrade() <= m_grade_sign)
         m_signed = true;
     else
@@ -67,6 +83,11 @@ const char *AForm::GradeTooHighException::what() const throw()
 const char *AForm::GradeTooLowException::what() const throw()
 {
     return ("Form grade too low! (or Bureaucrat too low to sign/execute this form)");
+}
+
+const char *AForm::AlreadySignedException::what() const throw()
+{
+    return ("Form was already signed!");
 }
 
 const char *AForm::FormNotSignedException::what() const throw()

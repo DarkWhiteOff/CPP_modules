@@ -1,8 +1,9 @@
 #include <iostream>
 #include <string>
+#include <exception>
 #include "RobotomyRequestForm.hpp"
 
-RobotomyRequestForm::RobotomyRequestForm(std::string const target) : AForm("Robotomy Request Form", target, 72, 45)
+RobotomyRequestForm::RobotomyRequestForm(std::string const target) : AForm("RobotomyRequestForm", target, 72, 45)
 {
     return ;
 }
@@ -10,6 +11,20 @@ RobotomyRequestForm::RobotomyRequestForm(std::string const target) : AForm("Robo
 RobotomyRequestForm::~RobotomyRequestForm(void)
 {
     return ;
+}
+
+RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &copy) : AForm(copy)
+{
+    return ;
+}
+
+RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &src)
+{
+    if (this != &src)
+    {
+        AForm::operator=(src);
+    }
+    return (*this);   
 }
 
 void RobotomyRequestForm::execute(Bureaucrat const &executor) const

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <exception>
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat(void) : m_name("Default Bureaucrat"), m_grade(150)
@@ -18,6 +19,20 @@ Bureaucrat::Bureaucrat(std::string const n, unsigned int g) : m_name(n), m_grade
 Bureaucrat::~Bureaucrat(void)
 {
     return ;
+}
+
+Bureaucrat::Bureaucrat(Bureaucrat const &copy) : m_name(copy.m_name), m_grade(copy.m_grade)
+{
+    return ;
+}
+
+Bureaucrat &Bureaucrat::operator=(Bureaucrat const &src)
+{
+    if (this != &src)
+    {
+        m_grade = src.m_grade;
+    }
+    return (*this);
 }
 
 std::string const Bureaucrat::getName(void) const

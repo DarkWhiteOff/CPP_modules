@@ -52,5 +52,11 @@ int main()
     worker1.executeForm(p);
     worker2.executeForm(p);
 
+    std::cout << "-- trying to execute a form that is not signed --" << std::endl << std::endl;
+    Bureaucrat test("test", 150);
+    RobotomyRequestForm rtest("AI");
+    test.signForm(rtest);
+    test.executeForm(rtest);
+
     return (0);
 }

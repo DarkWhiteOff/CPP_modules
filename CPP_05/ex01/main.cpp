@@ -48,4 +48,11 @@ int main()
   {
     std::cout << o.what() << std::endl;
   }
+
+    // Already signed error
+    Bureaucrat  K("K", 1);
+    Form        L("L", 75, 100);
+    K.signForm(L);
+    K.signForm(L);
+  return (0);
 }

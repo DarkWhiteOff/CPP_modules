@@ -15,6 +15,9 @@ public :
     AForm(std::string const n, std::string const t, unsigned int gs, unsigned int ge);
     virtual ~AForm(void);
 
+    AForm(AForm const &copy);
+    AForm &operator=(AForm const &src);
+
     std::string const getTarget(void) const;
 
     std::string const getName(void) const;
@@ -32,6 +35,12 @@ public :
     };
 
     class GradeTooLowException : public std::exception
+    {
+        public :
+            const char *what() const throw();
+    };
+
+    class AlreadySignedException : public std::exception
     {
         public :
             const char *what() const throw();

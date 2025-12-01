@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
@@ -15,6 +16,9 @@ class   Intern
 public :
     Intern(void);
     ~Intern(void);
+
+    Intern(Intern const &copy);
+    Intern &operator=(Intern const &src);
 
     AForm    *makeForm(std::string const formName, std::string const formTarget);
 

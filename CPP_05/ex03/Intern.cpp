@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <exception>
 #include "Intern.hpp"
 
 typedef struct	list
@@ -16,6 +17,18 @@ Intern::Intern(void)
 Intern::~Intern(void)
 {
     return ;
+}
+
+Intern::Intern(Intern const &copy)
+{
+	(void)copy;
+	return ;
+}
+
+Intern &Intern::operator=(Intern const &src)
+{
+	(void)src;
+	return (*this);
 }
 
 AForm    *Intern::makeForm(std::string const formName, std::string const formTarget)
