@@ -5,7 +5,7 @@ SRC = MutantStack.cpp main.cpp
 OBJS = $(SRC:%.cpp=%.o)
 
 CC = c++
-FLAGS = -Wall -Wextra -Werror -I ./includes
+FLAGS = -Wall -Wextra -Werror -std=c++98 -I ./includes
 
 %.o: %.cpp
 	$(CC) $(FLAGS) -c $< -o $@
@@ -13,7 +13,7 @@ FLAGS = -Wall -Wextra -Werror -I ./includes
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(FLAGS) -std=c++98 $(OBJS) -o $(NAME)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -rf $(OBJS)

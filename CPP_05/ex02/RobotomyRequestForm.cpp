@@ -34,7 +34,7 @@ void RobotomyRequestForm::execute(Bureaucrat const &executor) const
     if (executor.getGrade() > getGradeExec())
         throw GradeTooLowException();
     std::cout << "making weird drilling noises..." << std::endl;
-    srand(time(NULL));
+    std::srand(time(0));
     if (std::rand() % 2 == 0)
         std::cout << getTarget() << " has been robotomized." << std::endl;
     else

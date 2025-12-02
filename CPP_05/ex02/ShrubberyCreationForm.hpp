@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <cstdlib>
 #include <exception>
 #include "AForm.hpp"
 

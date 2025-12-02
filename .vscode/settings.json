@@ -48,6 +48,9 @@
         "typeinfo": "cpp",
         "map": "cpp",
         "list": "cpp",
-        "iomanip": "cpp"
+        "iomanip": "cpp",
+        "optional": "cpp",
+        "ranges": "cpp",
+        "span": "cpp"
     }
 }

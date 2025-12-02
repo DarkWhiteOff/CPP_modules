@@ -7,13 +7,13 @@
 #include <cmath>
 #include <iomanip>
 
-enum LiteralType { T_CHAR, T_INT, T_FLOAT, T_DOUBLE, T_PSEUDO, T_INVALID };
+enum LiteralType {T_CHAR, T_INT, T_FLOAT, T_DOUBLE, T_PSEUDO, T_INVALID};
 
 class ScalarConverter
 {
 public :
-    static void convert(std::string literal);
     static LiteralType detectType(std::string s);
+    static void convert(std::string literal);
 private :
     ScalarConverter(void);
     ScalarConverter(const ScalarConverter &copy);

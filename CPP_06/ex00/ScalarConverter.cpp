@@ -26,7 +26,10 @@ ScalarConverter::~ScalarConverter(void)
     return ;
 }
 
-static bool isPrintableChar(char c) { return c >= 32 && c <= 126; }
+static bool isPrintableChar(char c)
+{
+    return (c >= 32 && c <= 126);
+}
 
 bool ScalarConverter::isQuotedChar(std::string s)
 {
@@ -101,6 +104,19 @@ bool ScalarConverter::isDoubleLiteral(std::string s)
     return leftOk || rightOk;
 }
 
+LiteralType ScalarConverter::detectType(std::string s) {
+    if (isQuotedChar(s))
+        return T_CHAR;
+    if (isPseudoLiteral(s))
+        return T_PSEUDO;
+    if (isIntLiteral(s))
+        return T_INT;
+    if (isFloatLiteral(s))
+        return T_FLOAT;
+    if (isDoubleLiteral(s))
+        return T_DOUBLE;
+    return T_INVALID;
+}
 
 void ScalarConverter::convert(std::string literal)
 {
@@ -127,7 +143,6 @@ void ScalarConverter::convert(std::string literal)
     }
     else
         std::cout << "Invalid literal\n" << std::endl;
-
 
     std::cout << "char: ";
     if (std::isnan(value) || std::isinf(value) ||
@@ -163,13 +178,4 @@ void ScalarConverter::convert(std::string literal)
         std::cout << (value < 0 ? "-inf" : "+inf") << std::endl;
     else
         std::cout << std::fixed << std::setprecision(1) << value << std::endl;
-}
-
-LiteralType ScalarConverter::detectType(std::string s) {
-    if (isQuotedChar(s))        return T_CHAR;
-    if (isPseudoLiteral(s))     return T_PSEUDO;
-    if (isIntLiteral(s))        return T_INT;
-    if (isFloatLiteral(s))      return T_FLOAT;
-    if (isDoubleLiteral(s))     return T_DOUBLE;
-    return T_INVALID;
 }

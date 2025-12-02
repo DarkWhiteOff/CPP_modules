@@ -6,7 +6,7 @@ int main(int argc, char **argv)
     try
     {
         PmergeMe PmM();
-        rpn.calc();
+        zz
     }
     catch (std::exception &o)
     {
