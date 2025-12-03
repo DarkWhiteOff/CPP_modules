@@ -26,28 +26,34 @@ ScalarConverter::~ScalarConverter(void)
     return ;
 }
 
-static bool isPrintableChar(char c)
+bool isPrintableChar(char c)
 {
-    return (c >= 32 && c <= 126);
+    if (c >= 32 && c <= 126)
+        return true;
+    return false;
 }
 
-bool ScalarConverter::isQuotedChar(std::string s)
+bool isQuotedChar(std::string s)
 {
-    return s.size() == 3 && s[0] == '\'' && s[2] == '\'' && isPrintableChar(s[1]);
+    if (s.size() == 3 && s[0] == '\'' && s[2] == '\'' && isPrintableChar(s[1]))
+        return true;
+    return false;
 }
 
-bool ScalarConverter::isPseudoLiteral(std::string s)
+bool isPseudo(std::string s)
 {
-    return s == "nan" || s == "+inf" || s == "-inf" ||
-           s == "nanf" || s == "+inff" || s == "-inff";
+    if (s == "nan" || s == "+inf" || s == "-inf" ||
+           s == "nanf" || s == "+inff" || s == "-inff")
+        return true;
+    return false;
 }
 
-bool ScalarConverter::isIntLiteral(std::string s)
+bool isInt(std::string s)
 {
     size_t i = 0;
     if (s[0] == '-')
         i++;
-    for (; i < s.size(); ++i)
+    for (i; i < s.size(); i++)
     {
         if (!isdigit(s[i]))
             return false;
@@ -55,16 +61,16 @@ bool ScalarConverter::isIntLiteral(std::string s)
     return true;
 }
 
-static bool isAllDigits(std::string s, size_t a, size_t b) {
+bool isAllDigits(std::string s, size_t a, size_t b) {
     for (size_t i = a; i < b; ++i)
         if (!isdigit(s[i]))
             return false;
     return true;
 }
 
-bool ScalarConverter::isFloatLiteral(std::string s)
+bool isFloat(std::string s)
 {
-    if (s.size() < 2)
+    if (s.size() < 4)
         return false;
     if (s[s.size()-1] != 'f')
         return false;
@@ -73,76 +79,84 @@ bool ScalarConverter::isFloatLiteral(std::string s)
     size_t i = 0;
     if (core[0] == '-')
         i++;
-    if (i == core.size())
-        return false;
 
     size_t dot = core.find('.');
     if (dot == std::string::npos)
         return false;
 
-    bool leftOk  = (dot > i) ? isAllDigits(core, i, dot) : false;
-    bool rightOk = (dot + 1 < core.size()) ? isAllDigits(core, dot+1, core.size()) : false;
-    return leftOk || rightOk;
+    bool leftOk = false;
+    bool rightOk = false;
+    if (isAllDigits(core, i, dot))
+        leftOk = true;
+    if (isAllDigits(core, dot + 1, core.size()))
+        rightOk = true;
+    if (leftOk && rightOk)
+        return true;
+    return false;
 }
 
-bool ScalarConverter::isDoubleLiteral(std::string s)
+bool isDouble(std::string s)
 {
+    if (s.size() < 3)
+        return false;
     size_t i = 0;
     if (s[0] == '-')
-    {
         i++;
-        if (i == s.size())
-            return false;
-    }
 
     size_t dot = s.find('.');
     if (dot == std::string::npos)
         return false;
 
-    bool leftOk  = (dot > i) ? isAllDigits(s, i, dot) : false;
-    bool rightOk = (dot + 1 < s.size()) ? isAllDigits(s, dot+1, s.size()) : false;
-    return leftOk || rightOk;
+    bool leftOk = false;
+    bool rightOk = false;
+    if (isAllDigits(s, i, dot))
+        leftOk = true;
+    if (isAllDigits(s, dot + 1, s.size()))
+        rightOk = true;
+    if (leftOk && rightOk)
+        return true;
+    return false;
 }
 
-LiteralType ScalarConverter::detectType(std::string s) {
+LiteralType detectType(std::string s) {
     if (isQuotedChar(s))
         return T_CHAR;
-    if (isPseudoLiteral(s))
+    if (isPseudo(s))
         return T_PSEUDO;
-    if (isIntLiteral(s))
+    if (isInt(s))
         return T_INT;
-    if (isFloatLiteral(s))
+    if (isFloat(s))
         return T_FLOAT;
-    if (isDoubleLiteral(s))
+    if (isDouble(s))
         return T_DOUBLE;
     return T_INVALID;
 }
 
-void ScalarConverter::convert(std::string literal)
+void ScalarConverter::convert(std::string str)
 {
-    LiteralType type = detectType(literal);
+    LiteralType type = detectType(str);
 
     double value = 0.0;
 
     if (type == T_CHAR)
-        value = static_cast<double>(literal[1]);
+        value = static_cast<double>(str[1]);
     else if (type == T_INT)
-        value = static_cast<double>(std::stoi(literal));
+        value = static_cast<double>(std::stoi(str));
     else if (type == T_FLOAT)
-        value = static_cast<double>(std::stof(literal));
+        value = static_cast<double>(std::stof(str));
     else if (type == T_DOUBLE)
-        value = std::stod(literal);
+        value = std::stod(str);
     else if (type == T_PSEUDO)
     {
-        if (literal == "nan" || literal == "nanf")
+        if (str == "nan" || str == "nanf")
             value = std::numeric_limits<double>::quiet_NaN();
-        else if (literal == "+inf" || literal == "+inff")
+        else if (str == "+inf" || str == "+inff")
             value = std::numeric_limits<double>::infinity();
-        else if (literal == "-inf" || literal == "-inff")
+        else if (str == "-inf" || str == "-inff")
             value = -std::numeric_limits<double>::infinity();
     }
     else
-        std::cout << "Invalid literal\n" << std::endl;
+        std::cout << "Invalid str\n" << std::endl;
 
     std::cout << "char: ";
     if (std::isnan(value) || std::isinf(value) ||

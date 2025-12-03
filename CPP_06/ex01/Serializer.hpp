@@ -4,11 +4,7 @@
 #include <iostream>
 #include <string>
 #include <cstdint>
-
-struct Data {
-    std::string object1;
-    int object2;
-};
+#include "Data.hpp"
 
 class Serializer
 {
