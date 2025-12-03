@@ -17,10 +17,10 @@ int main(void)
     Data* ptr = Serializer::deserialize(raw);
     std::cout << "Deserialized pointer: " << ptr << std::endl;
 
+    // Verify adress
+    std::cout << "Data address (original pointer) : " << &data << std::endl;
+    std::cout << "Ptr address (serialize then deserialize pointer) : " << ptr << std::endl;
 
-    // Verify that the pointer matches the original
-    std::cout << "Same address? " << (ptr == &data ? "Yes" : "No") << std::endl;
-
-    // Check data integrity
+    // Check data
     std::cout << "Data content -> object1: " << ptr->object1 << ", object2: " << ptr->object2 << std::endl;
 }
