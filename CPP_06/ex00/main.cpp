@@ -12,14 +12,22 @@ int main(int argc, char **argv)
         ScalarConverter::convert(argv[1]);
     else
     {
-        // CHAR
-        std::cout << "CHAR" << std::endl;
+        // VALID CHAR
+        std::cout << "VALID CHAR" << std::endl;
         ScalarConverter::convert("\'a\'");
         ScalarConverter::convert("\'Z\'");
         ScalarConverter::convert("\'0\'");
         ScalarConverter::convert("\'%\'");
         ScalarConverter::convert("\' \'");
         ScalarConverter::convert("\'\n\'");
+        // INVALID CHAR
+        // std::cout << "INVALID CHAR" << std::endl;
+        // ScalarConverter::convert("\'a\'");
+        // ScalarConverter::convert("\'Z\'");
+        // ScalarConverter::convert("\'0\'");
+        // ScalarConverter::convert("\'%\'");
+        // ScalarConverter::convert("\' \'");
+        // ScalarConverter::convert("\'\n\'");
 
         // INT
         std::cout << "INT" << std::endl;
