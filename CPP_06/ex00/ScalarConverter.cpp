@@ -3,28 +3,8 @@
 #include <limits>
 #include <cmath>
 #include <iomanip>
+#include <cstdlib>
 #include "ScalarConverter.hpp"
-
-ScalarConverter::ScalarConverter(void)
-{
-    return ;
-}
-
-ScalarConverter::ScalarConverter(const ScalarConverter &copy)
-{
-    *this = copy;
-}
-
-ScalarConverter &ScalarConverter::operator=(const ScalarConverter &src)
-{
-    (void) src;
-    return (*this);
-}
-
-ScalarConverter::~ScalarConverter(void)
-{
-    return ;
-}
 
 bool isPrintableChar(char c)
 {
@@ -53,7 +33,7 @@ bool isInt(std::string s)
     size_t i = 0;
     if (s[0] == '-')
         i++;
-    for (i; i < s.size(); i++)
+    for (; i < s.size(); i++)
     {
         if (!isdigit(s[i]))
             return false;
@@ -140,12 +120,8 @@ void ScalarConverter::convert(std::string str)
 
     if (type == T_CHAR)
         value = static_cast<double>(str[1]);
-    else if (type == T_INT)
-        value = static_cast<double>(std::stoi(str));
-    else if (type == T_FLOAT)
-        value = static_cast<double>(std::stof(str));
-    else if (type == T_DOUBLE)
-        value = std::stod(str);
+    else if (type == T_INT || type == T_FLOAT || type == T_DOUBLE)
+        value = std::strtod(str.c_str(), NULL);
     else if (type == T_PSEUDO)
     {
         if (str == "nan" || str == "nanf")
@@ -183,7 +159,6 @@ void ScalarConverter::convert(std::string str)
         std::cout << (value < 0 ? "-inff" : "+inff") << std::endl;
     else
         std::cout << std::fixed << std::setprecision(1) << static_cast<float>(value) << "f" << std::endl;
-
 
     std::cout << "double: ";
     if (std::isnan(value))
