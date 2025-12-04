@@ -98,7 +98,7 @@ bool isDouble(std::string s)
     return false;
 }
 
-LiteralType detectType(std::string s) {
+Type detectType(std::string s) {
     if (isQuotedChar(s))
         return T_CHAR;
     if (isPseudo(s))
@@ -114,12 +114,12 @@ LiteralType detectType(std::string s) {
 
 void ScalarConverter::convert(std::string str)
 {
-    LiteralType type = detectType(str);
+    Type type = detectType(str);
 
     double value = 0.0;
 
     if (type == T_CHAR)
-        value = static_cast<double>(str[1]);
+        value = str[1];
     else if (type == T_INT || type == T_FLOAT || type == T_DOUBLE)
         value = std::strtod(str.c_str(), NULL);
     else if (type == T_PSEUDO)

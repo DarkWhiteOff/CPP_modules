@@ -8,7 +8,7 @@
 #include <iomanip>
 #include <cstdlib>
 
-enum LiteralType {T_CHAR, T_INT, T_FLOAT, T_DOUBLE, T_PSEUDO, T_INVALID};
+enum Type {T_CHAR, T_INT, T_FLOAT, T_DOUBLE, T_PSEUDO, T_INVALID};
 
 class ScalarConverter
 {
