@@ -3,62 +3,74 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 #include "Array.hpp"
 
 template <typename T>
-Array<T>::Array(void)
+Array<T>::Array(void) : m_size(0), m_array(NULL)
 {
-    m_array = new T[0];
-    m_l = 0;
+    if (m_size > 0)
+        m_array = new T[m_size]();
 }
 
 template <typename T>
-Array<T>::Array(unsigned int n)
+Array<T>::Array(unsigned int n) : m_size(n), m_array(NULL)
 {
-    m_array = new T[n];
-    m_l = n;
+    if (m_size > 0)
+        m_array = new T[m_size]();
 }
 
 template <typename T>
-Array<T>::Array(const Array &copy)
+Array<T>::Array(Array const &copy) : m_size(copy.m_size), m_array(NULL)
 {
-    m_array = new T[copy.m_l];
-    m_l = copy.m_l;
-    for (int i = 0; i < m_l; i++)
-        m_array[i] = copy.m_array[i];
+    (*this) = copy;
 }
 
 template <typename T>
-Array<T> &Array<T>::operator=(const Array &src)
+Array<T> &Array<T>::operator=(Array const &src)
 {
     if (this != &src)
     {
-        m_array = new T[src.m_l];
-        m_l = src.m_l;
-        for (int i = 0; i < m_l; i++)
-            m_array[i] = src.m_array[i];
+        if (m_array)
+		    delete [] m_array;
+        if (src.getSize() > 0)
+        {
+            m_size = src.m_size;
+            m_array = new T[m_size];
+            for (unsigned int i = 0; i < m_size; i++)
+                m_array[i] = src.m_array[i];
+        }
     }
     return (*this);
 }
 
 template <typename T>
-T &Array<T>::operator[](const int i)
-{
-    if (i < 0 || i >= m_l)
-        throw IndexOutOfBounds();
-    return (m_array[i]);
-}
-
-template <typename T>
 Array<T>::~Array(void)
 {
-    return ;
+    if (m_array)
+        delete [] m_array;
 }
 
 template <typename T>
-int Array<T>::size(void)
+T Array<T>::operator[](unsigned int index) const
 {
-    return (m_l);
+    if (index >= m_size || !m_array)
+        throw IndexOutOfBounds();
+    return (m_array[index]);
+}
+
+template <typename T>
+T &Array<T>::operator[](unsigned int index)
+{
+    if (index >= m_size || !m_array)
+        throw IndexOutOfBounds();
+    return (m_array[index]);
+}
+
+template <typename T>
+unsigned int Array<T>::getSize(void) const
+{
+    return (m_size);
 }
 
 template <typename T>

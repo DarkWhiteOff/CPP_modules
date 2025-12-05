@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 
 template <typename T>
 class Array
@@ -10,12 +11,14 @@ class Array
 public :
     Array(void);
     Array(unsigned int n);
-    Array(const Array &copy);
-    Array &operator=(const Array &src);
-    T &operator[](const int i);
+    Array(Array const &copy);
+    Array &operator=(Array const &src);
     ~Array(void);
 
-    int size(void);
+    T operator[](unsigned int index) const;
+    T &operator[](unsigned int index);
+
+    unsigned int getSize(void) const;
 
     class IndexOutOfBounds : public std::exception
     {
@@ -24,8 +27,10 @@ public :
     };
 
 private :
+    unsigned int m_size;
     T *m_array;
-    unsigned int m_l;
 };
+
+#include "Array.tpp"
 
 #endif
