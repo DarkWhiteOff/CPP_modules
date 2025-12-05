@@ -1,21 +1,22 @@
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <cstdlib>
 #include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
-#include <ctime>
 
 Base* generate(void)
 {
-    std::srand(std::time(nullptr));
+    std::srand(std::time(NULL));
     int r = std::rand() % 3;
     if (r == 0)
-        return (new A());
+        return (new A);
     else if (r == 1)
-        return (new B());
+        return (new B);
     else if (r == 2)
-        return (new C());
+        return (new C);
     else
         std::cout << "Error generating a Base class" << std::endl;
     return (NULL);
@@ -37,20 +38,23 @@ void identify(Base& p)
 {
     try {
         A& aref = dynamic_cast<A&>(p);
+        (void)aref;
         std::cout << "A (reference)" << std::endl;
         return ;
     }
     catch (std::exception &o) {
     }
     try {
-        B& aref = dynamic_cast<B&>(p);
+        B& bref = dynamic_cast<B&>(p);
+        (void)bref;
         std::cout << "B (reference)" << std::endl;
         return ;
     }
     catch (std::exception &o) {
     }
     try {
-        C& aref = dynamic_cast<C&>(p);
+        C& cref = dynamic_cast<C&>(p);
+        (void)cref;
         std::cout << "C (reference)" << std::endl;
         return ;
     }
@@ -59,30 +63,40 @@ void identify(Base& p)
     }
 }
 
-class D : public Base {
-
-};
-
 int main(void)
 {
-    // Good class
+    std::cout << "=== generate() ===" << std::endl;
     Base* p = generate();
     std::cout << "identify(Base*): ";
     identify(p);
     std::cout << "identify(Base&): ";
     identify(*p);
+    delete p;
 
-    // Wrong class
-    Base* p1 = new D;
-    std::cout << "identify(Base*): ";
-    identify(p1);
-    std::cout << "identify(Base&): ";
-    identify(*p1);
+    std::cout << "\n=== Manual A/B/C ===" << std::endl;
 
-    Base* p2;
-    std::cout << "identify(Base*): ";
-    identify(p2);
-    std::cout << "identify(Base&): ";
-    identify(*p2);
+    Base* pa = new A;
+    Base* pb = new B;
+    Base* pc = new C;
+    std::cout << "A via pointer: ";
+    identify(pa);
+    std::cout << "A via ref: ";
+    identify(*pa);
+    std::cout << "B via pointer: ";
+    identify(pb);
+    std::cout << "B via ref: ";
+    identify(*pb);
+    std::cout << "C via pointer: ";
+    identify(pc);
+    std::cout << "C via ref: ";
+    identify(*pc);
+    delete pa;
+    delete pb;
+    delete pc;
+
+    std::cout << "\n=== NULL ptr test ===" << std::endl;
+    Base* pn = NULL;
+    std::cout << "NULL via pointer: ";
+    identify(pn);
     return (0);
 }

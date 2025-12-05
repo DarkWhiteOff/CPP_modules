@@ -4,9 +4,8 @@
 #include <iostream>
 #include <string>
 #include <limits>
-#include <cmath>
-#include <iomanip>
 #include <cstdlib>
+#include <iomanip>
 
 enum Type {T_CHAR, T_INT, T_FLOAT, T_DOUBLE, T_PSEUDO, T_INVALID};
 

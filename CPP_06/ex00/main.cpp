@@ -12,8 +12,8 @@ int main(int argc, char **argv)
         ScalarConverter::convert(argv[1]);
     else
     {
-        // VALID CHAR
-        std::cout << "VALID CHAR" << std::endl;
+        // CHAR
+        std::cout << "CHAR" << std::endl;
         ScalarConverter::convert("\'a\'");
         std::cout << std::endl;
         ScalarConverter::convert("\'Z\'");
@@ -27,22 +27,7 @@ int main(int argc, char **argv)
         std::cout << "------------------------" << std::endl;
         std::cout << std::endl;
         
-        // INVALID CHAR
-        std::cout << "INVALID CHAR" << std::endl;
-        ScalarConverter::convert("a");
-        std::cout << std::endl;
-        ScalarConverter::convert("\'\'");
-        std::cout << std::endl;
-        ScalarConverter::convert("\'ab\'");
-        std::cout << std::endl;
-        ScalarConverter::convert("\'4a\'");
-        std::cout << std::endl;
-        ScalarConverter::convert("\'");
-        std::cout << std::endl;
-        std::cout << "------------------------" << std::endl;
-        std::cout << std::endl;
-
-        // VALID INT
+         // INT
         std::cout << "INT" << std::endl;
         ScalarConverter::convert("0");
         std::cout << std::endl;
@@ -59,24 +44,7 @@ int main(int argc, char **argv)
         std::cout << "------------------------" << std::endl;
         std::cout << std::endl;
 
-        // INVALID INT
-        std::cout << "INVALID INT" << std::endl;
-        ScalarConverter::convert("42a");
-        std::cout << std::endl;
-        ScalarConverter::convert("4.2");
-        std::cout << std::endl;
-        ScalarConverter::convert("+");
-        std::cout << std::endl;
-        ScalarConverter::convert("--42");
-        std::cout << std::endl;
-        ScalarConverter::convert("2147483648");
-        std::cout << std::endl;
-        ScalarConverter::convert("-2147483649");
-        std::cout << std::endl;
-        std::cout << "------------------------" << std::endl;
-        std::cout << std::endl;
-
-        // VALID FLOAT
+        // FLOAT
         std::cout << "FLOAT" << std::endl;
         ScalarConverter::convert("42.0f");
         std::cout << std::endl;
@@ -91,23 +59,8 @@ int main(int argc, char **argv)
         std::cout << "------------------------" << std::endl;
         std::cout << std::endl;
 
-        // INVALID FLOAT
-        std::cout << "INVALID FLOAT" << std::endl;
-        ScalarConverter::convert(".5f");
-        std::cout << std::endl;
-        ScalarConverter::convert("5.f");
-        std::cout << std::endl;
-        ScalarConverter::convert("42.fg");
-        std::cout << std::endl;
-        ScalarConverter::convert("42.");
-        std::cout << std::endl;
-        ScalarConverter::convert("42");
-        std::cout << std::endl;
-        std::cout << "------------------------" << std::endl;
-        std::cout << std::endl;
-
-        // VALID DOUBLE
-        std::cout << "VALID DOUBLE" << std::endl;
+        // DOUBLE
+        std::cout << "DOUBLE" << std::endl;
         ScalarConverter::convert("42.0");
         std::cout << std::endl;
         ScalarConverter::convert("-42.5");
@@ -121,17 +74,54 @@ int main(int argc, char **argv)
         std::cout << "------------------------" << std::endl;
         std::cout << std::endl;
 
-        // INVALID DOUBLE
-        std::cout << "INVALID DOUBLE" << std::endl;
-        ScalarConverter::convert(".5");
+        // PSEUDO LITERALS
+        std::cout << "PSEUDO LITERALS" << std::endl;
+        ScalarConverter::convert("nan");
         std::cout << std::endl;
-        ScalarConverter::convert("5.");
+        ScalarConverter::convert("nanf");
         std::cout << std::endl;
-        ScalarConverter::convert("42");
+        ScalarConverter::convert("+inf");
         std::cout << std::endl;
-        ScalarConverter::convert("42.0f");
+        ScalarConverter::convert("-inf");
+        std::cout << std::endl;
+        ScalarConverter::convert("+inff");
+        std::cout << std::endl;
+        ScalarConverter::convert("-inff");
+        std::cout << std::endl;
+        std::cout << "------------------------" << std::endl;
+        std::cout << std::endl;
+
+        // INVALID
+        std::cout << "INVALID" << std::endl;
+        ScalarConverter::convert("a");
+        std::cout << std::endl;
+        ScalarConverter::convert("\'\'");
+        std::cout << std::endl;
+        ScalarConverter::convert("\'4a\'");
+        std::cout << std::endl;
+        ScalarConverter::convert("42a");
+        std::cout << std::endl;
+        ScalarConverter::convert("+");
+        std::cout << std::endl;
+        ScalarConverter::convert("--42");
+        std::cout << std::endl;
+        ScalarConverter::convert("2147483648"); // invalid int and char
+        std::cout << std::endl;
+        ScalarConverter::convert("-2147483649"); // invalid int and char
+        std::cout << std::endl;
+        ScalarConverter::convert(".5f");
+        std::cout << std::endl;
+        ScalarConverter::convert("5.f");
+        std::cout << std::endl;
+        ScalarConverter::convert("42.fg");
+        std::cout << std::endl;
+        ScalarConverter::convert("42.");
         std::cout << std::endl;
         ScalarConverter::convert("4.2.3");
+        std::cout << std::endl;
+        ScalarConverter::convert("+1-7");
+        std::cout << std::endl;
+        ScalarConverter::convert("");
     }
     return (0);
 }

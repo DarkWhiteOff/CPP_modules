@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <cstdlib>
 #include "Base.hpp"
 
 class B : public Base

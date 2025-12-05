@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <cstdint>
+#include <stdint.h>
 #include "Serializer.hpp"
 
 int main(void)

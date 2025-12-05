@@ -1,9 +1,8 @@
 #include <iostream>
 #include <string>
 #include <limits>
-#include <cmath>
-#include <iomanip>
 #include <cstdlib>
+#include <iomanip>
 #include "ScalarConverter.hpp"
 
 bool isPrintableChar(char c)
@@ -28,6 +27,13 @@ bool isPseudo(std::string s)
     return false;
 }
 
+bool ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return true;
+	return false;
+}
+
 bool isInt(std::string s)
 {
     size_t i = 0;
@@ -35,15 +41,18 @@ bool isInt(std::string s)
         i++;
     for (; i < s.size(); i++)
     {
-        if (!isdigit(s[i]))
+        if (!ft_isdigit(s[i]))
             return false;
     }
     return true;
 }
 
-bool isAllDigits(std::string s, size_t a, size_t b) {
+bool isAllDigits(std::string s, size_t a, size_t b)
+{
+    if (a >= b)
+        return false;
     for (size_t i = a; i < b; ++i)
-        if (!isdigit(s[i]))
+        if (!ft_isdigit(s[i]))
             return false;
     return true;
 }
@@ -98,7 +107,8 @@ bool isDouble(std::string s)
     return false;
 }
 
-Type detectType(std::string s) {
+Type detectType(std::string s)
+{
     if (isQuotedChar(s))
         return T_CHAR;
     if (isPseudo(s))
@@ -112,10 +122,34 @@ Type detectType(std::string s) {
     return T_INVALID;
 }
 
+bool ft_isNan(double v)
+{
+    if (v != v)
+        return true;
+    return false;
+}
+
+bool ft_isInf(double v)
+{
+    double max = std::numeric_limits<double>::max();
+    if (!ft_isNan(v) && (v > max || v < -max))
+        return true;
+    return false;
+}
+
 void ScalarConverter::convert(std::string str)
 {
+    if (str.empty())
+    {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: impossible" << std::endl;
+        std::cout << "double: impossible" << std::endl;
+        return;
+    }
+    if (str.size() > 1 && str[0] == '+' && isdigit(str[1]))
+        str = str.substr(1);
     Type type = detectType(str);
-
     double value = 0.0;
 
     if (type == T_CHAR)
@@ -132,20 +166,26 @@ void ScalarConverter::convert(std::string str)
             value = -std::numeric_limits<double>::infinity();
     }
     else
-        std::cout << "Invalid str\n" << std::endl;
+    {
+        std::cout << "char: impossible" << std::endl;
+        std::cout << "int: impossible" << std::endl;
+        std::cout << "float: impossible" << std::endl;
+        std::cout << "double: impossible" << std::endl;
+        return;
+    }
 
     std::cout << "char: ";
-    if (std::isnan(value) || std::isinf(value) ||
+    if (ft_isNan(value) || ft_isInf(value) ||
         value < std::numeric_limits<char>::min() ||
-        value > std::numeric_limits<char>::max())
+        value > std::numeric_limits<char>::max() || (static_cast<char>(value)) < 0)
         std::cout << "impossible" << std::endl;
-    else if (!std::isprint(static_cast<int>(value)))
+    else if (!isPrintableChar(static_cast<int>(value)))
         std::cout << "Non displayable" << std::endl;
     else
         std::cout << "'" << static_cast<char>(value) << "'" << std::endl;
 
     std::cout << "int: ";
-    if (std::isnan(value) || std::isinf(value) ||
+    if (ft_isNan(value) || ft_isInf(value) ||
         value < std::numeric_limits<int>::min() ||
         value > std::numeric_limits<int>::max())
         std::cout << "impossible" << std::endl;
@@ -153,17 +193,17 @@ void ScalarConverter::convert(std::string str)
         std::cout << static_cast<int>(value) << std::endl;
     
     std::cout << "float: ";
-    if (std::isnan(value))
+    if (ft_isNan(value))
         std::cout << "nanf" << std::endl;
-    else if (std::isinf(value))
+    else if (ft_isInf(value))
         std::cout << (value < 0 ? "-inff" : "+inff") << std::endl;
     else
         std::cout << std::fixed << std::setprecision(1) << static_cast<float>(value) << "f" << std::endl;
 
     std::cout << "double: ";
-    if (std::isnan(value))
+    if (ft_isNan(value))
         std::cout << "nan" << std::endl;
-    else if (std::isinf(value))
+    else if (ft_isInf(value))
         std::cout << (value < 0 ? "-inf" : "+inf") << std::endl;
     else
         std::cout << std::fixed << std::setprecision(1) << value << std::endl;

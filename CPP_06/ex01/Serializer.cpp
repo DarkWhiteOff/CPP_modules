@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include <cstdint>
+#include <stdint.h>
 #include "Serializer.hpp"
 
 uintptr_t Serializer::serialize(Data* ptr)
