@@ -5,19 +5,20 @@
 #include <string>
 #include <stack>
 #include <algorithm>
-#include <stack>
 
 template <typename T>
-class MutantStack
+class MutantStack : public std::stack<T>
 {
 public :
     MutantStack(void);
-    MutantStack(const MutantStack &copy);
-    MutantStack &operator=(const MutantStack &src);
+    MutantStack(MutantStack const &copy);
+    MutantStack &operator=(MutantStack const &src);
     ~MutantStack(void);
 
-private :
-    
+    typedef typename std::stack<T>::container_type::iterator iterator;
+
+    iterator begin();
+    iterator end();
 };
 
 #endif

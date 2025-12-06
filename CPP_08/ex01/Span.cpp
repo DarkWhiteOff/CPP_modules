@@ -1,23 +1,19 @@
 #include <iostream>
 #include <string>
+#include <exception>
 #include <vector>
 #include <list>
 #include <algorithm>
 #include "Span.hpp"
 
-Span::Span(void) : m_vect(0), m_N(0)
-{
-    return ;
-}
-
-Span::Span(unsigned int N) : m_vect(N), m_N(N)
+Span::Span(unsigned int N) : m_N(N)
 {
     return ;
 }
 
 Span::Span(const Span &copy)
 {
-    *this = copy;
+    (*this) = copy;
 }
 
 Span &Span::operator=(const Span &src)
@@ -49,7 +45,7 @@ void    Span::addNumbers(std::vector<int>::iterator a, std::vector<int>::iterato
     m_vect.insert(m_vect.end(), a, b);
 }
 
-int    Span::shortestSpan(void)
+int    Span::shortestSpan(void) const
 {
     if (m_vect.size() == 0 || m_vect.size() == 1)
         throw NotEnoughNumberInSpanException();
@@ -69,7 +65,7 @@ int    Span::shortestSpan(void)
     return (res);
 }
 
-int    Span::longestSpan(void)
+int    Span::longestSpan(void) const
 {
     if (m_vect.size() == 0 || m_vect.size() == 1)
         throw NotEnoughNumberInSpanException();
@@ -81,15 +77,15 @@ int    Span::longestSpan(void)
 
 const char *Span::SpanIsFullException::what(void) const throw()
 {
-    return ("Span Is Full!\n");
+    return ("Span Is Full!");
 }
 
 const char *Span::NotEnoughNumberInSpanException::what(void) const throw()
 {
-    return ("Not Enough Number In Span!\n");
+    return ("Not Enough Number In Span!");
 }
 
 const char *Span::NotEnoughSpaceInSpanException::what(void) const throw()
 {
-    return ("Not Enough Space In Span!\n");
+    return ("Not Enough Space In Span!");
 }

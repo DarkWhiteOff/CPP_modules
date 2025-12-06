@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 #include <vector>
 #include <list>
 #include <algorithm>
@@ -10,16 +11,15 @@
 class Span
 {
 public :
-    Span(void);
     Span(unsigned int N);
-    Span(const Span &copy);
-    Span &operator=(const Span &src);
+    Span(Span const &copy);
+    Span &operator=(Span const &src);
     ~Span(void);
 
-    void    addNumber(int nb);
-    void    addNumbers(std::vector<int>::iterator a, std::vector<int>::iterator b);
-    int shortestSpan(void);
-    int longestSpan(void);
+    void addNumber(int nb);
+    void addNumbers(std::vector<int>::iterator a, std::vector<int>::iterator b);
+    int shortestSpan(void) const;
+    int longestSpan(void) const;
 
     class SpanIsFullException : public std::exception
     {
@@ -42,6 +42,8 @@ public :
 private :
     std::vector<int> m_vect;
     unsigned int m_N;
+
+    Span(void);
 };
 
 #endif

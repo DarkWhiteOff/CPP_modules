@@ -1,6 +1,6 @@
 NAME = ex02
 
-SRC = MutantStack.cpp main.cpp
+SRC = main.cpp
 
 OBJS = $(SRC:%.cpp=%.o)
 
