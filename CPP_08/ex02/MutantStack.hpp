@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <deque>
 #include <stack>
 #include <algorithm>
 
@@ -20,5 +21,7 @@ public :
     iterator begin();
     iterator end();
 };
+
+#include "MutantStack.tpp"
 
 #endif

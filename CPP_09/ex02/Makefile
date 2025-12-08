@@ -1,13 +1,14 @@
 NAME = PmergeMe
 
 SRC = PmergeMe.cpp main.cpp
+HEADERS = PmergeMe.hpp
 
 OBJS = $(SRC:%.cpp=%.o)
 
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 -I ./includes
 
-%.o: %.cpp
+%.o: %.cpp $(HEADERS)
 	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)

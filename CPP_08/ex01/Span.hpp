@@ -6,6 +6,7 @@
 #include <exception>
 #include <vector>
 #include <list>
+#include <map>
 #include <algorithm>
 
 class Span

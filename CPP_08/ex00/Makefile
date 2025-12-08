@@ -1,13 +1,14 @@
 NAME = ex00
 
 SRC = main.cpp
+HEADERS = easyfind.hpp easyfind.tpp
 
 OBJS = $(SRC:%.cpp=%.o)
 
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++98 -I ./includes
 
-%.o: %.cpp
+%.o: %.cpp $(HEADERS)
 	$(CC) $(FLAGS) -c $< -o $@
 
 all: $(NAME)

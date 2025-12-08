@@ -3,24 +3,25 @@
 
 #include <iostream>
 #include <string>
+#include <deque>
 #include <stack>
 #include <algorithm>
 #include "MutantStack.hpp"
 
 template <typename T>
-MutantStack<T>::MutantStack(void)
+MutantStack<T>::MutantStack(void) : std::stack<T>()
 {
     return ;
 }
 
 template <typename T>
-MutantStack<T>::MutantStack(const MutantStack &copy)
+MutantStack<T>::MutantStack(MutantStack const &copy) : std::stack<T>(copy)
 {
-    (*this) = copy;
+    return ;
 }
 
 template <typename T>
-MutantStack<T> &MutantStack<T>::operator=(const MutantStack &src)
+MutantStack<T> &MutantStack<T>::operator=(MutantStack const &src)
 {
     if (this != &src)
     {
@@ -38,13 +39,13 @@ MutantStack<T>::~MutantStack(void)
 template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::begin()
 {
-    return this->c.begin();
+    return (this->c.begin());
 }
 
 template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::end()
 {
-    return this->c.end();
+    return (this->c.end());
 }
 
 #endif

@@ -5,8 +5,7 @@
 #include <list>
 #include <map>
 #include <algorithm>
-#include <deque>
-#include "easyfind.tpp"
+#include "easyfind.hpp"
 
 int main()
 {

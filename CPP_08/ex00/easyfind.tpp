@@ -11,7 +11,7 @@
 #include "easyfind.hpp"
 
 template <typename T>
-void    easyfind(T &c, int occ)
+void    easyfind(T c, int occ)
 {
     typename T::iterator it = std::find(c.begin(), c.end(), occ);
     if (it == c.end())
@@ -25,7 +25,7 @@ void    easyfind(T &c, int occ)
 
 const char *NoOccurenceFound::what(void) const throw()
 {
-    return ("No Occurence Found!\n");
+    return ("No Occurence Found!");
 }
 
 #endif
