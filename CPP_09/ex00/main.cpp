@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <exception>
 #include <fstream>
 #include <map>
 #include <algorithm>
@@ -8,7 +10,11 @@
 
 int main(int argc, char **argv)
 {
-    (void) argc;
+    if (argc != 2)
+    {
+        std::cout << "Error: could not open file." << std::endl;
+        return (1);
+    }
     try
     {
         BitcoinExchange b;
@@ -18,4 +24,5 @@ int main(int argc, char **argv)
     {
         std::cout << o.what() << std::endl;
     }
+    return (0);
 }

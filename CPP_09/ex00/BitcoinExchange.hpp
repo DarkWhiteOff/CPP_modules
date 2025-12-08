@@ -3,9 +3,11 @@
 
 #include <iostream>
 #include <string>
-#include <fstream>
+#include <cstdlib>
+#include <exception>
 #include <map>
 #include <algorithm>
+#include <fstream>
 #include <sstream>
 
 class BitcoinExchange
@@ -26,29 +28,32 @@ public :
 
     class BadInputException : public std::exception
     {
-        private :
-            std::string m_msg;
         public :
             BadInputException(std::string date);
+            virtual ~BadInputException() throw() {}
             virtual const char *what(void) const throw();
+        private :
+            std::string m_msg;
     };
 
     class BadInput1Exception : public std::exception
     {
-        private :
-            std::string m_msg;
         public :
             BadInput1Exception(std::string line);
+            virtual ~BadInput1Exception() throw() {}
             virtual const char *what(void) const throw();
+        private :
+            std::string m_msg;
     };
 
     class WrongValueException : public std::exception
     {
-        private :
-            std::string m_msg;
         public :
             WrongValueException(float value);
+            virtual ~WrongValueException() throw() {}
             virtual const char *what(void) const throw();
+        private :
+            std::string m_msg;
     };
 
 private :

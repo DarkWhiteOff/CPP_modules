@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include <stack>
 #include <algorithm>
 #include <sstream>
@@ -7,7 +8,11 @@
 
 int main(int argc, char **argv)
 {
-    (void) argc;
+    if (argc != 2)
+    {
+        std::cout << "Error: Invalid number of arguments." << std::endl;
+        return (1);
+    }
     try
     {
         RPN rpn(argv[1]);
@@ -17,4 +22,5 @@ int main(int argc, char **argv)
     {
         std::cout << o.what() << std::endl;
     }
+    return (0);
 }

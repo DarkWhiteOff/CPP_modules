@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
+#include <exception>
 #include <fstream>
 #include <map>
 #include <algorithm>
@@ -12,14 +14,14 @@ BitcoinExchange::BitcoinExchange(void)
     if (!file)
         throw FileFailedException();
     std::string line;
-    getline(file, line);
-    while (getline(file, line))
+    std::getline(file, line);
+    while (std::getline(file, line))
     {
         int pos = line.find(',');
         std::string date = line.substr(0, pos);
         std::string ratestr = line.substr(pos + 1);
-        float rate = std::stof(ratestr);
-        m_map.insert({date, rate});
+        float rate = static_cast<float>(std::atof(ratestr.c_str()));
+        m_map[date] = rate;
     }
 }
 
@@ -48,8 +50,8 @@ void isValidInput(std::string line, std::string date, float value)
     if (date.size() != 10 || date[4] != '-' || date[7] != '-')
         throw BitcoinExchange::BadInputException(date);
 
-    int m = std::stoi(date.substr(5, 2));
-    int d = std::stoi(date.substr(8, 2));
+    int m = std::atoi(date.substr(5, 2).c_str());
+    int d = std::atoi(date.substr(8, 2).c_str());
 
     if (m < 1 || m > 12 || d < 1 || d > 31)
         throw BitcoinExchange::BadInputException(date);
@@ -61,12 +63,12 @@ void isValidInput(std::string line, std::string date, float value)
 
 void BitcoinExchange::make(std::string inputFile)
 {
-    std::ifstream file(inputFile);
+    std::ifstream file(inputFile.c_str());
     if (!file)
         throw FileFailedException();
     std::string line;
-    getline(file, line);
-    while (getline(file, line))
+    std::getline(file, line);
+    while (std::getline(file, line))
     {
         try
         {
@@ -75,7 +77,7 @@ void BitcoinExchange::make(std::string inputFile)
                 throw BadInput1Exception(line);
             std::string date = line.substr(0, pos - 1);
             std::string valuestr = line.substr(pos + 2);
-            float value = std::stof(valuestr);
+            float value = static_cast<float>(std::atof(valuestr.c_str()));
             isValidInput(line, date, value);
             std::map<std::string, float>::iterator it = m_map.find(date);
             if (it != m_map.end())

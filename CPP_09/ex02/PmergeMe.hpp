@@ -3,26 +3,23 @@
 
 #include <iostream>
 #include <string>
-#include <>
+#include <cstdlib>
+#include <vector>
+#include <deque>
 #include <algorithm>
+#include <ctime>
 #include <sstream>
 
 class PmergeMe
 {
 public :
     PmergeMe(void);
-    PmergeMe(std::string str);
+    PmergeMe(char **argv);
     PmergeMe(const PmergeMe &copy);
     PmergeMe &operator=(const PmergeMe &src);
     ~PmergeMe(void);
 
-    // void calc();
-
-    class ValueTooLargeException : public std::exception
-    {
-        public :
-            virtual const char *what(void) const throw();
-    };
+    void make();
 
     class BadInputException : public std::exception
     {
@@ -31,7 +28,11 @@ public :
     };
 
 private :
-    
+    std::vector<int> m_v;
+    std::deque<int> m_d;
+
+    void sortVector();
+    void sortDeque();
 };
 
 #endif

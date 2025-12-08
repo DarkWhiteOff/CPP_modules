@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cstdlib>
 #include <stack>
 #include <algorithm>
 #include <sstream>
@@ -53,7 +54,7 @@ void RPN::calc()
     for(int i = 0; m_str[i]; i++)
     {
         if (isdigit(m_str[i]))
-            m_stack.push(std::stoi(std::string(1, m_str[i])));
+            m_stack.push(std::atoi(std::string(1, m_str[i]).c_str()));
         if (m_str[i] == '+' || m_str[i] == '-'
             || m_str[i] == '/' || m_str[i] == '*')
             {
@@ -73,6 +74,7 @@ void RPN::calc()
                 m_stack.push(res);
             }
     }
+    std::cout << m_stack.top() << std::endl;
 }
 
 const char *RPN::ValueTooLargeException::what(void) const throw()
