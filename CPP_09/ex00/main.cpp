@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
-#include <cstdlib>
 #include <exception>
+#include <cstdlib>
+#include <cctype>
 #include <map>
-#include <algorithm>
 #include <fstream>
 #include "BitcoinExchange.hpp"
 

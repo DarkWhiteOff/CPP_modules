@@ -2,15 +2,15 @@
 #include <string>
 #include <exception>
 #include <cstdlib>
+#include <cctype>
 #include <stack>
-#include <algorithm>
 #include "RPN.hpp"
 
 int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        std::cout << "Error: Invalid number of arguments." << std::endl;
+        std::cerr << "Error" << std::endl;
         return (1);
     }
     try
@@ -20,7 +20,9 @@ int main(int argc, char **argv)
     }
     catch (std::exception &o)
     {
-        std::cout << o.what() << std::endl;
+        std::cerr << o.what() << std::endl;
     }
     return (0);
 }
+
+// Provide tests

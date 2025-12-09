@@ -5,8 +5,8 @@
 #include <string>
 #include <exception>
 #include <cstdlib>
+#include <cctype>
 #include <stack>
-#include <algorithm>
 
 class RPN
 {

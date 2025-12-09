@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
-#include <cstdlib>
 #include <exception>
+#include <cstdlib>
+#include <cctype>
 #include <map>
-#include <algorithm>
 #include <fstream>
 #include "BitcoinExchange.hpp"
 
@@ -99,14 +99,18 @@ void BitcoinExchange::make(std::string inputFile)
     {
         try
         {
+            if (line.empty())
+                throw BadInputException(line);
             if (line[line.size() - 1] == '\r')
                 line.erase(line.size() - 1);
             size_t pos = line.find('|');
             if (pos == std::string::npos)
                 throw BadInputException(line);
-            if (line.substr(0, pos).size() != 11 && line.substr(0, pos)[10] != ' ')
+            std::string d = line.substr(0, pos);
+            std::string v = line.substr(pos + 1);
+            if (d.empty() || d.size() != 11 || d[10] != ' ')
                 throw BadInputException(line);
-            if (line.substr(pos + 1)[0] != ' ')
+            if (v.empty() || v.size() < 2 || v[0] != ' ')
                 throw BadInputException(line);
             std::string date = line.substr(0, pos - 1);
             std::string valuestr = line.substr(pos + 2);

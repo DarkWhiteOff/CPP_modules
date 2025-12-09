@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <exception>
-#include <cstdlib>
 #include <vector>
 #include <deque>
 #include <algorithm>
@@ -51,26 +50,30 @@ void PmergeMe::sortVector()
 {
     if (m_v.size() <= 1)
         return;
+    std::vector<int> copy = m_v;
     std::vector<int> big;
     std::vector<int> small;
-    big.reserve(m_v.size() / 2);
-    small.reserve(m_v.size() / 2);
+    big.reserve(copy.size() / 2);
+    small.reserve(copy.size() / 2);
     size_t i = 0;
-    for (; i + 1 < m_v.size(); i += 2)
+    for (; i + 1 < copy.size(); i += 2)
     {
-        int a = m_v[i];
-        int b = m_v[i + 1];
+        int a = copy[i];
+        int b = copy[i + 1];
         if (a > b)
             std::swap(a, b);
         small.push_back(a);
         big.push_back(b);
     }
-    bool hasLeftover = (i < m_v.size());
+    bool hasLeftover = (i < copy.size());
     int leftover = 0;
     if (hasLeftover)
-        leftover = m_v[i];
-    std::sort(big.begin(), big.end());
-    std::vector<int> mainChain = big;
+        leftover = copy[i];
+    // std::sort(big.begin(), big.end());
+    // std::vector<int> mainChain = big;
+    m_v = big;
+    sortVector();
+    std::vector<int> mainChain = m_v;
     for (size_t j = 0; j < small.size(); ++j)
     {
         int value = small[j];
@@ -89,24 +92,28 @@ void PmergeMe::sortDeque()
 {
     if (m_d.size() <= 1)
         return;
+    std::deque<int> copy = m_d;
     std::deque<int> big;
     std::deque<int> small;
     size_t i = 0;
-    for (; i + 1 < m_d.size(); i += 2)
+    for (; i + 1 < copy.size(); i += 2)
     {
-        int a = m_d[i];
-        int b = m_d[i + 1];
+        int a = copy[i];
+        int b = copy[i + 1];
         if (a > b)
             std::swap(a, b);
         small.push_back(a);
         big.push_back(b);
     }
-    bool hasLeftover = (i < m_d.size());
+    bool hasLeftover = (i < copy.size());
     int leftover = 0;
     if (hasLeftover)
-        leftover = m_v[i];
-    std::vector<int> mainChain(big.begin(), big.end());
-    std::sort(mainChain.begin(), mainChain.end());
+        leftover = copy[i];
+    // std::vector<int> mainChain(big.begin(), big.end());
+    // std::sort(mainChain.begin(), mainChain.end());
+    m_d = big;
+    sortDeque();
+    std::vector<int> mainChain(m_d.begin(), m_d.end());
     for (size_t j = 0; j < small.size(); ++j)
     {
         int value = small[j];
