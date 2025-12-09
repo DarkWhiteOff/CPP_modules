@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
+#include <exception>
 #include <cstdlib>
 #include <stack>
 #include <algorithm>
-#include <sstream>
 #include "RPN.hpp"
 
 RPN::RPN(void)
@@ -30,12 +30,12 @@ RPN::RPN(std::string str)
     m_str = str;
 }
 
-RPN::RPN(const RPN &copy)
+RPN::RPN(RPN const &copy)
 {
     *this = copy;
 }
 
-RPN &RPN::operator=(const RPN &src)
+RPN &RPN::operator=(RPN const &src)
 {
     if (this != &src)
     {

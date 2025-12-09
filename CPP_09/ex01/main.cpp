@@ -1,9 +1,9 @@
 #include <iostream>
 #include <string>
+#include <exception>
 #include <cstdlib>
 #include <stack>
 #include <algorithm>
-#include <sstream>
 #include "RPN.hpp"
 
 int main(int argc, char **argv)

@@ -2,17 +2,16 @@
 #include <string>
 #include <cstdlib>
 #include <exception>
-#include <fstream>
 #include <map>
 #include <algorithm>
-#include <sstream>
+#include <fstream>
 #include "BitcoinExchange.hpp"
 
 int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        std::cout << "Error: could not open file." << std::endl;
+        std::cerr << "Error: could not open file." << std::endl;
         return (1);
     }
     try
@@ -22,7 +21,7 @@ int main(int argc, char **argv)
     }
     catch (std::exception &o)
     {
-        std::cout << o.what() << std::endl;
+        std::cerr << o.what() << std::endl;
     }
     return (0);
 }

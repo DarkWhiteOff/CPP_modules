@@ -1,3 +1,12 @@
+#include <iostream>
+#include <string>
+#include <exception>
+#include <cstdlib>
+#include <vector>
+#include <deque>
+#include <algorithm>
+#include <ctime>
+#include <sstream>
 #include "PmergeMe.hpp"
 
 int main(int argc, char **argv)

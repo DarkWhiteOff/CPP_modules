@@ -3,18 +3,18 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 #include <cstdlib>
 #include <stack>
 #include <algorithm>
-#include <sstream>
 
 class RPN
 {
 public :
     RPN(void);
     RPN(std::string str);
-    RPN(const RPN &copy);
-    RPN &operator=(const RPN &src);
+    RPN(RPN const &copy);
+    RPN &operator=(RPN const &src);
     ~RPN(void);
 
     void calc();

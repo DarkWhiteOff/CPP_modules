@@ -1,3 +1,12 @@
+#include <iostream>
+#include <string>
+#include <exception>
+#include <cstdlib>
+#include <vector>
+#include <deque>
+#include <algorithm>
+#include <ctime>
+#include <sstream>
 #include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe(void)
@@ -18,12 +27,12 @@ PmergeMe::PmergeMe(char **argv)
     }
 }
 
-PmergeMe::PmergeMe(const PmergeMe &copy)
+PmergeMe::PmergeMe(PmergeMe const &copy)
 {
     (*this) = copy;
 }
 
-PmergeMe &PmergeMe::operator=(const PmergeMe &src)
+PmergeMe &PmergeMe::operator=(PmergeMe const &src)
 {
     if (this != &src)
     {

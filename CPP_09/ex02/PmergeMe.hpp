@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
 #include <cstdlib>
 #include <vector>
 #include <deque>
@@ -15,8 +16,8 @@ class PmergeMe
 public :
     PmergeMe(void);
     PmergeMe(char **argv);
-    PmergeMe(const PmergeMe &copy);
-    PmergeMe &operator=(const PmergeMe &src);
+    PmergeMe(PmergeMe const &copy);
+    PmergeMe &operator=(PmergeMe const &src);
     ~PmergeMe(void);
 
     void make();
