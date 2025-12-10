@@ -50,27 +50,24 @@ void PmergeMe::sortVector()
 {
     if (m_v.size() <= 1)
         return;
-    std::vector<int> copy = m_v;
     std::vector<int> big;
     std::vector<int> small;
-    big.reserve(copy.size() / 2);
-    small.reserve(copy.size() / 2);
+    big.reserve(m_v.size() / 2);
+    small.reserve(m_v.size() / 2);
     size_t i = 0;
-    for (; i + 1 < copy.size(); i += 2)
+    for (; i + 1 < m_v.size(); i += 2)
     {
-        int a = copy[i];
-        int b = copy[i + 1];
+        int a = m_v[i];
+        int b = m_v[i + 1];
         if (a > b)
             std::swap(a, b);
         small.push_back(a);
         big.push_back(b);
     }
-    bool hasLeftover = (i < copy.size());
+    bool hasLeftover = (i < m_v.size());
     int leftover = 0;
     if (hasLeftover)
-        leftover = copy[i];
-    // std::sort(big.begin(), big.end());
-    // std::vector<int> mainChain = big;
+        leftover = m_v[i];
     m_v = big;
     sortVector();
     std::vector<int> mainChain = m_v;
@@ -109,8 +106,6 @@ void PmergeMe::sortDeque()
     int leftover = 0;
     if (hasLeftover)
         leftover = copy[i];
-    // std::vector<int> mainChain(big.begin(), big.end());
-    // std::sort(mainChain.begin(), mainChain.end());
     m_d = big;
     sortDeque();
     std::vector<int> mainChain(m_d.begin(), m_d.end());
