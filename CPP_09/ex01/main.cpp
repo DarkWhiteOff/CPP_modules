@@ -6,21 +6,67 @@
 #include <stack>
 #include "RPN.hpp"
 
+void autoTest(const char *tests)
+{
+    try
+    {
+        std::cout << " (" << tests << ")" << std::endl;
+        RPN rpn(tests);
+        rpn.calc();
+    }
+    catch (std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+}
+
+void runAutomaticTests()
+{
+    std::cout << "===== " << "Basic" << " =====" << std::endl;
+    autoTest("8 9 * 9 - 9 - 9 - 4 - 1 +");
+    autoTest("7 7 * 7 -");
+    autoTest("1 2 * 2 / 2 * 2 4 - +");
+    autoTest("3 4 +");
+    autoTest("9 9 *");
+    autoTest("5 1 2 + 4 * + 3 -");
+    std::cout << std::endl;
+
+    std::cout << "===== " << "Error" << " =====" << std::endl;
+    autoTest("(1 2 +)");
+    autoTest("1 a +");
+    autoTest("1 +");
+    autoTest("+ 1 2");
+    autoTest("1 2 3 +");
+    autoTest("");
+    autoTest("    ");
+    autoTest("10 2 +");
+    autoTest("5 0 /");
+    std::cout << std::endl;
+}
+
 int main(int argc, char **argv)
 {
-    if (argc != 2)
+    if (argc > 2)
     {
         std::cerr << "Error" << std::endl;
         return (1);
     }
-    try
+    else if (argc == 1)
     {
-        RPN rpn(argv[1]);
-        rpn.calc();
+        runAutomaticTests();
+        return (0);
     }
-    catch (std::exception &o)
+    else
     {
-        std::cerr << o.what() << std::endl;
+        try
+        {
+            RPN rpn(argv[1]);
+            rpn.calc();
+        }
+        catch (std::exception &o)
+        {
+            std::cerr << o.what() << std::endl;
+        }
     }
     return (0);
 }
