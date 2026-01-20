@@ -10,10 +10,15 @@
 #include <ctime>
 #include <sstream>
 
+struct Pair
+{
+    int small;
+    int big;
+};
+
 class PmergeMe
 {
 public :
-    PmergeMe(void);
     PmergeMe(char **argv);
     PmergeMe(PmergeMe const &copy);
     PmergeMe &operator=(PmergeMe const &src);
@@ -31,8 +36,11 @@ private :
     std::vector<int> m_v;
     std::deque<int> m_d;
 
+    std::vector<size_t> buildJacobOrder(size_t m);
     void sortVector();
     void sortDeque();
+
+    PmergeMe(void);
 };
 
 #endif

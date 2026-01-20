@@ -19,7 +19,7 @@ PmergeMe::PmergeMe(char **argv)
     {
         std::stringstream ss(argv[i]);
         int value;
-        if (!(ss >> value) || !(ss.eof()) || value < 0)
+        if (!(ss >> value) || !(ss.eof()) || value <= 0)
             throw BadInputException();
         m_v.push_back(value);
         m_d.push_back(value);
@@ -46,56 +46,43 @@ PmergeMe::~PmergeMe(void)
     return ;
 }
 
-static std::vector<size_t> buildJacobInsertionOrder(size_t m)
+std::vector<size_t> PmergeMe::buildJacobOrder(size_t m)
 {
     std::vector<size_t> order;
     if (m <= 1)
-        return order; // b1 déjà géré ailleurs
+        return order;
 
-    // Génère Jacobsthal: 0,1,1,3,5,11,21...
-    std::vector<size_t> J;
-    J.push_back(0);
-    J.push_back(1);
-    while (true)
+    size_t prev = 1;
+    size_t j0 = 1, j1 = 3;
+
+    while (j1 <= m)
     {
-        size_t n = J.size();
-        size_t next = J[n - 1] + 2 * J[n - 2];
-        if (next > m)
-            break;
-        J.push_back(next);
-    }
+        order.push_back(j1);
 
-    size_t prev = 1; // parce que b1 sera déjà inséré
-    // on démarre à l'indice 3 dans Jacobsthal (valeur 3)
-    for (size_t i = 0; i < J.size(); i++)
-    {
-        size_t j = J[i];
-        if (j < 3)
-            continue;
-        if (j > m)
-            break;
-
-        order.push_back(j);
-        for (size_t k = j - 1; k > prev; k--)
+        for (size_t k = j1 - 1; k > prev; k--)
             order.push_back(k);
 
-        prev = j;
+        prev = j1;
+
+        size_t next = j1 + 2 * j0;            // Jacobsthal: J(n)=J(n-1)+2*J(n-2)
+        j0 = j1;
+        j1 = next;
     }
 
     for (size_t k = m; k > prev; k--)
         order.push_back(k);
 
-    return order; // indices 1-based (b1..bm)
+    return order;
 }
 
 void PmergeMe::sortVector()
 {
     if (m_v.size() <= 1)
         return;
-    std::vector<int> big;
-    std::vector<int> small;
-    big.reserve(m_v.size() / 2);
-    small.reserve(m_v.size() / 2);
+
+    std::vector<Pair> pairs;
+    pairs.reserve(m_v.size() / 2);
+
     size_t i = 0;
     for (; i + 1 < m_v.size(); i += 2)
     {
@@ -103,44 +90,54 @@ void PmergeMe::sortVector()
         int b = m_v[i + 1];
         if (a > b)
             std::swap(a, b);
-        small.push_back(a);
-        big.push_back(b);
+        Pair p; p.small = a; p.big = b;
+        pairs.push_back(p);
     }
     bool hasLeftover = (i < m_v.size());
     int leftover = 0;
     if (hasLeftover)
         leftover = m_v[i];
+
+    std::vector<int> big;
+    big.reserve(pairs.size());
+    for (size_t k = 0; k < pairs.size(); k++)
+        big.push_back(pairs[k].big);
     m_v = big;
     sortVector();
-    std::vector<int> mainChain = m_v;
-    // for (size_t j = 0; j < small.size(); j++)
-    // {
-    //     int value = small[j];
-    //     std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), value);
-    //     mainChain.insert(it, value);
-    // }
-    if (!small.empty())
-    {
-        // b1 en premier (a push si <= au premier big donc a faire)
-        int b1 = small[0];
-        std::vector<int>::iterator it =
-            std::lower_bound(mainChain.begin(), mainChain.end(), b1);
-        mainChain.insert(it, b1);
 
-        // ordre Jacobsthal pour b2..bm
-        std::vector<size_t> order = buildJacobInsertionOrder(small.size());
-        for (size_t t = 0; t < order.size(); t++)
+    std::vector<Pair> sortedPairs;
+    sortedPairs.reserve(pairs.size());
+    for (size_t k = 0; k < m_v.size(); k++)
+    {
+        int targetBig = m_v[k];
+        for (size_t p = 0; p < pairs.size(); p++)
         {
-            size_t idx = order[t];          // 1-based
-            int value = small[idx - 1];     // small[1] = b2, etc.
-            std::vector<int>::iterator pos =
-                std::lower_bound(mainChain.begin(), mainChain.end(), value);
-            mainChain.insert(pos, value);
+            if (pairs[p].big == targetBig)
+            {
+                sortedPairs.push_back(pairs[p]);
+                pairs.erase(pairs.begin() + p);
+                break;
+            }
         }
+    }
+
+    std::vector<int> mainChain = m_v;
+    int b1 = sortedPairs[0].small;
+    mainChain.insert(mainChain.begin(), b1);
+
+    std::vector<size_t> order = buildJacobOrder(sortedPairs.size());
+    for (size_t t = 0; t < order.size(); t++)
+    {
+        size_t idx = order[t];
+        int value = sortedPairs[idx - 1].small;
+        std::vector<int>::iterator pos =
+            std::lower_bound(mainChain.begin(), mainChain.end(), value);
+        mainChain.insert(pos, value);
     }
     if (hasLeftover)
     {
-        std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), leftover);
+        std::vector<int>::iterator it =
+            std::lower_bound(mainChain.begin(), mainChain.end(), leftover);
         mainChain.insert(it, leftover);
     }
     m_v = mainChain;
@@ -150,37 +147,69 @@ void PmergeMe::sortDeque()
 {
     if (m_d.size() <= 1)
         return;
-    std::deque<int> copy = m_d;
-    std::deque<int> big;
-    std::deque<int> small;
+
+    std::vector<Pair> pairs;
+    pairs.reserve(m_d.size() / 2);
+
     size_t i = 0;
-    for (; i + 1 < copy.size(); i += 2)
+    for (; i + 1 < m_d.size(); i += 2)
     {
-        int a = copy[i];
-        int b = copy[i + 1];
+        int a = m_d[i];
+        int b = m_d[i + 1];
         if (a > b)
             std::swap(a, b);
-        small.push_back(a);
-        big.push_back(b);
+        Pair p; p.small = a; p.big = b;
+        pairs.push_back(p);
     }
-    bool hasLeftover = (i < copy.size());
+    bool hasLeftover = (i < m_d.size());
     int leftover = 0;
     if (hasLeftover)
-        leftover = copy[i];
+        leftover = m_d[i];
+
+    std::deque<int> big;
+    for (size_t k = 0; k < pairs.size(); k++)
+        big.push_back(pairs[k].big);
     m_d = big;
     sortDeque();
-    std::vector<int> mainChain(m_d.begin(), m_d.end());
-    for (size_t j = 0; j < small.size(); j++)
+
+    std::vector<Pair> sortedPairs;
+    sortedPairs.reserve(pairs.size());
+    for (size_t k = 0; k < m_d.size(); k++)
     {
-        int value = small[j];
-        std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), value);
-        mainChain.insert(it, value);
+        int targetBig = m_d[k];
+        for (size_t p = 0; p < pairs.size(); p++)
+        {
+            if (pairs[p].big == targetBig)
+            {
+                sortedPairs.push_back(pairs[p]);
+                pairs.erase(pairs.begin() + p);
+                break;
+            }
+        }
     }
+
+    std::vector<int> mainChain(m_d.begin(), m_d.end());
+    int b1 = sortedPairs[0].small;
+    mainChain.insert(mainChain.begin(), b1);
+
+    std::vector<size_t> order = buildJacobOrder(sortedPairs.size());
+    for (size_t t = 0; t < order.size(); t++)
+    {
+        size_t idx = order[t];
+        int value = sortedPairs[idx - 1].small;
+
+        std::vector<int>::iterator pos =
+            std::lower_bound(mainChain.begin(), mainChain.end(), value);
+        mainChain.insert(pos, value);
+    }
+
     if (hasLeftover)
     {
-        std::vector<int>::iterator it = std::lower_bound(mainChain.begin(), mainChain.end(), leftover);
+        std::vector<int>::iterator it =
+            std::lower_bound(mainChain.begin(), mainChain.end(), leftover);
         mainChain.insert(it, leftover);
     }
+
     m_d.assign(mainChain.begin(), mainChain.end());
 }
 
