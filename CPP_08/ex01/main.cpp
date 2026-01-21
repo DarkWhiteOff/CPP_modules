@@ -82,7 +82,7 @@ int main( void )
         std::vector<int> v;
         v.reserve(10000);
         std::srand(std::time(NULL));
-        for (int i = 0; i < 10000; ++i)
+        for (int i = 0; i < 10000; i++)
             v.push_back(std::rand());
         try {
             sp.addNumbers(v.begin(), v.end());

@@ -99,12 +99,12 @@ int main()
         b = a;
 
         std::cout << "a: ";
-        for (MutantStack<int>::iterator it = a.begin(); it != a.end(); ++it)
+        for (MutantStack<int>::iterator it = a.begin(); it != a.end(); it++)
             std::cout << *it << " ";
         std::cout << std::endl;
 
         std::cout << "b: ";
-        for (MutantStack<int>::iterator it = b.begin(); it != b.end(); ++it)
+        for (MutantStack<int>::iterator it = b.begin(); it != b.end(); it++)
             std::cout << *it << " ";
         std::cout << std::endl;
     }
@@ -116,7 +116,7 @@ int main()
         ms.push("mutant");
         ms.push("stack");
 
-        for (MutantStack<std::string>::iterator it = ms.begin(); it != ms.end(); ++it)
+        for (MutantStack<std::string>::iterator it = ms.begin(); it != ms.end(); it++)
             std::cout << *it << std::endl;
     }
 

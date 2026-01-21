@@ -12,8 +12,8 @@ int main()
     std::cout << "=== std::vector<int> found ===" << std::endl;
     {
         std::vector<int> v;
-        for (int i = 0; i < 10; ++i)
-            v.push_back(i * 2); // 0, 2, 4, 6
+        for (int i = 0; i < 10; i++)
+            v.push_back(i * 2); // 0, 2, 4, 6, 8...
         try
         {
             easyfind(v, 8);
@@ -28,8 +28,8 @@ int main()
     std::cout << "\n=== std::vector<int> not found ===" << std::endl;
     {
         std::vector<int> v;
-        for (int i = 0; i < 10; ++i)
-            v.push_back(i * 3); // 0, 3, 6, 9
+        for (int i = 0; i < 10; i++)
+            v.push_back(i * 3); // 0, 3, 6, 9, 12...
         try
         {
             easyfind(v, 5);
