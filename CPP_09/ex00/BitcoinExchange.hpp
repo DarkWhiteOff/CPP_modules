@@ -59,6 +59,8 @@ public :
 
 private :
     std::map<std::string, float> m_map;
+
+    void isValidInput(std::string line, std::string date, std::string valuestr);
 };
 
 #endif

@@ -16,7 +16,7 @@ public :
     MutantStack &operator=(MutantStack const &src);
     ~MutantStack(void);
 
-    typedef typename std::stack<T>::container_type::iterator iterator;
+    typedef typename std::deque<T>::iterator iterator;
 
     iterator begin();
     iterator end();

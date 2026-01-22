@@ -44,7 +44,7 @@ BitcoinExchange::~BitcoinExchange(void)
 }
 
 
-void isValidInput(std::string line, std::string date, std::string valuestr)
+void BitcoinExchange::isValidInput(std::string line, std::string date, std::string valuestr)
 {
     if (date.empty())
         throw BitcoinExchange::BadInputException(line);

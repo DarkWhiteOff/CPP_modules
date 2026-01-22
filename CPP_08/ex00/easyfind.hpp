@@ -10,7 +10,7 @@
 #include <algorithm>
 
 template <typename T>
-void easyfind(T c, int occ);
+void easyfind(T &c, int occ);
 
 class NoOccurenceFound : public std::exception
 {
