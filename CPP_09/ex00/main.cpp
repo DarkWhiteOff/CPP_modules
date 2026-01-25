@@ -1,27 +1,28 @@
-#include <iostream>
-#include <string>
-#include <exception>
-#include <cstdlib>
-#include <cctype>
-#include <map>
-#include <fstream>
 #include "BitcoinExchange.hpp"
+#include <iostream>
 
 int main(int argc, char **argv)
 {
-    if (argc != 2)
+    if (argc == 1)
     {
         std::cerr << "Error: could not open file." << std::endl;
-        return (1);
+        return 1;
     }
+    if (argc != 2)
+    {
+        std::cerr << "Usage: ./btc <input_file>" << std::endl;
+        return 1;
+    }
+
     try
     {
         BitcoinExchange b;
         b.make(argv[1]);
     }
-    catch (std::exception &o)
+    catch (std::exception &e)
     {
-        std::cerr << o.what() << std::endl;
+        std::cerr << e.what() << std::endl;
+        return 1;
     }
-    return (0);
+    return 0;
 }

@@ -13,13 +13,13 @@ RPN::RPN(void) : m_str("")
 
 RPN::RPN(std::string str)
 {
-    for(int i = 0; str[i]; i++)
+    for(int i = 0; i < str.size(); i++)
     {
         if (!std::isdigit(str[i]) && str[i] != '+' && str[i] != '-'
             && str[i] != '/' && str[i] != '*' && str[i] != ' ')
             throw BadInputException();
     }
-    for(int i = 0; str[i]; i++)
+    for(int i = 0; i < str.size(); i++)
     {
         if (str[i] != ' ' && std::isdigit(str[i]))
         {
@@ -52,7 +52,7 @@ RPN::~RPN(void)
 
 void RPN::calc()
 {
-    for(int i = 0; m_str[i]; i++)
+    for(int i = 0; i < m_str.size(); i++)
     {
         if (std::isdigit(m_str[i]))
             m_stack.push(std::atoi(std::string(1, m_str[i]).c_str()));

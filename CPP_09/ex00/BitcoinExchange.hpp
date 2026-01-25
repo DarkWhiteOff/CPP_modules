@@ -1,13 +1,9 @@
 #ifndef BITCOINEXCHANGE_HPP
 #define BITCOINEXCHANGE_HPP
 
-#include <iostream>
 #include <string>
 #include <exception>
-#include <cstdlib>
-#include <cctype>
 #include <map>
-#include <fstream>
 
 class BitcoinExchange
 {
@@ -17,7 +13,7 @@ public :
     BitcoinExchange &operator=(BitcoinExchange const &src);
     ~BitcoinExchange(void);
 
-    void make(std::string inputFile);
+    void make(std::string const &inputFile);
 
     class FileFailedException : public std::exception
     {
@@ -34,8 +30,8 @@ public :
     class BadInputException : public std::exception
     {
         public :
-            BadInputException(std::string date);
-            virtual ~BadInputException() throw() {}
+            BadInputException(const std::string &str);
+            virtual ~BadInputException() throw();
             virtual const char *what(void) const throw();
         private :
             std::string m_msg;
@@ -45,7 +41,7 @@ public :
     {
         public :
             WrongValueException(float value);
-            virtual ~WrongValueException() throw() {}
+            virtual ~WrongValueException() throw();
             virtual const char *what(void) const throw();
         private :
             std::string m_msg;
@@ -60,7 +56,16 @@ public :
 private :
     std::map<std::string, float> m_map;
 
-    void isValidInput(std::string line, std::string date, std::string valuestr);
+    void loadDatabase(std::string const &dbFile);
+
+    void parseLine(std::string const &line, std::string &date, std::string &valuestr);
+
+    bool isValidDate(std::string const &date);
+    int  daysInMonth(int m);
+    bool isValidValue(std::string const &valuestr, float &value);
+    void isValidInput(std::string const &line, std::string const &date, std::string const &valuestr);
+
+    float getRateForDate(std::string const &date);
 };
 
 #endif
