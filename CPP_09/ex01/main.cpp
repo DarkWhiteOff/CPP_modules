@@ -17,7 +17,7 @@ void autoTest(const char *tests)
 
 void runAutomaticTests()
 {
-    std::cout << "===== " << "Basic" << " =====" << std::endl;
+    std::cout << "===== " << "Valid" << " =====" << std::endl;
     autoTest("8 9 * 9 - 9 - 9 - 4 - 1 +");
     autoTest("7 7 * 7 -");
     autoTest("1 2 * 2 / 2 * 2 4 - +");

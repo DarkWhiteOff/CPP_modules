@@ -191,7 +191,7 @@ bool BitcoinExchange::isValidValue(std::string const &valuestr, float &value)
 void BitcoinExchange::isValidInput(std::string const &line, std::string const &date, std::string const &valuestr)
 {
     if (!isValidDate(date))
-        throw BadInputException(date);
+        throw BadInputException(line);
 
     float value = 0.0;
     if (!isValidValue(valuestr, value))

@@ -13,12 +13,21 @@ PmergeMe::PmergeMe(char **argv)
 {
     for (int i = 1; argv[i]; i++)
     {
-        std::stringstream ss(argv[i]);
-        int value;
-        if (!(ss >> value) || !(ss.eof()) || value <= 0)
+        std::string s(argv[i]);
+        if (s.empty())
             throw BadInputException();
+
+        for (size_t k = 0; k < s.size(); k++)
+            if (s[k] < '0' || s[k] > '9')
+                throw BadInputException();
+
+        int value = std::atoi(s.c_str());
+        if (value <= 0)
+            throw BadInputException();
+
         if (std::find(m_v.begin(), m_v.end(), value) != m_v.end())
             throw BadInputException();
+
         m_v.push_back(value);
         m_d.push_back(value);
     }
@@ -205,14 +214,12 @@ void PmergeMe::sortDeque()
             std::lower_bound(mainChain.begin(), mainChain.end(), value);
         mainChain.insert(pos, value);
     }
-
     if (hasLeftover)
     {
         std::vector<int>::iterator it =
             std::lower_bound(mainChain.begin(), mainChain.end(), leftover);
         mainChain.insert(it, leftover);
     }
-
     m_d.assign(mainChain.begin(), mainChain.end());
 }
 
