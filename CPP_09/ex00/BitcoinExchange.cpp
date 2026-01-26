@@ -76,7 +76,8 @@ void BitcoinExchange::loadDatabase(std::string const &dbFile)
         throw FileFailedException();
 
     std::string line;
-    std::getline(file, line);
+    if (!std::getline(file, line))
+        throw EmptyFileException();
 
     while (std::getline(file, line))
     {
@@ -201,13 +202,14 @@ void BitcoinExchange::isValidInput(std::string const &line, std::string const &d
 
 float BitcoinExchange::getRateForDate(std::string const &date)
 {
-    std::map<std::string, float>::iterator it = m_map.find(date);
-    if (it != m_map.end())
+    std::map<std::string, float>::iterator it = m_map.lower_bound(date);
+    if (it == m_map.end())
+        return (--it)->second;
+
+    if (it->first == date)
         return it->second;
 
-    it = m_map.lower_bound(date);
-    --it;
-    return it->second;
+    return (--it)->second;
 }
 
 void BitcoinExchange::make(std::string const &inputFile)
