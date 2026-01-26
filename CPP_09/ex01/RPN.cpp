@@ -1,33 +1,15 @@
-#include <iostream>
-#include <string>
-#include <exception>
-#include <cstdlib>
-#include <cctype>
-#include <stack>
 #include "RPN.hpp"
+#include <iostream>
+#include <cctype>
 
 RPN::RPN(void) : m_str("")
 {
     return ;
 }
 
-RPN::RPN(std::string str)
+RPN::RPN(std::string const str) : m_str(str)
 {
-    for(int i = 0; i < str.size(); i++)
-    {
-        if (!std::isdigit(str[i]) && str[i] != '+' && str[i] != '-'
-            && str[i] != '/' && str[i] != '*' && str[i] != ' ')
-            throw BadInputException();
-    }
-    for(int i = 0; i < str.size(); i++)
-    {
-        if (str[i] != ' ' && std::isdigit(str[i]))
-        {
-            if (std::isdigit(str[i + 1]))
-                throw BadInputException();
-        }
-    }
-    m_str = str;
+    return ;
 }
 
 RPN::RPN(RPN const &copy)
@@ -50,41 +32,72 @@ RPN::~RPN(void)
     return ;
 }
 
-void RPN::calc()
+const char *RPN::BadInputException::what(void) const throw()
 {
-    for(int i = 0; i < m_str.size(); i++)
+    return ("Error");
+}
+
+void RPN::validateRPN()
+{
+    if (m_str.empty())
+        throw BadInputException();
+    for(size_t i = 0; i < m_str.size(); i++)
     {
-        if (std::isdigit(m_str[i]))
-            m_stack.push(std::atoi(std::string(1, m_str[i]).c_str()));
-        if (m_str[i] == '+' || m_str[i] == '-'
-            || m_str[i] == '/' || m_str[i] == '*')
+        if (!std::isdigit(static_cast<unsigned char>(m_str[i])) && m_str[i] != '+'
+            && m_str[i] != '-' && m_str[i] != '/' && m_str[i] != '*' && m_str[i] != ' ')
+            throw BadInputException();
+    }
+    bool sum = false;
+    for(size_t i = 0; i < m_str.size(); i++)
+    {
+        if (m_str[i] != ' ')
+        {
+            if (i + 1 < m_str.size() && m_str[i + 1] != ' ')
+                throw BadInputException();
+            sum = true;
+        }
+    }
+    if (!sum)
+        throw BadInputException();
+}
+
+void RPN::calcRPN()
+{
+    validateRPN();
+    while (!m_stack.empty())
+        m_stack.pop();
+    for(size_t i = 0; i < m_str.size(); i++)
+    {
+        char c = m_str[i];
+        if (std::isdigit(static_cast<unsigned char>(c)))
+            m_stack.push(c - '0');
+        else if (c == '+' || c == '-'
+            || c == '/' || c == '*')
             {
                 if (m_stack.size() < 2)
                     throw BadInputException();
-                int res(0);
-                int a(m_stack.top());
+                int a = m_stack.top();
                 m_stack.pop();
-                int b(m_stack.top());
+                int b = m_stack.top();
                 m_stack.pop();
-                if (m_str[i] == '/' && a == 0)
-                    throw BadInputException();
-                if (m_str[i] == '+')
+            
+                int res = 0;
+                if (c == '+')
                     res = b + a;
-                if (m_str[i] == '-')
+                else if (c == '-')
                     res = b - a;
-                if (m_str[i] == '/')
-                    res = b / a;
-                if (m_str[i] == '*')
+                else if (c == '*')
                     res = b * a;
+                else
+                {
+                    if (a == 0)
+                        throw BadInputException();
+                    res = b / a;
+                }
                 m_stack.push(res);
             }
     }
     if (m_stack.size() != 1)
         throw BadInputException();
     std::cout << m_stack.top() << std::endl;
-}
-
-const char *RPN::BadInputException::what(void) const throw()
-{
-    return ("Error");
 }
