@@ -1,14 +1,11 @@
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-#include <iostream>
 #include <string>
 #include <exception>
 #include <vector>
 #include <deque>
-#include <algorithm>
-#include <ctime>
-#include <sstream>
+#include <cstddef>
 
 struct Pair
 {
@@ -36,11 +33,14 @@ private :
     std::vector<int> m_v;
     std::deque<int> m_d;
 
+    PmergeMe(void);
+
     std::vector<size_t> buildJacobOrder(size_t m);
     void sortVector();
     void sortDeque();
 
-    PmergeMe(void);
+    std::vector<int> recursiveSortVector(std::vector<int> const &in);
+    std::deque<int>  recursiveSortDeque (std::deque<int> const &in);
 };
 
 #endif

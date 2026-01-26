@@ -1,12 +1,8 @@
+#include "PmergeMe.hpp"
 #include <iostream>
-#include <string>
-#include <exception>
-#include <vector>
-#include <deque>
 #include <algorithm>
 #include <ctime>
 #include <sstream>
-#include "PmergeMe.hpp"
 
 PmergeMe::PmergeMe(void)
 {

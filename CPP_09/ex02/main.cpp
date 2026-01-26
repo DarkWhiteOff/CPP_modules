@@ -1,12 +1,6 @@
+#include "PmergeMe.hpp"
 #include <iostream>
 #include <string>
-#include <exception>
-#include <vector>
-#include <deque>
-#include <algorithm>
-#include <ctime>
-#include <sstream>
-#include "PmergeMe.hpp"
 
 void autoTest(const std::string& name, char **tests)
 {
@@ -109,19 +103,27 @@ void runAutomaticTests()
 
 int main(int argc, char **argv)
 {
-    if (argc == 1)
+    if (argc < 2)
+    {
+        std::cerr << "Error" << std::endl;
+        return 1;
+    }
+    if (std::string(argv[1]) == "--test")
     {
         runAutomaticTests();
-        return (0);
+        return 0;
     }
+    
     try
     {
         PmergeMe p(argv);
         p.make();
     }
-    catch (std::exception &o)
+    catch (std::exception &e)
     {
-        std::cerr << o.what() << std::endl;
+        std::cerr << e.what() << std::endl;
+        return 1;
     }
-    return (0);
+
+    return 0;
 }
