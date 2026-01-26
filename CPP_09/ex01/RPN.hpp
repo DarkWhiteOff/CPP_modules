@@ -16,12 +16,6 @@ public :
 
     void calcRPN();
 
-    class ValueTooLargeException : public std::exception
-    {
-        public :
-            virtual const char *what(void) const throw();
-    };
-
     class BadInputException : public std::exception
     {
         public :

@@ -17,6 +17,8 @@ PmergeMe::PmergeMe(char **argv)
         int value;
         if (!(ss >> value) || !(ss.eof()) || value <= 0)
             throw BadInputException();
+        if (std::find(m_v.begin(), m_v.end(), value) != m_v.end())
+            throw BadInputException();
         m_v.push_back(value);
         m_d.push_back(value);
     }
@@ -40,6 +42,11 @@ PmergeMe &PmergeMe::operator=(PmergeMe const &src)
 PmergeMe::~PmergeMe(void)
 {
     return ;
+}
+
+const char *PmergeMe::BadInputException::what(void) const throw()
+{
+    return ("Error");
 }
 
 std::vector<size_t> PmergeMe::buildJacobOrder(size_t m)
@@ -240,9 +247,4 @@ void PmergeMe::make()
           << m_d.size()
           << " elements with std::deque : "
           << timeDeq << " us" << std::endl;
-}
-
-const char *PmergeMe::BadInputException::what(void) const throw()
-{
-    return ("Error");
 }

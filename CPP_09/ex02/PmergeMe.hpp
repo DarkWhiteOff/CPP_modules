@@ -38,9 +38,6 @@ private :
     std::vector<size_t> buildJacobOrder(size_t m);
     void sortVector();
     void sortDeque();
-
-    std::vector<int> recursiveSortVector(std::vector<int> const &in);
-    std::deque<int>  recursiveSortDeque (std::deque<int> const &in);
 };
 
 #endif

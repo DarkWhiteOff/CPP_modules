@@ -110,12 +110,12 @@ void BitcoinExchange::parseLine(std::string const &line, std::string &date, std:
 
     for (size_t i = 0; i < date.size(); i++)
     {
-        if (date[i] == ' ') // \t à faire?? ou avec isspace, tester input
+        if (date[i] == ' ')
             throw BadInputException(line);
     }
     for (size_t i = 0; i < valuestr.size(); i++)
     {
-        if (valuestr[i] == ' ') // \t à faire?? ou avec isspace, tester input
+        if (valuestr[i] == ' ')
             throw BadInputException(line);
     }
 }
@@ -206,10 +206,7 @@ float BitcoinExchange::getRateForDate(std::string const &date)
         return it->second;
 
     it = m_map.lower_bound(date);
-    if (it == m_map.begin())
-        return it->second;
     --it;
-
     return it->second;
 }
 

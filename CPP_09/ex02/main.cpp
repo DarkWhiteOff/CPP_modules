@@ -108,7 +108,7 @@ int main(int argc, char **argv)
         std::cerr << "Error" << std::endl;
         return 1;
     }
-    if (std::string(argv[1]) == "--test")
+    if (argc == 2 && std::string(argv[1]) == "--test")
     {
         runAutomaticTests();
         return 0;
